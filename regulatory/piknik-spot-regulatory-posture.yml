@@ -1,0 +1,42 @@
+generated: '2026-09-19'
+method: searched
+probe: true
+source: >-
+  (a) artifacts harvested this run — well-known/ (no security.txt), lifecycle/, conformance/;
+  (b) conventional paths probed live on 2026-09-19; (c) the docs surface — llms.txt, agent-ethics.md,
+  terms-of-service, privacy-policy, cookie-policy.
+signals:
+  data_subject_request:
+    url: https://piknik.spot/privacy-policy
+    evidence: >-
+      "Your Rights and Choices" section: Access ("Request a copy of your personal information stored in
+      our database"), Correction (profile settings), Account Deletion (self-service in Settings ->
+      Account, with the anonymization procedure spelled out), Analytics opt-out, and a named contact
+      ("For additional assistance with your privacy rights, contact us at info@piknik.spot"; mail:
+      "Piknik Privacy Officer, Waterloo Region, Ontario, Canada"). The delete path is also an API
+      operation, POST /user/delete-account, in the OpenAPI.
+    channels: [self-service (Settings -> Account), email info@piknik.spot, postal]
+    api: https://piknik.spot/api/user/delete-account
+    last_updated: '2026-06-22'
+probed_absent:
+  - {url: 'https://piknik.spot/accessibility', status: 404}
+  - {url: 'https://piknik.spot/accessibility/vpat', status: 404}
+  - {url: 'https://piknik.spot/legal/subprocessors', status: 404}
+  - {url: 'https://piknik.spot/legal/dpa', status: 404}
+  - {url: 'https://piknik.spot/privacy/requests', status: 404}
+  - {url: 'https://piknik.spot/transparency', status: 404}
+  - {url: 'https://piknik.spot/security', status: 404}
+  - {url: 'https://piknik.spot/security/sbom', status: 404}
+  - {url: 'https://piknik.spot/docs/data-residency', status: 404}
+  - {url: 'https://piknik.spot/ai/transparency', status: 404}
+  - {url: 'https://piknik.spot/legal/report-content', status: 404}
+  - {url: 'https://piknik.spot/.well-known/security.txt', status: 404}
+not_recorded_and_why:
+  subprocessors: The privacy policy names PostHog (analytics) and "our email provider" in prose; there is no dated subprocessor table, so the substance bar is not met.
+  age_assurance: 'ToS 2 requires users to be "at least 13 years old" and the privacy policy says the service is "not intended for children under 13" — an age floor statement (COPPA-shaped), not an age-assurance mechanism.'
+  incident_notification: 'Privacy policy lists "Incident response procedures" under Data Security with no notification commitment or SLA.'
+  global_privacy_control: No published GPC statement; not tested by header, per the rule.
+  ai_transparency: agent-ethics.md governs AGENTS USING Piknik, and robots.txt blocks AI-training crawlers; neither is a disclosure about Piknik's own AI use (the site does run chatbots — /v2/participants/{id}/chat, chatbotFacts — but publishes no transparency notice about them).
+  data_residency: Hosting is observably DigitalOcean (DNS) and the privacy policy names PostHog US endpoints in CSP, but no residency statement is published.
+  training_data_summary, sbom, support_lifetime, accessibility_conformance, notice_and_action, transparency_report, exit_assistance: no page found.
+jurisdiction_note: Ontario, Canada (ToS 12). Regime applicability is decided by the Kin Score regime map, not here.

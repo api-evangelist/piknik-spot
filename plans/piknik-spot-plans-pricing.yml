@@ -1,0 +1,35 @@
+generated: '2026-09-19'
+method: searched
+source: https://piknik.spot/for-towns + https://piknik.spot/llms.txt + https://piknik.spot/terms-of-service + https://piknik.spot/settings/developer (login-gated) + probe of https://piknik.spot/pricing (404)
+checked: '2026-09-19'
+summary: >-
+  Piknik publishes no API pricing page and no API plans: /pricing returns 404, llms.txt has no
+  pricing entry, and developer tokens are self-issued from Settings -> Developer after a free account
+  signup. The platform "does not process payments or handle transactions" (ToS 3). The API, MCP
+  server and A2A agent are free to call within the agent-ethics rate tiers; bulk access, model
+  training and redistribution require a separately negotiated written license (ToS 7A, price not
+  published). The only published price on the site is a municipal services package, not an API tier.
+plan_count: 0
+prices_published: false
+currency: null
+billing_period: null
+public_signup_pricing: false
+plans: []
+api_access_model:
+  cost: free
+  onboarding: self-serve (magic-link account, then pik_pat_ token or OAuth client via /api/oauth/register)
+  limits: see rate-limits/piknik-spot-rate-limits.yml
+  licensed_tier:
+    name: written data license
+    covers: [bulk_access, model_training, redistribution, derivative_datasets]
+    price: null
+    contact: info@piknik.spot
+    source: https://piknik.spot/terms-of-service (7A) and agent-ethics.md
+related_offers:
+  - name: For Towns — Town Local Food Map + Local Spend Challenge
+    audience: Ontario municipalities (economic development officers)
+    price: 10000
+    currency: CAD
+    billing_period: one-time technical fee covering 12 months of hosting, map configuration and spend-challenge tracking
+    note: 'Flat $10,000 "for a limited time"; positioned against the OMAFRA Rural Ontario Development Program 50% match (municipal cost $5,000); applications due October 1, 2026. Not an API plan.'
+    source: https://piknik.spot/for-towns

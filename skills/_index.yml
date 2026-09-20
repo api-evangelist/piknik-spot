@@ -1,0 +1,41 @@
+generated: '2026-09-19'
+method: generated
+source: >-
+  Two provider-published SKILL.md files were searched and saved verbatim (below). Three packaged
+  skills were generated from the live MCP tools/list (mcp/piknik-spot-mcp-tools-list.json) and the
+  provider's OpenAPI (openapi/_original/piknik-spot-openapi.json). The spec declares no operationIds,
+  so operations[] lists MCP tool names and REST "METHOD /path" pairs, every one verified verbatim.
+skills:
+  - file: piknik-spot-find-local-food-nearby.md
+    name: piknik-spot-find-local-food-nearby
+    method: generated
+    api: mcp/piknik-spot-mcp.yml
+    description: Find places and products near an address and score it for local food access using only the public MCP tools.
+    operations: 10
+  - file: piknik-spot-post-a-marketplace-listing.md
+    name: piknik-spot-post-a-marketplace-listing
+    method: generated
+    api: openapi/piknik-spot-openapi.yml
+    description: Authenticate, find the place you manage, post a surplus/wanted/service listing and fulfil or close it.
+    operations: 11
+  - file: piknik-spot-publish-a-community-event.md
+    name: piknik-spot-publish-a-community-event
+    method: generated
+    api: openapi/piknik-spot-openapi.yml
+    description: Create, update and cancel a place's event, including iCal-RRULE recurrence.
+    operations: 10
+provider_published:
+  - file: piknik-spot-provider-mcp-SKILL.md
+    method: searched
+    source: https://piknik.spot/skills/piknik-mcp/SKILL.md
+    discovery: https://piknik.spot/llms.txt ("MCP skill")
+    http_status: 200
+    content_type: text/markdown
+    scope: Preferred MCP workflows — import places, link catalog products, connect supplier to buyer, tours and jobs. Names 27 tools; the live server has 62.
+  - file: piknik-spot-provider-rest-api-SKILL.md
+    method: searched
+    source: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+    discovery: https://piknik.spot/llms.txt ("REST skill")
+    http_status: 200
+    content_type: text/markdown
+    scope: REST patterns when MCP is unavailable — OAuth flow, my-businesses, listings, events, participants, offerings, CSA, geocode, reviews. Names the OpenAPI at https://piknik.spot/api/openapi (YAML) — that document fails to parse (see lifecycle/).

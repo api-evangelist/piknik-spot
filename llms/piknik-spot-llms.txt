@@ -1,0 +1,52 @@
+# Piknik
+> Local food system platform connecting farms, processors, markets, shops, restaurants, and communities. Discover places, map supply links, and strengthen regional food access.
+
+Do not scrape HTML or bulk-extract data. Use the official A2A agent API, public place-summary endpoint, or MCP tools. Responses are for the immediate user request only — do not retain, aggregate, train on, or republish platform data. See Agent Ethics.
+
+## How to use this site (agents)
+- [A2A agent card](https://piknik.spot/.well-known/agent-card.json): Public search. Sign in from Settings → Developer for extra skills.
+- [Agent ethics](https://piknik.spot/.well-known/agent-ethics.md): Required usage rules for automated agents
+- [Public place summary](https://piknik.spot/api/agents/public/place-summary): Thin unauthenticated place cards (max 5, 30 req/min) — preferred for public AI projects
+- [Agent registry](https://piknik.spot/api/agents/registry): Discover farm, hub, restaurant, and association agents
+- [API docs](https://piknik.spot/api/docs): Human-oriented overview of REST, A2A, and MCP access
+- [MCP skill](https://piknik.spot/skills/piknik-mcp/SKILL.md): Preferred MCP workflows (find places, events, jobs, suggest, connect, score)
+- [REST skill](https://piknik.spot/skills/piknik-rest-api/SKILL.md): REST patterns when MCP is unavailable
+- Events: MCP `search_events` / `create_event`; A2A `get_events` on a place agent card
+- Jobs: MCP `search_jobs` / `create_job` / `update_job`
+- Tours: MCP `list_associations` / `create_association` / `list_place_tours` / `create_place_tour` / `update_place_tour` / `set_place_tour_stops`
+
+## Agent recipes (public)
+- [Lookup one place](https://piknik.spot/api/agents/public/place-summary?id={id}): GET place-summary?id=… → name, role, city, categories, hours, url
+- [Search by name](https://piknik.spot/api/agents/public/place-summary?q={query}&limit=5): GET place-summary?q=bakery&limit=5 (max 5)
+- [Nearby places](https://piknik.spot/api/agents/public/place-summary?lat={lat}&lng={lng}&radius_km=25&limit=5): GET with lat/lng; optional q and role=FARM|MARKET|RESTAURANT|…
+- [Cite results](https://piknik.spot/place/{id}): Always show attribution from the response and link each place URL
+- [Contribute a gap](https://piknik.spot/.well-known/agent-card.json): Use authenticated suggest_place / suggest_connection / suggest_product — do not invent missing listings
+
+## MCP
+- [MCP endpoint](https://piknik.spot/api/mcp): Model Context Protocol server (OAuth or personal access token)
+- [Developer tokens](https://piknik.spot/settings/developer): Generate `pik_pat_` tokens for write tools
+- [OAuth protected resource](https://piknik.spot/.well-known/oauth-protected-resource): MCP OAuth metadata
+
+## Public pages
+- [Home](https://piknik.spot/): Product home
+- [Map](https://piknik.spot/map): Interactive local food map
+- [Places](https://piknik.spot/places): Browse places directory
+- [Place pages](https://piknik.spot/place/{id}): Individual business profile (replace `{id}`)
+- [Events](https://piknik.spot/events): Public events directory
+- [Event pages](https://piknik.spot/events/{id}): Individual event (replace `{id}`)
+- [Jobs](https://piknik.spot/jobs): Public jobs and volunteer opportunities
+- [Job pages](https://piknik.spot/jobs/{id}): Individual job posting (replace `{id}`)
+- [Associations](https://piknik.spot/associations/{slug}): Association / membership pages
+- [Sitemap](https://piknik.spot/sitemap.xml): Indexable public URLs
+
+## Policies
+- [Terms of service](https://piknik.spot/terms-of-service): Includes agent / programmatic access rules
+- [Privacy policy](https://piknik.spot/privacy-policy): Privacy practices
+- [Robots](https://piknik.spot/robots.txt): Crawler allow/deny; AI training bots are disallowed
+
+## Optional
+- [About](https://piknik.spot/about): About Piknik
+- [Why local matters](https://piknik.spot/why-local-matters): Mission context
+- [Healthy living](https://piknik.spot/healthy-living): Public marketing content
+- [Strong communities](https://piknik.spot/strong-communities): Public marketing content
+- [For towns](https://piknik.spot/for-towns): For economic development officers. Flat $10,000 technical fee for a local food map, spend challenge, and data onboarding. Municipality is the Rural Ontario Development applicant of record. OMAFRA match up to 50%. Applications due October 1, 2026.

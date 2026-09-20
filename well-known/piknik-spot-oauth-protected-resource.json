@@ -1,0 +1,1 @@
+{"resource":"https://piknik.spot/api/mcp","authorization_servers":["https://piknik.spot"],"scopes_supported":["marketplace:write","events:write","read:profile","write:profile"],"bearer_methods_supported":["header"],"resource_documentation":"https://piknik.spot/api/mcp","resource_signing_alg_values_supported":["HS256"]}

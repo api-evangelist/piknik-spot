@@ -1,18 +1,159 @@
 aid: piknik-spot
 name: Piknik.Spot
-description: 'Piknik.Spot is a company surfaced via the API Evangelist harvest backlog (source: a2a-registry)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Piknik (piknik.spot) is a local food system platform based in Waterloo Region, Ontario, Canada that
+  maps farms, processors, markets, shops, restaurants, community gardens and food hubs, the supply links between
+  them, marketplace listings, community events, jobs and volunteer posts, recipes, and a Local Food Score for any
+  address. It is built agent-first: a REST API under https://piknik.spot/api described by a 683-operation OpenAPI
+  3.0.3 document, a hosted Model Context Protocol server at https://piknik.spot/api/mcp exposing 62 tools (public
+  discovery tools anonymously, write tools behind OAuth 2.0 with PKCE and dynamic client registration or pik_pat_
+  personal access tokens), an A2A 1.0 agent card served at /.well-known/agent-card.json with a JSON-RPC endpoint
+  at /api/a2a, an llms.txt, provider-published Agent Skills, and a published Agent Ethics policy that permits only
+  immediate-use access and forbids bulk extraction, retention and model training.'
+image: https://piknik.spot/icons/icon-512x512.png
 url: https://raw.githubusercontent.com/api-evangelist/piknik-spot/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:a2a-registry
-x-tier: stub
-x-tier-reason: harvest
+x-tier: enriched
+x-tier-reason: local-v3 enrichment pass 2026-09-19 over the a2a-registry harvest stub
 specificationVersion: '0.20'
 created: '2026-09-19'
 modified: '2026-09-19'
 tags:
-- Company
-apis: []
+- Local Food
+- Agriculture
+- Farmers Markets
+- Marketplace
+- Events
+- Jobs
+- Recipes
+- Geolocation
+- Community
+- Food Systems
+- MCP
+- A2A
+- agent-native
+- Ontario
+- Canada
+apis:
+- name: Piknik.Spot REST API
+  description: REST API under https://piknik.spot/api covering participants (places), offerings and pack prices,
+    service locations, marketplace listings, events and RSVPs, jobs, recipes, associations and place tours, CSA
+    interests, spend challenges, delivery tasks, geocoding, the Local Food Score, OAuth 2.0 client management and
+    an unauthenticated public place-summary endpoint for AI agents (max 5 results, 30 requests per minute). Described
+    by a provider-hosted OpenAPI 3.0.3 document with 509 paths and 683 operations; the same document is served as
+    YAML at /api/openapi. Authentication is an OAuth 2.0 bearer JWT or a pik_pat_ personal access token; browser
+    sessions use a next-auth cookie.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Local Food
+  - Marketplace
+  - Events
+  - Jobs
+  - Recipes
+  - Geolocation
+  - OAuth 2.0
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-openapi.yml
+  - type: OpenAPI
+    name: Provider-hosted OpenAPI 3.0.3 (JSON, 683 operations)
+    url: https://piknik.spot/openapi.json
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Overlay
+    url: overlays/piknik-spot-openapi-overlay.yaml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: OpenAPI
+    url: https://piknik.spot/api/openapi
+    name: Provider-hosted OpenAPI (YAML twin) — does not parse; see lifecycle/
+  image: https://piknik.spot/icons/icon-512x512.png
+- name: Piknik.Spot MCP Server
+  description: Hosted, remote Model Context Protocol server (protocol 2025-03-26, Streamable HTTP with an SSE endpoint
+    at /api/mcp/sse) exposing 62 tools and 7 piknik:// resources for local-food discovery, Local Food Score analysis,
+    marketplace listings, events, jobs, recipes, products and pack prices, service locations, supplier-buyer connections,
+    associations and walking tours. tools/list, initialize, prompts/list and resources/list answer anonymously;
+    write tools return a JSON-RPC -32001 error with a WWW-Authenticate Bearer challenge pointing at RFC 9728 protected-resource
+    metadata until the client authorizes via OAuth 2.0 (authorization code + PKCE, dynamic client registration)
+    or presents a pik_pat_ personal access token.
+  humanURL: https://piknik.spot/skills/piknik-mcp/SKILL.md
+  baseURL: https://piknik.spot/api/mcp
+  tags:
+  - MCP
+  - agent-native
+  - Local Food
+  - OAuth 2.0
+  properties:
+  - type: MCPServer
+    url: mcp/piknik-spot-mcp.yml
+  - type: MCPServer
+    url: https://piknik.spot/api/mcp
+  - type: Documentation
+    url: https://piknik.spot/skills/piknik-mcp/SKILL.md
+  - type: ToolCrosswalk
+    url: mcp/piknik-spot-tool-crosswalk.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: LLMsTxt
+    url: llms/piknik-spot-llms.txt
+  - type: WellKnown
+    url: well-known/piknik-spot-well-known.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Documentation
+    url: https://piknik.spot/llms.txt
+  image: https://piknik.spot/icons/icon-512x512.png
+- name: Piknik.Spot A2A Agent
+  description: 'Agent-to-Agent (A2A 1.0) agent served from the provider''s own host: the agent card at /.well-known/agent-card.json
+    (also at the legacy /.well-known/agent.json, byte-identical) declares five public skills (search local food
+    places, get a public place summary, search marketplace listings, search events, search jobs) over a JSON-RPC
+    binding at https://piknik.spot/api/a2a. Anonymous message/send works for public search; the extended agent card
+    and additional skills require a bearer token (pik_pat_ or OAuth JWT). Per-place and per-association agent cards
+    are also exposed under /api/agents/participant/{id}/card and /api/agents/association/{id}/card.'
+  humanURL: https://piknik.spot/.well-known/agent-card.json
+  baseURL: https://piknik.spot/api/a2a
+  tags:
+  - A2A
+  - agent-native
+  - Local Food
+  properties:
+  - type: AgentCard
+    url: a2a/piknik-spot-a2a.yml
+  - type: AgentCard
+    name: Agent card as served by the provider
+    url: https://piknik.spot/.well-known/agent-card.json
+  - type: Documentation
+    url: https://piknik.spot/llms.txt
+  - type: WellKnown
+    url: well-known/piknik-spot-well-known.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  image: https://piknik.spot/icons/icon-512x512.png
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -21,3 +162,68 @@ maintainers:
 common:
 - type: Website
   url: https://piknik.spot/
+- type: DomainSecurity
+  url: security/piknik-spot-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/piknik-spot-agentic-access.yml
+- type: OAuthScopes
+  url: scopes/piknik-spot-scopes.yml
+- type: Authentication
+  url: authentication/piknik-spot-authentication.yml
+- type: Documentation
+  url: https://piknik.spot/api/docs
+- type: APIReference
+  url: https://piknik.spot/api/docs
+- type: GettingStarted
+  url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+- type: Support
+  url: https://piknik.spot/contact
+- type: SignUp
+  url: https://piknik.spot/signup
+- type: Login
+  url: https://piknik.spot/auth/signin
+- type: TermsOfService
+  url: https://piknik.spot/terms-of-service
+- type: PrivacyPolicy
+  url: https://piknik.spot/privacy-policy
+- type: LLMsTxt
+  url: https://piknik.spot/llms.txt
+- type: MCPServer
+  url: mcp/piknik-spot-mcp.yml
+- type: AgentCard
+  url: a2a/piknik-spot-a2a.yml
+- type: LLMsTxt
+  url: llms/piknik-spot-llms.txt
+- type: WellKnown
+  url: well-known/piknik-spot-well-known.yml
+- type: ToolCrosswalk
+  url: mcp/piknik-spot-tool-crosswalk.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Conventions
+  url: conventions/piknik-spot-conventions.yml
+- type: Idempotency
+  url: conventions/piknik-spot-conventions.yml
+- type: ErrorCatalog
+  url: errors/piknik-spot-problem-types.yml
+- type: DataModel
+  url: data-model/piknik-spot-data-model.yml
+- type: RateLimits
+  url: rate-limits/piknik-spot-rate-limits.yml
+- type: Plans
+  url: plans/piknik-spot-plans-pricing.yml
+- type: Lifecycle
+  url: lifecycle/piknik-spot-lifecycle.yml
+- type: Conformance
+  url: conformance/piknik-spot-conformance.yml
+- type: Overlay
+  url: overlays/piknik-spot-openapi-overlay.yaml
+- type: Webhooks
+  url: asyncapi/piknik-spot-webhooks.yml
+- type: DataSubjectRequest
+  url: https://piknik.spot/privacy-policy
+x-enrichment:
+  date: '2026-09-19'
+  status: enriched
+  artifacts_added: 36
+  pass: local-v3

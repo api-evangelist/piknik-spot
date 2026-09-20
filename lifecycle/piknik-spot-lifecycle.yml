@@ -1,0 +1,62 @@
+generated: '2026-09-19'
+method: searched
+source: >-
+  https://piknik.spot/terms-of-service + /privacy-policy + /cookie-policy + /.well-known/agent-ethics.md +
+  openapi/_original/piknik-spot-openapi.json + live probes of /status, /changelog, /pricing (all 404).
+versioning:
+  scheme: mixed uri-path
+  current: null
+  notes: >-
+    The base is https://piknik.spot/api with no version segment for most resources (listings, events,
+    jobs, recipes, geocode, oauth, mcp, a2a) and a parallel /api/v2/ family for participants,
+    associations, CSA, surveys, follows and search (GET /v2 and GET /v2/metadata exist). The OpenAPI
+    info.version is "1.0.0", the MCP serverInfo.version is "1.0.0" and the agent card version is
+    "1.0.0". No version header or date-pinning is documented; the two families coexist with no
+    published migration guidance.
+spec_publication:
+  json: {url: 'https://piknik.spot/openapi.json', status: 200, bytes: 1048742, parses: true}
+  yaml: {url: 'https://piknik.spot/api/openapi', status: 200, bytes: 95486, parses: false,
+    defect: 'Eight summary/description scalars contain an unquoted ": " (e.g. line 997 "summary: Public response shape. STRUCTURAL GUARANTEE: this type does not include") — a YAML scanner error; the file cannot be loaded by a compliant parser. The JSON twin is the usable contract.'}
+  yaml_in_spec: {path: 'GET /openapi and GET /openapi/json', note: 'Both self-describing endpoints are declared in the contract.'}
+changelog:
+  url: null
+  artifact: changelog/piknik-spot-changelog.yml
+  notes: No changelog, release notes or feed found (/changelog 404; none in sitemap.xml or llms.txt). No ChangeLog pointer emitted.
+status_page:
+  url: null
+  probed:
+    - {url: 'https://piknik.spot/status', status: 404}
+  notes: No status page found on the site, in llms.txt or in the sitemap; no status.piknik.spot DNS record. No StatusPage pointer emitted.
+deprecation:
+  policy_documented: false
+  sunset_header: false
+  deprecated_operations: []
+  notes: No operation in the 683-operation spec carries deprecated:true and no deprecation policy or Sunset/Deprecation header is documented. No Deprecation pointer emitted.
+sla:
+  documented: false
+  notes: 'Terms of Service 8: "We do not warrant that the platform will be uninterrupted or error-free". No uptime target.'
+terms:
+  url: https://piknik.spot/terms-of-service
+  last_updated: '2026-06-25'
+  agent_clause: 'Section 7A "No Data Scraping — Proprietary Data License" designates the official agent API at /.well-known/agent.json + the Agent Ethics guidelines as the only authorized automated access; immediate-use only; written license required for bulk access, model training, redistribution or derivative datasets.'
+  change_notice: Significant changes communicated through the platform or email; the "Last updated" date is the version marker.
+  governing_law: Ontario, Canada
+privacy:
+  url: https://piknik.spot/privacy-policy
+  last_updated: '2026-06-22'
+agent_ethics:
+  url: https://piknik.spot/.well-known/agent-ethics.md
+  version: '1.0'
+  last_updated: '2026-01-31'
+  file: well-known/piknik-spot-agent-ethics.md
+  enforcement_ladder: 'First violation: warning + temporary rate-limit reduction; second: 24-hour suspension; serious: permanent API key revocation and legal action.'
+  log_retention: 90 days for logs (stated as the retention period agents must honour for cached data).
+cookie_policy:
+  url: https://piknik.spot/cookie-policy
+  last_updated: January 2025
+  note: Authentication cookies are HTTP-only JWTs that expire after 24 hours.
+token_lifecycle:
+  personal_access_tokens: 'Minted at https://piknik.spot/settings/developer; managed via POST /mcp/token/generate, GET /mcp/tokens, DELETE /mcp/tokens/{id}. Lifetime not published.'
+  oauth: 'refresh_token grant supported; revocation at /api/oauth/revoke; access-token lifetime not published. Deleting an account removes its API keys and webhooks (privacy policy).'
+roadmap:
+  published: false

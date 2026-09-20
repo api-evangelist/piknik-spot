@@ -1,0 +1,18 @@
+generated: '2026-09-19'
+method: searched
+source: >-
+  Registry searches on 2026-09-19 — npm (registry.npmjs.org search "piknik"), PyPI (pypi.org/pypi/piknik,
+  /piknik-spot), the MCP registry (registry.modelcontextprotocol.io search "piknik"), GitHub (search +
+  users/orgs piknik, piknik-spot, piknikspot) — plus llms.txt, both SKILL.md files and the OpenAPI.
+summary: >-
+  No first-party client library, SDK, CLI or MCP package exists. Piknik ships its MCP server hosted
+  (https://piknik.spot/api/mcp) and documents raw HTTP for REST; nothing is published to a registry.
+packages: []
+official_count: 0
+name_collisions_ruled_out:
+  - {registry: pypi, name: piknik, version: 0.3.19, what: 'CLI issue tracker by defalsify.org — unrelated'}
+  - {registry: npm, name: '@nurulhidayat/piknik', what: unrelated}
+  - {registry: npm, name: peeknik, what: unrelated}
+  - {registry: github, name: 'github.com/piknik', what: 'personal account (Emacs tooling) — unrelated'}
+  - {registry: mcp-registry, query: piknik, result: 0 servers}
+pointer_note: No Packages or SDKs pointer is emitted — the artifact records a searched absence.

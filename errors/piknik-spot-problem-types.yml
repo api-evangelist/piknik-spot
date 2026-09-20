@@ -1,0 +1,82 @@
+generated: '2026-09-19'
+method: derived
+format: json-error-envelope
+rfc9457: false
+source: >-
+  Derived from the 4xx responses declared in openapi/_original/piknik-spot-openapi.json (683
+  operations) and enriched from live unauthenticated responses observed 2026-09-19 on
+  https://piknik.spot/api/agents/public/place-summary, /api/agents/registry, /api/a2a and /api/mcp,
+  plus the error table in the provider's REST SKILL.md.
+envelope:
+  media_type: application/json
+  schema: Error
+  shape: '{ "error": string, "error_description": string }'
+  note: >-
+    The single Error schema is referenced by 1,360 declared responses (400 and 401 on 680 of 683
+    operations). Live responses add fields the spec does not declare: a "message" string and an
+    "attribution" string on the agent endpoints.
+  observed_live:
+    - status: 400
+      url: https://piknik.spot/api/agents/public/place-summary
+      body: '{"error":"Bad request","message":"Provide id=…, or q=…, or lat=&lng= (optional q, role, limit≤5, radius_km≤50).","attribution":"Data from Piknik (piknik.spot). ..."}'
+    - status: 401
+      url: https://piknik.spot/api/agents/registry
+      body: '{"error":"Unauthorized","message":"Authentication required"}'
+    - status: 405
+      url: https://piknik.spot/api/a2a (GET)
+      body: '{"error":"Use POST JSON-RPC message/send","attribution":"..."}'
+jsonrpc_errors:
+  note: The MCP and A2A endpoints return JSON-RPC 2.0 error objects instead of the REST envelope.
+  codes:
+    - code: -32001
+      http_status: 401
+      message: Authentication required. Please authorize this application.
+      surface: MCP tools/call on an authenticated tool
+      data: '{ authorizationUrl, tokenUrl, scopes: [marketplace:write, events:write], instructions, quickstart: https://piknik.spot/api/mcp/auth/start }'
+      header: 'WWW-Authenticate: Bearer realm="mcp", resource_metadata="https://piknik.spot/.well-known/oauth-protected-resource"'
+      remediation: Run the OAuth flow the data block describes (or attach a pik_pat_ token) and retry the same call.
+    - code: -32001
+      http_status: 401
+      message: 'Authentication required. Send Authorization: Bearer <pik_pat_ or OAuth JWT>.'
+      surface: A2A agent/getAuthenticatedExtendedCard
+      remediation: Attach a bearer token; the five public skills work without one.
+problems:
+  - status: 400
+    title: Bad Request
+    media_type: application/json
+    schema: Error
+    declared_on: 680 of 683 operations
+    meaning: Missing or malformed parameter or body; the public place-summary endpoint returns it when none of id, q, or lat+lng is supplied or limit > 5 / radius_km > 50.
+    remediation: Read error / message; fix the request. Do not retry unchanged.
+  - status: 401
+    title: Unauthorized
+    media_type: application/json
+    schema: Error
+    declared_on: '680 of 683 operations (including the 200+ operations whose security is [] — declared defensively)'
+    meaning: No or expired bearer token / session cookie.
+    remediation: Refresh via POST /oauth/token (refresh_token grant) or mint a new pik_pat_ token; retry.
+  - status: 403
+    title: Forbidden
+    declared_on: none in the spec
+    source: REST SKILL.md status-code table
+    meaning: Authenticated but not an owner/admin of the place or resource.
+    remediation: Use get_my_places / GET /v2/participants/my-businesses to find a place you manage.
+  - status: 404
+    title: Not Found
+    declared_on: none in the spec
+    source: REST SKILL.md status-code table; the Next.js app returns an HTML 404 page for unknown paths
+    remediation: Verify the id; place ids are cuid strings (e.g. cmtz6528b001jqn07ubkl4hlo).
+  - status: 405
+    title: Method Not Allowed
+    declared_on: none in the spec
+    source: observed live on GET /api/a2a
+    remediation: POST a JSON-RPC message/send envelope.
+  - status: 429
+    title: Rate Limited
+    declared_on: none in the spec
+    source: REST SKILL.md status-code table; agent-ethics.md mandates exponential backoff on 429
+    remediation: Honour X-RateLimit-Reset (epoch seconds) on the place-summary endpoint; back off exponentially elsewhere.
+gaps:
+  - Only 400 and 401 are declared in the contract; 403, 404, 405, 409, 429 and every 5xx are undeclared, so a generated client learns nothing about them from the spec.
+  - 234 operations (every POST/PUT declared with a 201) have empty or minimal response objects; POST /listings and POST /events declare responses: '{}.'
+  - No error code catalogue beyond the free-text error string is published; the error field is a human sentence, not a stable machine code.

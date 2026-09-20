@@ -1,0 +1,149 @@
+generated: '2026-09-19'
+method: searched
+source: >-
+  openapi/_original/piknik-spot-openapi.json (683 operations; parameter-name census) + live
+  unauthenticated responses on 2026-09-19 + https://piknik.spot/skills/piknik-rest-api/SKILL.md +
+  https://piknik.spot/skills/piknik-mcp/SKILL.md + https://piknik.spot/.well-known/agent-ethics.md.
+summary: >-
+  Cross-cutting semantics for the Piknik REST API, MCP server and A2A endpoint. The REST surface is
+  a Next.js route handler API: JSON in/out, offset-or-page pagination by query parameter, bearer JWT
+  or pik_pat_ token, a two-field error envelope, and no idempotency-key, request-id, versioning or
+  field-selection mechanism. The MCP server adds JSON-RPC semantics and per-tool auth tiers.
+authentication:
+  styles: [oauth2_bearer_jwt, personal_access_token_bearer, session_cookie]
+  bearer_header: 'Authorization: Bearer <OAuth JWT | pik_pat_...>'
+  cookie: next-auth.session-token (browser sessions only)
+  scopes: [marketplace:write, events:write, read:profile, write:profile]
+  see: authentication/piknik-spot-authentication.yml, scopes/piknik-spot-scopes.yml
+  note: 441 of 683 operations declare bearerAuth OR cookieAuth; 242 declare security [] (public), including the agent, oauth, geocode and place-summary endpoints.
+idempotency:
+  coverage: partial
+  documented: true
+  header: null
+  mechanism: natural-key duplicate suppression on one operation
+  scope:
+    - create_product (MCP) / POST /v2/participants/{id}/offerings
+  evidence: >-
+    The provider's MCP SKILL.md documents create_product as "idempotent — skips duplicates" and that a
+    duplicate returns "Already on This Place — no action needed". No Idempotency-Key header or
+    parameter exists anywhere in the 683-operation spec (zero matches for "idempoten"); every other
+    write — POST /listings, POST /events, POST /jobs, POST /recipes, suggest_place, create_listing,
+    create_event — has no replay protection.
+  agent_risk: >-
+    A retried create after a timeout can duplicate a listing, event, job or recipe. Skills in skills/
+    therefore re-run the matching search before any retry.
+  pointer_note: 'type: Idempotency is emitted with coverage: partial and the one-operation scope above; it is NOT a surface-wide guarantee.'
+reversibility:
+  grade: documented
+  read_only: false
+  write_surface_note: 233 POST, 51 PUT, 25 PATCH and 53 DELETE operations. Piknik does not process payments or transactions (ToS 3, 6), so no financial reversal exists; reversals below are content lifecycle actions.
+  reversals:
+    - surface: marketplace listing
+      create: POST /listings | create_listing
+      reverse: DELETE /listings/{id}; POST /listings/{id}/fulfill (close); POST /listings/{id}/reactivate (undo expiry); POST /listings/{id}/decline-acceptance (undo an acceptance)
+      window: not stated
+      docs: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+    - surface: event
+      create: POST /events | create_event
+      reverse: DELETE /events/{id}; update_event with status (MCP) / PUT /events/{id}
+      window: not stated
+    - surface: event RSVP
+      create: POST /events/{id}/rsvp
+      reverse: DELETE /events/{id}/rsvp
+      window: not stated
+    - surface: job posting
+      create: POST /jobs | create_job
+      reverse: DELETE /jobs/{jobId}; update_job with status CANCELLED / FILLED (MCP SKILL.md)
+      window: not stated
+    - surface: recipe
+      create: POST /recipes | create_recipe
+      reverse: DELETE /recipes/{id} | delete_recipe ("Permanently delete")
+      window: not stated
+    - surface: pack price
+      create: POST /v2/participants/{id}/pack-prices | create_pack_price
+      reverse: DELETE /v2/participants/{id}/pack-prices/{quoteId} | delete_pack_price ("Permanently delete"); update_pack_price is_active=false (pause, reversible)
+      window: not stated
+    - surface: delivery task claim
+      create: POST /tasks/{id}/claim | claim_delivery_task
+      reverse: POST /tasks/{id}/unclaim; POST /tasks/{id}/abandon
+      window: not stated
+    - surface: event ticket check-in
+      create: POST /events/tickets/checkin, POST /agritourism/campaigns/{id}/scanner/checkin
+      reverse: POST /agritourism/campaigns/{id}/scanner/undo-checkin
+      window: not stated
+    - surface: agritourism ticket
+      create: POST /agritourism/checkout
+      reverse: POST /agritourism/tickets/{id}/cancel
+      window: not stated
+      note: Ticketing runs on Stripe Connect (/agritourism/stripe-connect); refund terms are not published by Piknik.
+    - surface: supplier-buyer connection
+      create: apply_connection (admin) / POST /v2/participants/{id}/connections
+      reverse: remove_connection (admin) / DELETE /v2/participants/{id}/connections/{connectionId}
+      window: not stated
+    - surface: user account
+      create: signup
+      reverse: POST /user/delete-account — anonymizes the account; "Public information already copied or cached by others cannot be removed" (privacy policy)
+      window: not stated
+  irreversible:
+    - suggest_place / suggest_connection / suggest_product submissions (pending admin review; no withdraw operation published)
+    - POST /contact, POST /feedback, POST /agents/participant/{id}/send_inquiry (messages sent)
+  grading_note: >-
+    Every reversal path above is real (present in the contract or the provider's own skill docs) but
+    NO window is stated anywhere, so the dimension grades `documented` (0.4), not `verified`. No
+    window has been invented.
+dry_run_mode:
+  supported: false
+  note: No dry-run, validate-only or preview flag documented; GET /for-real-estate/connectivity-audit/preview and POST /regional-score/simulate are read-only simulations, not write rehearsals.
+pagination:
+  style: offset-or-page
+  params:
+    - {name: limit, occurrences: 52, meaning: Maximum number of results}
+    - {name: offset, occurrences: 21, meaning: Pagination offset}
+    - {name: page, occurrences: 24}
+    - {name: pageSize, occurrences: 5}
+  response_fields: 'Not declared (response schemas are bare objects); the public place-summary endpoint returns { places[], count, max_results, max_radius_km, attribution }.'
+  caps: 'place-summary limit <= 5; MCP list_all_places has limit/offset; radius_km <= 50 on place-summary, <= 30 on calculate_local_food_score.'
+  cursor: false
+geo_conventions:
+  params: [lat, lng, latitude, longitude, radius, radius_km, radiusKm, maxRadius, maxDistance, address]
+  note: Two spellings coexist (lat/lng on older routes, latitude/longitude on /v2 and MCP); radius is kilometres throughout.
+field_selection:
+  supported: false
+  note: No fields/expand/include parameter; MCP list_all_places has a format parameter.
+naming:
+  request_bodies: snake_case (participant_id, listing_type, end_date)
+  response_objects: camelCase (participantId, listingType, endDate)
+  note: Mixed casing between request and response is declared in the Listing / CreateListingRequest schema pair.
+request_tracing:
+  supported: false
+  note: No request-id header observed on any live response (Caddy server headers only).
+versioning:
+  see: lifecycle/piknik-spot-lifecycle.yml
+  note: Unversioned /api plus /api/v2 family; no header/date versioning.
+error_envelope:
+  shape: '{ "error": string, "error_description"?: string, "message"?: string, "attribution"?: string }'
+  jsonrpc: -32001 authentication required (MCP, A2A)
+  see: errors/piknik-spot-problem-types.yml
+rate_limit_signaling:
+  headers: [X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset]
+  observed_on: https://piknik.spot/api/agents/public/place-summary (30 / 27 / epoch seconds)
+  not_observed_on: /api/mcp, /api/a2a (no rate headers on live responses)
+  see: rate-limits/piknik-spot-rate-limits.yml
+attribution:
+  required: true
+  mechanism: Every agent-surface response carries an attribution string; llms.txt and agent-ethics.md require citing Piknik and linking each place URL.
+caching:
+  observed: 'cache-control: public, s-maxage=60, stale-while-revalidate=300 on place-summary'
+security_headers:
+  observed: [strict-transport-security max-age=31536000 includeSubDomains preload, content-security-policy, x-frame-options DENY, x-content-type-options nosniff, referrer-policy strict-origin-when-cross-origin, permissions-policy]
+transport:
+  server: Caddy (HTTP/2, h3 advertised)
+  hosting: DigitalOcean (A 143.110.213.203; ns*.digitalocean.com)
+cross_links:
+  authentication: authentication/piknik-spot-authentication.yml
+  scopes: scopes/piknik-spot-scopes.yml
+  errors: errors/piknik-spot-problem-types.yml
+  lifecycle: lifecycle/piknik-spot-lifecycle.yml
+  rate_limits: rate-limits/piknik-spot-rate-limits.yml
+  mcp: mcp/piknik-spot-mcp.yml
+  a2a: a2a/piknik-spot-a2a.yml

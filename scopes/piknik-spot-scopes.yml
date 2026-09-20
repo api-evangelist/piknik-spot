@@ -1,0 +1,36 @@
+generated: '2026-09-19'
+method: derived
+source: openapi/piknik-spot-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/piknik-spot-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://piknik.spot/api/oauth/authorize
+    tokenUrl: https://piknik.spot/api/oauth/token
+  description: OAuth 2.0 authentication for external applications and AI agents
+scopes:
+- scope: events:write
+  description: Create and manage community events
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/piknik-spot-openapi.yml
+- scope: marketplace:write
+  description: Create and manage marketplace listings
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/piknik-spot-openapi.yml
+- scope: read:profile
+  description: Read user profile information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/piknik-spot-openapi.yml
+- scope: write:profile
+  description: Update user profile information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/piknik-spot-openapi.yml

@@ -1,0 +1,22 @@
+generated: '2026-09-19'
+method: searched
+source: probes of https://piknik.spot/changelog (404), sitemap.xml (1,055 URLs, no changelog/blog/news path), llms.txt (no changelog entry), openapi info.version
+checked: '2026-09-19'
+summary: >-
+  Piknik publishes no changelog, release notes, blog or feed. The only dated change markers on the
+  site are legal documents (terms 2026-06-25, privacy 2026-06-22, agent ethics 2026-01-31, cookie
+  policy January 2025) and the sitemap lastmod stamps, which are regenerated daily and therefore
+  carry no change information. No ChangeLog pointer is emitted.
+scheme:
+  api_versioning: mixed (unversioned /api + /api/v2)
+  note: info.version "1.0.0" on the OpenAPI, "1.0.0" on the MCP serverInfo and "1.0.0" on the agent card; none is documented as a release identifier.
+current_version:
+  spec_declared: 1.0.0
+  source: openapi/_original/piknik-spot-openapi.json
+feeds: {rss: null, atom: null, json: null}
+entries: []
+entries_note: Deliberately empty — no provider-published entries exist to capture.
+baseline_capture:
+  - date: '2026-09-19'
+    method: pipeline capture
+    summary: First capture of the surface — OpenAPI 509 paths / 683 operations / 6 schemas / 0 operationIds; MCP 62 tools / 7 resources / protocol 2025-03-26; A2A card 5 skills / protocol 1.0. Future passes can diff against openapi/_original/piknik-spot-openapi.json and mcp/piknik-spot-mcp-tools-list.json.

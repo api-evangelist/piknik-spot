@@ -1,0 +1,118 @@
+generated: '2026-09-19'
+method: probed
+source: live probes of the closed /.well-known/ path list on every host the record knows, 2026-09-19
+summary: >-
+  Four real documents are served, all on the apex host piknik.spot, which is also the API host, the
+  MCP resource server and the OAuth authorization server (issuer https://piknik.spot): an A2A agent
+  card at both the canonical and the legacy path (byte-identical, content-type application/a2a+json),
+  RFC 8414 authorization-server metadata and RFC 9728 protected-resource metadata (resource
+  https://piknik.spot/api/mcp). The provider additionally publishes a non-standard
+  /.well-known/agent-ethics.md usage policy, saved because llms.txt, robots.txt and the terms of
+  service all bind agents to it. Nothing else is served: no security.txt (so NO SecurityTxt pointer),
+  no api-catalog, no openid-configuration, no ai-plugin.json, no ucp/acp/aauth documents, and no
+  apis.json at any of the three locations.
+pointer_basis: >-
+  WellKnown pointer emitted on the strength of the OAuth discovery documents and the agent card
+  (four 200s carrying real JSON/markdown documents). SecurityTxt pointer NOT emitted — RFC 9116 is
+  unimplemented at /.well-known/security.txt and /security.txt.
+host_set_note: >-
+  piknik.spot is the only host: www.piknik.spot has no DNS A record (curl exit 6), the OpenAPI
+  servers[] production entry is https://piknik.spot/api (the second entry is http://localhost:3000),
+  the MCP endpoint is https://piknik.spot/api/mcp on the same host, and the protected-resource
+  document names https://piknik.spot itself as the sole authorization server, so there is no third
+  host to probe. No mcp./api./docs. subdomains resolve.
+false_positive_watch: >-
+  The Next.js app answers every unknown path with a real HTTP 404 and a ~28 KB HTML not-found page,
+  so misses below are genuine 404s, not SPA soft-200s. /api returns 200 only after a 307 to
+  /auth/signin?callbackUrl=%2Fapi, a login page, recorded as a miss for discovery purposes.
+hosts:
+- host: https://piknik.spot
+  role: apex + API host + MCP resource server + OAuth issuer
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    bytes: 902
+    file: piknik-spot-oauth-authorization-server.json
+    validated_on: issuer == https://piknik.spot; authorization_code + refresh_token; PKCE S256 and plain; registration_endpoint (RFC 7591); revocation_endpoint
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: application/json
+    bytes: 320
+    file: piknik-spot-oauth-protected-resource.json
+    validated_on: resource == https://piknik.spot/api/mcp; authorization_servers [https://piknik.spot]; bearer_methods_supported [header]
+  - path: /.well-known/oauth-protected-resource/api/mcp
+    status: 404
+    note: RFC 9728 path-suffixed variant is not served; the root document already names the /api/mcp resource.
+  - path: /.well-known/oauth-authorization-server/api/mcp
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/api-catalog.json
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/mcp.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 200
+    content_type: application/a2a+json
+    bytes: 2476
+    file: ../a2a/piknik-spot-agent-card.json
+    note: A2A 1.0 card; graded in a2a/piknik-spot-a2a.yml.
+  - path: /.well-known/agent.json
+    status: 200
+    content_type: application/a2a+json
+    bytes: 2476
+    note: Legacy pre-0.3 path, byte-identical to agent-card.json (cmp). Not saved twice.
+  - path: /.well-known/agent-ethics.md
+    status: 200
+    content_type: text/markdown
+    bytes: 7980
+    file: piknik-spot-agent-ethics.md
+    note: Non-standard document. Agent usage policy v1.0 (2026-01-31) referenced by llms.txt, robots.txt and the terms of service; carries a machine-readable JSON summary with rate-limit tiers and prohibited uses.
+  - path: /security.txt
+    status: 404
+  - path: /llms.txt
+    status: 200
+    content_type: text/plain
+    bytes: 4395
+    file: ../llms/piknik-spot-llms.txt
+  - path: /llms-full.txt
+    status: 404
+  - path: /robots.txt
+    status: 200
+    note: Disallows /api/ and /api/agents for all crawlers; explicitly allows /llms.txt, /.well-known/agent.json, /.well-known/agent-card.json and /.well-known/agent-ethics.md; blocks 30+ named AI-training crawlers (GPTBot, ClaudeBot, CCBot, Google-Extended, PerplexityBot, Bytespider, ...) with Disallow /. Crawl-delay 10.
+- host: https://www.piknik.spot
+  documents: []
+  note: No DNS A record (dig empty; curl exit 6 "could not resolve host"). Not a host; recorded so a future pass does not re-add it.
+a2a:
+  agent_card_found: true
+  host: piknik.spot
+  canonical_path_status: 200
+  legacy_path_status: 200
+  manifest: ../a2a/piknik-spot-a2a.yml
+x-mcp-probe:
+  probed: '2026-09-19'
+  issue: roadmap#321, roadmap#337
+  mcp_host: piknik.spot
+  note: >-
+    The MCP server lives at a path on the apex host, so the RFC 9728 document sits where the primary
+    probe already looks; the live tools/call challenge confirms it —
+    WWW-Authenticate: Bearer realm="mcp", resource_metadata="https://piknik.spot/.well-known/oauth-protected-resource".

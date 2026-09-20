@@ -1,0 +1,1271 @@
+generated: '2026-09-19'
+method: derived
+source: Derived by aligning the LIVE MCP tools/list (62 tools, anonymous, mcp/piknik-spot-mcp-tools-list.json) with the provider-hosted
+  OpenAPI (openapi/_original/piknik-spot-openapi.json, 509 paths / 683 operations). Every REST reference below was verified
+  to exist as a METHOD + path in that spec.
+purpose: 'Make each MCP tool a first-class discovery unit bound to its backing REST operation(s). Piknik''s REST, MCP and
+  A2A surfaces are overlapping-but-divergent projections of one data core: two tools have no REST counterpart, and 610 of
+  683 REST operations have no tool.'
+binding_key_note: The provider's OpenAPI declares NO operationId on any of its 683 operations, so rest[] entries are "METHOD
+  /path" strings (paths relative to https://piknik.spot/api) rather than operationIds. overlays/piknik-spot-openapi-overlay.yaml
+  proposes stable operationIds; this file deliberately keys on what the provider actually published.
+surfaces:
+  rest_openapi: openapi/piknik-spot-openapi.yml (source openapi/_original/piknik-spot-openapi.json; 683 operations, 0 operationIds,
+    6 schemas)
+  mcp: https://piknik.spot/api/mcp — tools/list NOT gated (62 tools with inputSchema captured live); tools/call gated per
+    tool (public / authenticated / admin)
+  a2a: https://piknik.spot/api/a2a — 5 public skills (see a2a/piknik-spot-a2a.yml); the A2A endpoint is itself POST /a2a in
+    the OpenAPI
+  graphql: null
+crosswalk:
+- tool: geocode_address
+  category: geo
+  access: public
+  rest:
+  - GET /geocode
+  binding: rest
+  confidence: high
+- tool: calculate_local_food_score
+  category: score
+  access: public
+  rest:
+  - GET /local-food-score
+  binding: rest
+  confidence: high
+- tool: geocode_place
+  category: admin-places
+  access: admin
+  rest:
+  - POST /admin/set-gps
+  - POST /admin/geocode-missing
+  binding: rest
+  confidence: medium
+  note: Admin-only tool; either admin endpoint sets coordinates, exact routing is server-side.
+- tool: link_google_place
+  category: admin-places
+  access: admin
+  rest:
+  - POST /admin/places/google-places
+  binding: rest
+  confidence: medium
+- tool: search_events
+  category: events
+  access: public
+  rest:
+  - GET /events
+  - GET /events/map
+  binding: rest
+  confidence: high
+- tool: get_analytics_metrics
+  category: admin-analytics
+  access: public
+  rest:
+  - GET /analytics/metrics
+  binding: rest
+  confidence: high
+  note: Admin access required on both surfaces.
+- tool: search_games
+  category: games
+  access: public
+  rest:
+  - GET /games/active
+  - GET /games
+  binding: rest
+  confidence: high
+- tool: find_places
+  category: discovery
+  access: public
+  rest:
+  - GET /v2/participants/nearby
+  - GET /participants/search
+  - GET /recommendations
+  binding: rest
+  confidence: medium
+  note: Composite tool that "combines multiple recommendation engines"; fans out over the nearby/search/recommendation operations.
+- tool: suggest_place
+  category: contribute
+  access: public
+  rest:
+  - POST /agents/platform/suggest_place
+  - POST /v2/participants/suggestions
+  binding: rest
+  confidence: high
+- tool: get_professional_profile
+  category: people
+  access: public
+  rest:
+  - GET /profile/{username}
+  binding: rest
+  confidence: high
+- tool: search_listings
+  category: marketplace
+  access: public
+  rest:
+  - GET /listings
+  binding: rest
+  confidence: high
+- tool: create_listing
+  category: marketplace
+  access: authenticated
+  rest:
+  - POST /listings
+  binding: rest
+  confidence: high
+  note: Requires marketplace:write; REST body schema is CreateListingRequest.
+- tool: create_event
+  category: events
+  access: authenticated
+  rest:
+  - POST /events
+  - POST /participants/{id}/events
+  binding: rest
+  confidence: high
+  note: Requires events:write; REST body schema is CreateEventRequest.
+- tool: update_event
+  category: events
+  access: authenticated
+  rest:
+  - PUT /events/{id}
+  binding: rest
+  confidence: high
+- tool: get_my_places
+  category: places
+  access: authenticated
+  rest:
+  - GET /v2/participants/my-businesses
+  - GET /my-businesses
+  binding: rest
+  confidence: high
+- tool: update_place
+  category: places
+  access: authenticated
+  rest:
+  - PATCH /v2/participants/{id}
+  - PUT /v2/participants/{id}
+  binding: rest
+  confidence: high
+- tool: claim_delivery_task
+  category: delivery
+  access: authenticated
+  rest:
+  - POST /tasks/{id}/claim
+  binding: rest
+  confidence: high
+- tool: update_delivery_status
+  category: delivery
+  access: authenticated
+  rest:
+  - POST /tasks/{id}/confirm-pickup
+  - POST /tasks/{id}/confirm-dropoff
+  - PUT /tasks/{id}/update
+  binding: rest
+  confidence: medium
+  note: Status transitions map onto separate REST verbs.
+- tool: search_offerings
+  category: products
+  access: public
+  rest:
+  - GET /browse-products
+  - GET /v2/search
+  binding: rest
+  confidence: medium
+- tool: list_all_places
+  category: places
+  access: public
+  rest:
+  - GET /v2/participants
+  binding: rest
+  confidence: high
+- tool: list_service_locations
+  category: service-locations
+  access: public
+  rest:
+  - GET /v2/participants/{id}/service-locations
+  binding: rest
+  confidence: high
+- tool: create_service_location
+  category: service-locations
+  access: authenticated
+  rest:
+  - POST /v2/participants/{id}/service-locations
+  binding: rest
+  confidence: high
+- tool: update_service_location
+  category: service-locations
+  access: authenticated
+  rest:
+  - PUT /v2/participants/{id}/service-locations/{locationId}
+  binding: rest
+  confidence: high
+- tool: list_products
+  category: products
+  access: public
+  rest:
+  - GET /v2/participants/{id}/offerings
+  binding: rest
+  confidence: high
+- tool: search_products
+  category: products
+  access: public
+  rest:
+  - GET /products/search
+  - POST /agents/platform/search_products
+  binding: rest
+  confidence: high
+- tool: create_product
+  category: products
+  access: authenticated
+  rest:
+  - POST /v2/participants/{id}/offerings
+  binding: rest
+  confidence: high
+  note: Provider documents this tool as idempotent ("skips duplicates"); the REST operation does not document that guarantee.
+- tool: update_product
+  category: products
+  access: authenticated
+  rest:
+  - PUT /v2/participants/{id}/offerings/{offeringId}
+  binding: rest
+  confidence: high
+- tool: get_regional_food_improvements
+  category: score
+  access: public
+  rest:
+  - GET /regional-score/analyze
+  binding: rest
+  confidence: medium
+- tool: suggest_connection
+  category: contribute
+  access: authenticated
+  rest:
+  - POST /agents/platform/suggest_connection
+  - POST /v2/participants/connection-suggestions
+  binding: rest
+  confidence: high
+- tool: apply_connection
+  category: admin-connections
+  access: admin
+  rest:
+  - POST /admin/regional-score/apply-connection
+  - POST /v2/participants/{id}/connections
+  binding: rest
+  confidence: medium
+- tool: remove_connection
+  category: admin-connections
+  access: admin
+  rest:
+  - DELETE /v2/participants/{id}/connections/{connectionId}
+  binding: rest
+  confidence: medium
+- tool: suggest_product
+  category: contribute
+  access: authenticated
+  rest:
+  - POST /agents/platform/suggest_product
+  binding: rest
+  confidence: high
+- tool: notify_participants
+  category: admin-participants
+  access: admin
+  rest:
+  - POST /admin/participants/notify
+  binding: rest
+  confidence: high
+- tool: list_neighborhoods
+  category: admin-neighborhoods
+  access: admin
+  rest:
+  - GET /admin/neighborhoods/waterloo-region
+  binding: rest
+  confidence: high
+- tool: add_neighborhood
+  category: admin-neighborhoods
+  access: admin
+  rest:
+  - POST /admin/neighborhoods/waterloo-region
+  binding: rest
+  confidence: high
+- tool: update_neighborhood
+  category: admin-neighborhoods
+  access: admin
+  rest:
+  - PUT /admin/neighborhoods/waterloo-region/{id}
+  binding: rest
+  confidence: high
+- tool: delete_neighborhood
+  category: admin-neighborhoods
+  access: admin
+  rest:
+  - DELETE /admin/neighborhoods/waterloo-region/{id}
+  binding: rest
+  confidence: high
+- tool: rebuild_neighborhood_score_samples
+  category: admin-neighborhoods
+  access: admin
+  rest:
+  - POST /admin/neighborhoods/waterloo-region/rebuild
+  binding: rest
+  confidence: high
+- tool: discover_neighborhood_candidates
+  category: admin-neighborhoods
+  access: admin
+  rest:
+  - GET /admin/neighborhoods/discover-osm
+  binding: rest
+  confidence: high
+- tool: apply_association
+  category: admin-associations
+  access: admin
+  rest:
+  - POST /v2/participants/{id}/associations
+  - POST /admin/associations/{id}/memberships/bulk
+  binding: rest
+  confidence: medium
+- tool: remove_association
+  category: admin-associations
+  access: admin
+  rest:
+  - DELETE /v2/participants/{id}/associations
+  binding: rest
+  confidence: medium
+- tool: create_pack_price
+  category: pack-prices
+  access: authenticated
+  rest:
+  - POST /v2/participants/{id}/pack-prices
+  binding: rest
+  confidence: high
+- tool: list_pack_prices
+  category: pack-prices
+  access: authenticated
+  rest:
+  - GET /v2/participants/{id}/pack-prices
+  binding: rest
+  confidence: high
+- tool: update_pack_price
+  category: pack-prices
+  access: authenticated
+  rest:
+  - PATCH /v2/participants/{id}/pack-prices/{quoteId}
+  binding: rest
+  confidence: high
+- tool: delete_pack_price
+  category: pack-prices
+  access: authenticated
+  rest:
+  - DELETE /v2/participants/{id}/pack-prices/{quoteId}
+  binding: rest
+  confidence: high
+- tool: search_recipes
+  category: recipes
+  access: public
+  rest:
+  - GET /recipes
+  binding: rest
+  confidence: high
+- tool: get_recipe
+  category: recipes
+  access: public
+  rest:
+  - GET /recipes/{id}
+  binding: rest
+  confidence: high
+- tool: list_cuisines
+  category: recipes
+  access: public
+  rest:
+  - GET /cuisines
+  binding: rest
+  confidence: high
+- tool: create_recipe
+  category: recipes
+  access: authenticated
+  rest:
+  - POST /recipes
+  binding: rest
+  confidence: high
+- tool: update_recipe
+  category: recipes
+  access: authenticated
+  rest:
+  - PATCH /recipes/{id}
+  binding: rest
+  confidence: high
+- tool: delete_recipe
+  category: recipes
+  access: authenticated
+  rest:
+  - DELETE /recipes/{id}
+  binding: rest
+  confidence: high
+- tool: search_jobs
+  category: jobs
+  access: public
+  rest:
+  - GET /jobs/public
+  - GET /jobs
+  binding: rest
+  confidence: high
+- tool: create_job
+  category: jobs
+  access: authenticated
+  rest:
+  - POST /jobs
+  binding: rest
+  confidence: high
+- tool: update_job
+  category: jobs
+  access: authenticated
+  rest:
+  - PUT /jobs/{jobId}
+  binding: rest
+  confidence: high
+- tool: list_associations
+  category: associations
+  access: public
+  rest:
+  - GET /v2/associations/available
+  binding: rest
+  confidence: medium
+- tool: create_association
+  category: admin-associations
+  access: admin
+  rest:
+  - POST /admin/associations
+  binding: rest
+  confidence: high
+- tool: list_place_tours
+  category: tours
+  access: public
+  rest:
+  - GET /associations/{id}/place-tours
+  binding: rest
+  confidence: high
+- tool: create_place_tour
+  category: tours
+  access: public
+  rest:
+  - POST /associations/{id}/place-tours
+  binding: rest
+  confidence: high
+- tool: update_place_tour
+  category: tours
+  access: public
+  rest:
+  - PATCH /associations/{id}/place-tours/{tourId}
+  binding: rest
+  confidence: high
+- tool: set_place_tour_stops
+  category: tours
+  access: public
+  rest:
+  - PUT /associations/{id}/place-tours/{tourId}
+  binding: rest
+  confidence: medium
+  note: Stop replacement is most likely the PUT on the tour; the spec has no dedicated stops path.
+mcp_only:
+- tool: fetch_ontario_farms
+  reason: Pass-through to Ontario government open data (OMAFRA licensed farms); no REST operation in the OpenAPI.
+- tool: fetch_ontario_grocery_retailers
+  reason: Pass-through to AGCO open data; no REST operation in the OpenAPI.
+rest_only_summary:
+  admin: 115
+  v2/participants: 62
+  agents: 43
+  agritourism: 41
+  events: 25
+  tasks: 15
+  place: 14
+  associations: 13
+  listings: 12
+  oauth: 12
+  widget: 12
+  business: 10
+  discussions: 10
+  games: 10
+  notifications: 10
+  participants: 9
+  user: 9
+  v2/csa: 9
+  mcp: 8
+  profile: 8
+  spend-challenge: 8
+  webhooks: 8
+  users: 7
+  connections: 6
+  upload: 6
+  baskets: 5
+  recipes: 5
+  v2/admin: 5
+  v2/associations: 5
+  analytics: 4
+  dev: 4
+  jobs: 4
+  place-tours: 4
+  v2/surveys: 4
+  auth: 3
+  endorsements: 3
+  for-real-estate: 3
+  invitations: 3
+  a2a: 2
+  community: 2
+  feature-flags: 2
+  food-score: 2
+  local-food-score: 2
+  openapi: 2
+  planting-calendar: 2
+  scan: 2
+  sponsor: 2
+  sponsorships: 2
+  surveys: 2
+  telegram: 2
+  thumbs: 2
+  v2/auth: 2
+  v2/csa-leads: 2
+  v2/follow: 2
+  v2/notifications: 2
+  validation: 2
+  voice: 2
+  categories: 1
+  community-food-score-pdf: 1
+  config: 1
+  contact: 1
+  cron: 1
+  debug: 1
+  engagement-metrics: 1
+  feedback: 1
+  geocode: 1
+  global-features: 1
+  local-food-score-narrative-pdf: 1
+  local-food-score-pdf: 1
+  marketplace: 1
+  me: 1
+  ontario-food-score-heatmap: 1
+  piknik-durham-report-card-pdf: 1
+  planting-calendar.ics: 1
+  products: 1
+  recommendations: 1
+  regional-score: 1
+  seasonal-guide: 1
+  skills: 1
+  sms: 1
+  test: 1
+  upload-image: 1
+  v2/followed-announcements: 1
+  v2/following: 1
+  v2/metadata: 1
+  v2/offerings: 1
+  v2/resiliency: 1
+  v2/: 1
+  v2/service-locations: 1
+  v2/users: 1
+  v2/visit: 1
+rest_only:
+  admin:
+  - GET /admin/agent-settings
+  - PUT /admin/agent-settings
+  - POST /admin/announcements/cleanup
+  - GET /admin/announcements/cleanup
+  - GET /admin/associations/{id}/memberships
+  - DELETE /admin/associations/{id}/memberships
+  - PATCH /admin/associations/{id}/memberships
+  - GET /admin/associations/{id}
+  - PUT /admin/associations/{id}
+  - DELETE /admin/associations/{id}
+  - GET /admin/associations/{id}/surveys
+  - POST /admin/associations/{id}/surveys
+  - GET /admin/associations
+  - GET /admin/associations/verification-queue
+  - PUT /admin/associations/verify/{membershipId}
+  - POST /admin/campaign-batch
+  - GET /admin/campaign-status
+  - GET /admin/categories/{id}
+  - PATCH /admin/categories/{id}
+  - DELETE /admin/categories/{id}
+  - POST /admin/categories/reorder
+  - GET /admin/categories
+  - POST /admin/categories
+  - GET /admin/event-sources/{id}
+  - PUT /admin/event-sources/{id}
+  - DELETE /admin/event-sources/{id}
+  - GET /admin/event-sources
+  - POST /admin/event-sources
+  - POST /admin/events/recurrence
+  - GET /admin/events/recurrence
+  - DELETE /admin/fee-profiles/{id}/assignments/{assignmentId}
+  - POST /admin/fee-profiles/{id}/assignments
+  - PUT /admin/fee-profiles/{id}
+  - DELETE /admin/fee-profiles/{id}
+  - GET /admin/fee-profiles
+  - POST /admin/fee-profiles
+  - POST /admin/for-towns-pdf
+  - POST /admin/frost-dates/import
+  - GET /admin/frost-dates
+  - PUT /admin/games/{id}
+  - GET /admin/games/{id}
+  - DELETE /admin/games/{id}
+  - GET /admin/games/place-interests
+  - PATCH /admin/games/place-interests
+  - POST /admin/games
+  - GET /admin/games
+  - GET /admin/global-features
+  - POST /admin/global-features
+  - POST /admin/global-features/seed
+  - POST /admin/grant-feature
+  - GET /admin/grant-feature
+  - GET /admin/missing-coords
+  - PUT /admin/neighborhoods/waterloo-region
+  - GET /admin/neighborhoods/waterloo-region/samples
+  - GET /admin/notifications
+  - GET /admin/osm-explorer/connections
+  - GET /admin/osm-explorer/ignored-names
+  - POST /admin/osm-explorer/ignored-names
+  - GET /admin/osm-explorer/local-food-score
+  - GET /admin/osm-explorer/neighborhood-match
+  - GET /admin/osm-explorer/reverse-geocode
+  - GET /admin/osm-explorer
+  - POST /admin/osm-explorer/simulate
+  - POST /admin/participants/import
+  - GET /admin/participants
+  - GET /admin/participants/template
+  - POST /admin/participants/verify/generate-link
+  - GET /admin/performance
+  - GET /admin/places/store-qr/{participantId}/pdf
+  - GET /admin/places/store-qr
+  - PUT /admin/places/store-qr
+  - POST /admin/planting-guides/import
+  - GET /admin/planting-guides
+  - GET /admin/products/{id}
+  - PATCH /admin/products/{id}
+  - DELETE /admin/products/{id}
+  - GET /admin/products
+  - POST /admin/products
+  - GET /admin/provenance-categories
+  - GET /admin/provenance-reports/place-interest
+  - GET /admin/provenance-reports/producer-demand
+  - GET /admin/provenance-reports/producer-leads
+  - GET /admin/provenance-reports/regional-trend
+  - POST /admin/real-estate-pdf/bulk
+  - GET /admin/real-estate-pdf/connectivity-audit
+  - GET /admin/real-estate-pdf/cover-letter
+  - GET /admin/recipes/db
+  - GET /admin/regional-score/regions
+  - GET /admin/score-cache
+  - POST /admin/score-cache
+  - GET /admin/settings
+  - PATCH /admin/settings
+  - PATCH /admin/sponsorships/{id}
+  - DELETE /admin/sponsorships/{id}
+  - GET /admin/sponsorships
+  - POST /admin/sponsorships
+  - GET /admin/stats
+  - GET /admin/store-qr/default-layout
+  - PUT /admin/store-qr/default-layout
+  - GET /admin/surveys/{id}
+  - PUT /admin/surveys/{id}
+  - DELETE /admin/surveys/{id}
+  - GET /admin/surveys
+  - POST /admin/surveys
+  - GET /admin/tasks
+  - GET /admin/template
+  - PUT /admin/users/{id}/admin
+  - PUT /admin/users/{id}/email
+  - GET /admin/users/admin-info
+  - GET /admin/users
+  - GET /admin/users/search
+  - GET /admin/widget-access
+  - POST /admin/widget-access
+  - DELETE /admin/widget-access
+  - GET /admin/widget-usage
+  v2/participants:
+  - PUT /v2/participants/{id}/announcements/{announcementId}
+  - DELETE /v2/participants/{id}/announcements/{announcementId}
+  - GET /v2/participants/{id}/announcements
+  - POST /v2/participants/{id}/announcements
+  - GET /v2/participants/{id}/associations
+  - PUT /v2/participants/{id}/associations
+  - GET /v2/participants/{id}/capabilities
+  - POST /v2/participants/{id}/capabilities
+  - PUT /v2/participants/{id}/capabilities
+  - GET /v2/participants/{id}/challenges
+  - POST /v2/participants/{id}/chat
+  - GET /v2/participants/{id}/chat-metrics
+  - POST /v2/participants/{id}/claim/generate-link
+  - POST /v2/participants/{id}/claim
+  - GET /v2/participants/{id}/claim
+  - PUT /v2/participants/{id}/connections/{connectionId}
+  - GET /v2/participants/{id}/connections
+  - GET /v2/participants/{id}/csa-analytics
+  - PATCH /v2/participants/{id}/csa-availability
+  - GET /v2/participants/{id}/csa-demand-breakdown
+  - GET /v2/participants/{id}/csa-empty-context
+  - GET /v2/participants/{id}/csa-leads
+  - POST /v2/participants/{id}/csa-rematch
+  - GET /v2/participants/{id}/featured-in
+  - GET /v2/participants/{id}/followers
+  - POST /v2/participants/{id}/followers
+  - GET /v2/participants/{id}/games
+  - GET /v2/participants/{id}/messages
+  - POST /v2/participants/{id}/messages
+  - PUT /v2/participants/{id}/messages
+  - DELETE /v2/participants/{id}/offerings/{offeringId}
+  - GET /v2/participants/{id}/offerings/{offeringId}
+  - GET /v2/participants/{id}/reviews
+  - POST /v2/participants/{id}/reviews
+  - PUT /v2/participants/{id}/reviews
+  - DELETE /v2/participants/{id}/reviews
+  - GET /v2/participants/{id}
+  - DELETE /v2/participants/{id}
+  - POST /v2/participants/{id}/service-locations/{locationId}/geocode
+  - GET /v2/participants/{id}/service-locations/{locationId}
+  - DELETE /v2/participants/{id}/service-locations/{locationId}
+  - PUT /v2/participants/{id}/service-locations
+  - PUT /v2/participants/{id}/users/{userId}
+  - DELETE /v2/participants/{id}/users/{userId}
+  - GET /v2/participants/{id}/users
+  - POST /v2/participants/{id}/users
+  - GET /v2/participants/claim/{token}
+  - POST /v2/participants/claim/{token}
+  - PUT /v2/participants/connection-suggestions/{id}
+  - GET /v2/participants/connection-suggestions
+  - PUT /v2/participants/offerings/suggestions/{id}
+  - GET /v2/participants/personal-profile
+  - POST /v2/participants
+  - PUT /v2/participants/suggestions/{id}
+  - DELETE /v2/participants/suggestions/{id}
+  - PATCH /v2/participants/suggestions/{id}
+  - GET /v2/participants/suggestions
+  - PATCH /v2/participants/verify/{token}/mute
+  - GET /v2/participants/verify/{token}
+  - POST /v2/participants/verify/{token}
+  - PUT /v2/participants/verify/{token}
+  - PATCH /v2/participants/verify/{token}
+  agents:
+  - POST /agents/admin/ban_agent
+  - GET /agents/association/{id}/card
+  - POST /agents/association/{id}/get_benefits
+  - GET /agents/association/{id}/get_benefits
+  - POST /agents/association/{id}/get_info
+  - GET /agents/association/{id}/get_info
+  - POST /agents/association/{id}/list_members
+  - GET /agents/association/{id}/list_members
+  - POST /agents/association/{id}/membership_info
+  - GET /agents/association/{id}/membership_info
+  - POST /agents/participant/{id}/add_offering
+  - GET /agents/participant/{id}/card
+  - POST /agents/participant/{id}/challenge_status
+  - POST /agents/participant/{id}/get_analytics
+  - POST /agents/participant/{id}/get_associations
+  - POST /agents/participant/{id}/get_capabilities
+  - POST /agents/participant/{id}/get_events
+  - POST /agents/participant/{id}/get_hours
+  - POST /agents/participant/{id}/get_messages
+  - POST /agents/participant/{id}/get_profile
+  - POST /agents/participant/{id}/get_resellers
+  - POST /agents/participant/{id}/get_reviews
+  - POST /agents/participant/{id}/get_suppliers
+  - POST /agents/participant/{id}/list_offerings
+  - POST /agents/participant/{id}/send_inquiry
+  - POST /agents/participant/{id}/update_hours
+  - POST /agents/participant/{id}/update_offering
+  - POST /agents/participant/{id}/update_place
+  - POST /agents/platform/approve_task
+  - GET /agents/platform/card
+  - POST /agents/platform/claim_task
+  - POST /agents/platform/create_place
+  - POST /agents/platform/discover_businesses
+  - POST /agents/platform/get_platform_info
+  - POST /agents/platform/get_task
+  - POST /agents/platform/list_tasks
+  - GET /agents/platform/rate_limit_status
+  - POST /agents/platform/submit_task_response
+  - GET /agents/public/place-summary
+  - GET /agents/registry
+  - POST /agents/task-processor/process
+  - POST /agents/tasks/create
+  - GET /agents/tasks/status/{taskId}
+  agritourism:
+  - GET /agritourism/campaigns/{id}/analytics
+  - DELETE /agritourism/campaigns/{id}/locations/{participantId}
+  - POST /agritourism/campaigns/{id}/locations
+  - POST /agritourism/campaigns/{id}/opt-in
+  - GET /agritourism/campaigns/{id}/participant-stats
+  - GET /agritourism/campaigns/{id}
+  - PUT /agritourism/campaigns/{id}
+  - DELETE /agritourism/campaigns/{id}
+  - GET /agritourism/campaigns/{id}/scanner/attendees
+  - POST /agritourism/campaigns/{id}/scanner/bulk-reconcile
+  - POST /agritourism/campaigns/{id}/scanner/checkin
+  - GET /agritourism/campaigns/{id}/scanner/context
+  - GET /agritourism/campaigns/{id}/scanner/guest-list
+  - POST /agritourism/campaigns/{id}/scanner/lookup
+  - GET /agritourism/campaigns/{id}/scanner/stats
+  - POST /agritourism/campaigns/{id}/scanner/undo-checkin
+  - POST /agritourism/campaigns/{id}/status
+  - GET /agritourism/campaigns/{id}/stop-busyness
+  - PATCH /agritourism/campaigns/{id}/ticket-types/{ticketTypeId}
+  - DELETE /agritourism/campaigns/{id}/ticket-types/{ticketTypeId}
+  - POST /agritourism/campaigns/{id}/ticket-types
+  - GET /agritourism/campaigns/all
+  - POST /agritourism/campaigns/create
+  - GET /agritourism/campaigns/joinable
+  - GET /agritourism/campaigns/mine
+  - GET /agritourism/campaigns
+  - POST /agritourism/checkout
+  - POST /agritourism/claim-free
+  - GET /agritourism/fee-profiles
+  - POST /agritourism/lookup
+  - GET /agritourism/my-associations
+  - GET /agritourism/stripe-connect/dashboard
+  - POST /agritourism/stripe-connect
+  - GET /agritourism/stripe-connect/status
+  - PUT /agritourism/ticket-types/{id}
+  - POST /agritourism/tickets/{id}/cancel
+  - GET /agritourism/tickets/{id}/download
+  - GET /agritourism/tickets/{id}/pass
+  - GET /agritourism/tickets/{id}
+  - GET /agritourism/tickets
+  - POST /agritourism/validate
+  events:
+  - GET /events/{id}/analytics
+  - GET /events/{id}/calendar
+  - GET /events/{id}/instances
+  - POST /events/{id}/instances
+  - GET /events/{id}
+  - DELETE /events/{id}
+  - POST /events/{id}/rsvp
+  - DELETE /events/{id}/rsvp
+  - GET /events/analytics
+  - POST /events/digest
+  - GET /events/import/fetch
+  - POST /events/import
+  - GET /events/import/sources
+  - GET /events/my-rsvps
+  - GET /events/rsvp/{id}/download
+  - GET /events/tickets/attendees
+  - GET /events/tickets/audit-csv
+  - POST /events/tickets/bulk-checkin
+  - POST /events/tickets/bulk-reconcile
+  - POST /events/tickets/checkin
+  - GET /events/tickets/guest-list
+  - POST /events/tickets/lookup
+  - GET /events/tickets/scannable
+  - GET /events/tickets/stats
+  - POST /events/tickets/verify
+  tasks:
+  - POST /tasks/{id}/abandon
+  - GET /tasks/{id}/messages
+  - POST /tasks/{id}/messages
+  - POST /tasks/{id}/reject
+  - GET /tasks/{id}
+  - POST /tasks/{id}/submit-response
+  - POST /tasks/{id}/unclaim
+  - DELETE /tasks/{id}/update
+  - PATCH /tasks/{id}/update-response
+  - POST /tasks/{id}/verify
+  - POST /tasks/create
+  - GET /tasks/nearby
+  - POST /tasks/nearby
+  - GET /tasks/public
+  - POST /tasks/trigger-proximity-check
+  place:
+  - GET /place/{id}/og-image
+  - PUT /place/{id}/users/{userId}
+  - DELETE /place/{id}/users/{userId}
+  - GET /place/{id}/users
+  - POST /place/{id}/users
+  - POST /place/challenge-interest
+  - GET /place/challenge-interest
+  - GET /place/challenge-opportunities
+  - PATCH /place/games/{gameId}/participation
+  - GET /place/games/{gameId}/qr-code/pdf
+  - GET /place/games/{gameId}/qr-code
+  - GET /place/games
+  - GET /place/store-qr/{participantId}/qr-code/pdf
+  - GET /place/store-qr/{participantId}/qr-code
+  associations:
+  - PUT /associations/{id}/members/{membershipId}
+  - GET /associations/{id}/members
+  - GET /associations/{id}/spend-challenge/activity-map
+  - POST /associations/{id}/spend-challenge/campaigns/{campaignId}/open
+  - GET /associations/{id}/spend-challenge/campaigns/{campaignId}/poster
+  - PATCH /associations/{id}/spend-challenge/campaigns/{campaignId}
+  - GET /associations/{id}/spend-challenge/campaigns
+  - POST /associations/{id}/spend-challenge/campaigns
+  - GET /associations/{id}/spend-challenge/insights
+  - GET /associations/{id}/spend-challenge
+  - PUT /associations/{id}/spend-challenge
+  - GET /associations/by-slug/{slug}/tours/{tourSlug}
+  - GET /associations/by-slug/{slug}/tours
+  listings:
+  - POST /listings/{id}/accept
+  - POST /listings/{id}/confirm-acceptance
+  - POST /listings/{id}/confirm-direct-pickup
+  - POST /listings/{id}/decline
+  - POST /listings/{id}/decline-acceptance
+  - POST /listings/{id}/fulfill
+  - POST /listings/{id}/reactivate
+  - GET /listings/{id}
+  - PUT /listings/{id}
+  - DELETE /listings/{id}
+  - POST /listings/{id}/view
+  - GET /listings/my
+  oauth:
+  - GET /oauth/authorize
+  - POST /oauth/clients/{id}/reset-secret
+  - PATCH /oauth/clients/{id}
+  - PUT /oauth/clients/{id}
+  - DELETE /oauth/clients/{id}
+  - GET /oauth/clients/info
+  - POST /oauth/clients
+  - GET /oauth/clients
+  - POST /oauth/register
+  - POST /oauth/revoke
+  - POST /oauth/token
+  - GET /oauth/userinfo
+  widget:
+  - GET /widget/analytics
+  - GET /widget/branding
+  - PUT /widget/branding
+  - PUT /widget/keys/{keyId}
+  - DELETE /widget/keys/{keyId}
+  - GET /widget/keys
+  - POST /widget/keys
+  - POST /widget/listings/{id}/email-pdfs
+  - PATCH /widget/listings/{id}
+  - DELETE /widget/listings/{id}
+  - GET /widget/listings
+  - POST /widget/listings
+  business:
+  - POST /business/store-qr/apply-layout-all
+  - POST /business/store-qr/regenerate-token
+  - GET /business/store-qr
+  - PUT /business/store-qr
+  - POST /business/store-qr/track
+  - GET /business/surveys/{id}
+  - PUT /business/surveys/{id}
+  - DELETE /business/surveys/{id}
+  - GET /business/surveys
+  - POST /business/surveys
+  discussions:
+  - GET /discussions/categories/{slug}/jobs
+  - GET /discussions/categories
+  - GET /discussions/locations
+  - POST /discussions/posts/{id}/replies
+  - GET /discussions/posts/{id}
+  - GET /discussions/posts
+  - POST /discussions/posts
+  - GET /discussions/subscriptions
+  - POST /discussions/subscriptions
+  - DELETE /discussions/subscriptions
+  games:
+  - GET /games/{gameId}/leaderboard
+  - GET /games/{gameId}/participating-businesses
+  - GET /games/{gameId}
+  - GET /games/{gameId}/user-stats
+  - GET /games/{gameId}/user-visits
+  - GET /games/has-active
+  - POST /games/match3/scores
+  - GET /games/match3/scores
+  - GET /games/my-challenges
+  - GET /games/random-local-spot
+  notifications:
+  - GET /notifications/announcement-count
+  - GET /notifications/debug
+  - GET /notifications/preferences
+  - PUT /notifications/preferences
+  - GET /notifications
+  - PUT /notifications
+  - POST /notifications/subscribe
+  - DELETE /notifications/subscribe
+  - POST /notifications/test
+  - GET /notifications/vapid-key
+  participants:
+  - GET /participants/{id}/events
+  - GET /participants/{id}/notification-filters/{filterId}
+  - PATCH /participants/{id}/notification-filters/{filterId}
+  - DELETE /participants/{id}/notification-filters/{filterId}
+  - GET /participants/{id}/notification-filters
+  - POST /participants/{id}/notification-filters
+  - GET /participants/{id}
+  - PATCH /participants/{id}
+  - GET /participants/{id}/tasks
+  user:
+  - GET /user/delete-account
+  - POST /user/delete-account
+  - GET /user/delivery-stats
+  - GET /user/feature-preferences
+  - PATCH /user/feature-preferences
+  - GET /user/game-permissions
+  - POST /user/location
+  - GET /user/location
+  - GET /user/tasks
+  v2/csa:
+  - GET /v2/csa/budget-context
+  - GET /v2/csa/demand-map
+  - GET /v2/csa/interests/{id}/activity
+  - POST /v2/csa/interests/{id}/selections
+  - GET /v2/csa/interests/my-inquiries
+  - DELETE /v2/csa/interests/my-inquiries
+  - POST /v2/csa/interests
+  - POST /v2/csa/unclaimed-notifications/opt-out
+  - GET /v2/csa/unclaimed-notifications/opt-out
+  mcp:
+  - GET /mcp/auth/start
+  - POST /mcp
+  - GET /mcp
+  - GET /mcp/sse
+  - POST /mcp/token/generate
+  - GET /mcp/token/generate
+  - DELETE /mcp/tokens/{id}
+  - GET /mcp/tokens
+  profile:
+  - GET /profile
+  - POST /profile
+  - DELETE /profile/skills/{id}
+  - POST /profile/skills
+  - GET /profile/suggest-slug
+  - PUT /profile/work-experience/{id}
+  - DELETE /profile/work-experience/{id}
+  - POST /profile/work-experience
+  spend-challenge:
+  - GET /spend-challenge/associations/{id}/campaign
+  - GET /spend-challenge/associations/{id}
+  - GET /spend-challenge/associations/{id}/share-card
+  - POST /spend-challenge/log
+  - GET /spend-challenge/my-logs
+  - GET /spend-challenge/nearby
+  - GET /spend-challenge/participant/{id}/impact
+  - GET /spend-challenge/rankings
+  webhooks:
+  - GET /webhooks/{id}
+  - PUT /webhooks/{id}
+  - DELETE /webhooks/{id}
+  - POST /webhooks/process
+  - GET /webhooks
+  - POST /webhooks
+  - POST /webhooks/stripe
+  - POST /webhooks/test
+  users:
+  - GET /users/{userId}/follows
+  - POST /users/me/social-links/phone/code
+  - DELETE /users/me/social-links/phone
+  - GET /users/me/social-links
+  - POST /users/me/social-links/telegram/code
+  - DELETE /users/me/social-links/telegram
+  - GET /users/search
+  connections:
+  - POST /connections/{id}
+  - PUT /connections/{id}
+  - DELETE /connections/{id}
+  - GET /connections
+  - POST /connections
+  - GET /connections/status
+  upload:
+  - POST /upload/avatar
+  - POST /upload/place-image
+  - DELETE /upload/place-image
+  - POST /upload/recipe-image
+  - POST /upload/widget-brand-image
+  - DELETE /upload/widget-brand-image
+  baskets:
+  - GET /baskets/{id}
+  - PUT /baskets/{id}
+  - DELETE /baskets/{id}
+  - POST /baskets
+  - GET /baskets
+  recipes:
+  - GET /recipes/{id}/comments
+  - POST /recipes/{id}/comments
+  - DELETE /recipes/{id}/comments
+  - POST /recipes/{id}/flag
+  - GET /recipes/{id}/local-sourcing
+  v2/admin:
+  - PUT /v2/admin/business-claims/{id}
+  - GET /v2/admin/business-claims/{id}
+  - POST /v2/admin/business-claims/release
+  - GET /v2/admin/business-claims
+  - GET /v2/admin/users/search
+  v2/associations:
+  - GET /v2/associations/{slug}/campaigns
+  - POST /v2/associations/{slug}/chat
+  - GET /v2/associations/{slug}/jobs
+  - GET /v2/associations/{slug}/members
+  - GET /v2/associations/{slug}
+  analytics:
+  - GET /analytics/entity/{entityType}/{entityId}
+  - POST /analytics/fallback
+  - GET /analytics/fallback
+  - POST /analytics/track
+  dev:
+  - GET /dev/chat
+  - POST /dev/chat
+  - POST /dev/login
+  - GET /dev/users
+  jobs:
+  - GET /jobs/{jobId}/candidates
+  - GET /jobs/{jobId}
+  - DELETE /jobs/{jobId}
+  - GET /jobs/recommendations
+  place-tours:
+  - GET /place-tours/by-slug/{tourSlug}
+  - GET /place-tours/for-place/{participantId}
+  - POST /place-tours/road-path
+  - GET /place-tours
+  v2/surveys:
+  - POST /v2/surveys/{id}/respond
+  - GET /v2/surveys/{id}/results
+  - GET /v2/surveys/active
+  - GET /v2/surveys/aggregate
+  auth:
+  - POST /auth/telegram/link
+  - POST /auth/telegram/register-chat
+  - POST /auth/telegram/verify
+  endorsements:
+  - POST /endorsements/check
+  - POST /endorsements
+  - DELETE /endorsements
+  for-real-estate:
+  - GET /for-real-estate/connectivity-audit/preview
+  - POST /for-real-estate/connectivity-audit
+  - GET /for-real-estate/connectivity-audit
+  invitations:
+  - POST /invitations/{token}/decline
+  - GET /invitations/{token}
+  - POST /invitations/{token}
+  a2a:
+  - GET /a2a
+  - POST /a2a
+  community:
+  - GET /community/insights
+  - GET /community/members
+  feature-flags:
+  - GET /feature-flags
+  - POST /feature-flags
+  food-score:
+  - GET /food-score/personal
+  - PATCH /food-score/personal
+  local-food-score:
+  - GET /local-food-score/sovereignty-index
+  - GET /local-food-score/system-metrics
+  openapi:
+  - GET /openapi/json
+  - GET /openapi
+  planting-calendar:
+  - GET /planting-calendar/products
+  - GET /planting-calendar/zones
+  scan:
+  - POST /scan/checkin
+  - GET /scan/nearby
+  sponsor:
+  - GET /sponsor/applications
+  - POST /sponsor/applications
+  sponsorships:
+  - GET /sponsorships
+  - POST /sponsorships
+  surveys:
+  - POST /surveys
+  - GET /surveys
+  telegram:
+  - POST /telegram/create-listing
+  - POST /telegram/inbound
+  thumbs:
+  - GET /thumbs/{participantId}
+  - POST /thumbs/{participantId}
+  v2/auth:
+  - POST /v2/auth/verify-email/confirm
+  - POST /v2/auth/verify-email
+  v2/csa-leads:
+  - POST /v2/csa-leads/{id}/quick-reply
+  - PATCH /v2/csa-leads/{id}
+  v2/follow:
+  - POST /v2/follow
+  - DELETE /v2/follow
+  v2/notifications:
+  - GET /v2/notifications/announcements
+  - PUT /v2/notifications/announcements
+  validation:
+  - POST /validation/places
+  - GET /validation/places
+  voice:
+  - POST /voice/twilio
+  - POST /voice/vapi
+  categories:
+  - GET /categories
+  community-food-score-pdf:
+  - GET /community-food-score-pdf
+  config:
+  - GET /config/client
+  contact:
+  - POST /contact
+  cron:
+  - POST /cron/ontario-weekly-snapshot
+  debug:
+  - GET /debug/features
+  engagement-metrics:
+  - GET /engagement-metrics
+  feedback:
+  - POST /feedback
+  geocode:
+  - GET /geocode/reverse
+  global-features:
+  - GET /global-features
+  local-food-score-narrative-pdf:
+  - GET /local-food-score-narrative-pdf
+  local-food-score-pdf:
+  - GET /local-food-score-pdf
+  marketplace:
+  - POST /marketplace/contact
+  me:
+  - GET /me
+  ontario-food-score-heatmap:
+  - GET /ontario-food-score-heatmap
+  piknik-durham-report-card-pdf:
+  - GET /piknik-durham-report-card-pdf
+  planting-calendar.ics:
+  - GET /planting-calendar.ics
+  products:
+  - POST /products/validate-local-food
+  recommendations:
+  - POST /recommendations
+  regional-score:
+  - POST /regional-score/simulate
+  seasonal-guide:
+  - GET /seasonal-guide
+  skills:
+  - GET /skills/search
+  sms:
+  - POST /sms/inbound
+  test:
+  - POST /test/telegram-notify
+  upload-image:
+  - POST /upload-image
+  v2/followed-announcements:
+  - GET /v2/followed-announcements
+  v2/following:
+  - GET /v2/following
+  v2/metadata:
+  - GET /v2/metadata
+  v2/offerings:
+  - GET /v2/offerings/{id}/sources
+  v2/resiliency:
+  - GET /v2/resiliency/score
+  v2/:
+  - GET /v2
+  v2/service-locations:
+  - GET /v2/service-locations/bulk
+  v2/users:
+  - GET /v2/users/{userId}/suggestions
+  v2/visit:
+  - GET /v2/visit/{participantId}
+coverage:
+  tools_named: 62
+  tools_bound: 60
+  mcp_only: 2
+  rest_ops_total: 683
+  rest_ops_with_tool: 77
+  rest_ops_without_tool: 606
+  confidence:
+    high: 48
+    medium: 12
+    low: 0

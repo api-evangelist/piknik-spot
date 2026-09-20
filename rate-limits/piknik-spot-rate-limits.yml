@@ -1,0 +1,62 @@
+generated: '2026-09-19'
+method: probed
+source: >-
+  Live unauthenticated GET https://piknik.spot/api/agents/public/place-summary?q=bakery&limit=2 on
+  2026-09-19 (200; one request) + https://piknik.spot/llms.txt + https://piknik.spot/.well-known/agent-ethics.md
+  + https://piknik.spot/skills/piknik-rest-api/SKILL.md.
+confidence: high for the place-summary limit (headers observed); medium for the agent-ethics tiers (published numbers, no headers observed, enforcement surface unstated).
+limit_count: 4
+scopes:
+  - scope: per-client
+    surface: GET /api/agents/public/place-summary (public, unauthenticated)
+    window: 1 minute
+    limit: 30
+    unit: requests
+    burst: null
+    status_on_exhaustion: 429
+    headers:
+      - {name: X-RateLimit-Limit, observed_value: '30'}
+      - {name: X-RateLimit-Remaining, observed_value: '27'}
+      - {name: X-RateLimit-Reset, observed_value: '1789860844', meaning: Unix epoch seconds when the window resets}
+    retry_after: null
+    other_caps: 'limit <= 5 results per call; radius_km <= 50'
+    source: llms.txt ("max 5, 30 req/min") corroborated by the observed headers
+    method: probed
+  - scope: per-agent
+    surface: Discovery operations (agent registry queries, public business searches, general information) — A2A / agent API
+    window: 1 hour
+    limit: 1000
+    unit: requests
+    status_on_exhaustion: 429
+    headers: []
+    source: https://piknik.spot/.well-known/agent-ethics.md (Rate Limit Tiers; machine-readable summary rate_limits.discovery 1000 per_hour)
+    method: searched
+  - scope: per-agent
+    surface: Business interactions (business detail queries, hours/capability lookups, individual inquiries)
+    window: 1 hour
+    limit: 100
+    unit: requests
+    status_on_exhaustion: 429
+    headers: []
+    source: agent-ethics.md (rate_limits.interactions 100 per_hour)
+    method: searched
+  - scope: per-agent
+    surface: Bulk operations (batch data requests, cross-business analytics, automated coordination)
+    window: 1 hour
+    limit: 10
+    unit: requests
+    status_on_exhaustion: 429
+    headers: []
+    source: agent-ethics.md (rate_limits.bulk 10 per_hour)
+    method: searched
+mcp_surface:
+  headers_observed: none on POST /api/mcp (tools/list, initialize, tools/call)
+  documented_limit: null
+a2a_surface:
+  headers_observed: none on POST /api/a2a
+  documented_limit: 'agent-ethics.md tiers above; the card carries no rateLimit field'
+runtime_signal_note: >-
+  The only header-signalled limit is on the public place-summary endpoint. The agent-ethics tiers are
+  policy numbers; GET /agents/platform/rate_limit_status exists in the OpenAPI for an authenticated
+  agent to read its own standing, which is the runtime signal for those tiers.
+client_guidance: agent-ethics.md requires exponential backoff on 429 and forbids circumventing limits with multiple identities; higher limits "through proper channels" (info@piknik.spot).

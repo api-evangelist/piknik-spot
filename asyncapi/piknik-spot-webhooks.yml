@@ -1,0 +1,37 @@
+generated: '2026-09-19'
+method: derived
+spec_type: Webhooks
+source: openapi/_original/piknik-spot-openapi.json (webhook management operations) + https://piknik.spot/privacy-policy ("API keys, webhooks" removed on account deletion)
+asyncapi_published: false
+summary: >-
+  Piknik exposes an outbound webhook subscription surface in its own contract — CRUD over /webhooks
+  plus a test-delivery endpoint — so the surface is real and provider-declared, but NO event catalogue
+  (event names, payload schemas, signing scheme, retry policy) is published anywhere, and no AsyncAPI
+  document exists. Inbound webhooks the platform RECEIVES (Stripe, Twilio SMS/voice, Telegram, Vapi)
+  are also declared and listed separately because they are not a consumer surface.
+management_surface:
+  base: https://piknik.spot/api
+  operations:
+    - {method: GET, path: /webhooks, summary: list webhook subscriptions, security: bearerAuth | cookieAuth}
+    - {method: POST, path: /webhooks, summary: create a webhook subscription, security: bearerAuth | cookieAuth}
+    - {method: GET, path: '/webhooks/{id}', security: bearerAuth | cookieAuth}
+    - {method: PUT, path: '/webhooks/{id}', security: bearerAuth | cookieAuth}
+    - {method: DELETE, path: '/webhooks/{id}', security: bearerAuth | cookieAuth}
+    - {method: POST, path: /webhooks/test, summary: send a test delivery, security: bearerAuth | cookieAuth}
+    - {method: POST, path: /webhooks/process, summary: internal delivery processor (declared; purpose not documented)}
+  request_schema: 'requestBody declared as a bare object — subscription fields (target URL, events, secret) are NOT declared.'
+events: []
+events_note: Unknown — the contract declares no event types and no docs page describes them. Deliberately empty; nothing invented.
+signing: unknown
+retries: unknown
+inbound_webhooks_received_by_piknik:
+  - {path: /webhooks/stripe, from: Stripe, note: Stripe Connect ticketing for agritourism campaigns}
+  - {path: /sms/inbound, from: Twilio, note: 'OpenAPI summary: "Twilio inbound SMS webhook."'}
+  - {path: /voice/twilio, from: Twilio, note: voice speech-gather loop}
+  - {path: /voice/vapi, from: Vapi}
+  - {path: /telegram/inbound, from: Telegram, note: 'OpenAPI summary: "Telegram inbound message handler."'}
+push_notifications:
+  web_push: true
+  operations: [GET /notifications/vapid-key, POST /notifications/subscribe, DELETE /notifications/subscribe]
+  note: Browser Web Push (VAPID) for end users; not an API event surface.
+pointer_note: 'type: Webhooks is emitted for the provider-declared subscription surface; no AsyncAPI pointer (none exists).'

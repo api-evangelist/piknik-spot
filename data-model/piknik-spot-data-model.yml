@@ -1,0 +1,433 @@
+generated: '2026-09-19'
+method: derived
+source: Derived from openapi/_original/piknik-spot-openapi.json (6 components.schemas, path structure, path/query id parameters)
+  and the MCP tool inputSchemas (mcp/piknik-spot-mcp-tools-list.json), which name the foreign keys the REST spec leaves as
+  bare objects.
+caveat: The contract declares only six schemas (Error, Participant, Listing, CreateListingRequest, Event, CreateEventRequest);
+  every other entity below is inferred from path structure and MCP tool parameters, so field lists are known only for the
+  four declared entities. Relationship evidence is quoted per row.
+identifiers:
+  format: cuid (e.g. cmtz6528b001jqn07ubkl4hlo)
+  note: Observed on live place-summary results; place URLs are https://piknik.spot/place/{id}. Recipes accept UUID or cuid
+    (get_recipe).
+  key_naming: participant_id in request bodies and MCP tools; participantId in response objects and query params
+enumerations:
+  Participant.primaryRole:
+  - FARM
+  - PROCESSOR
+  - MERCHANT
+  - RESTAURANT
+  - MARKET
+  - DELIVERY
+  - COMMUNITY_GARDEN
+  - COMMUNITY_KITCHEN
+  - FOOD_BANK
+  Listing.listingType:
+  - wanted_to_sell
+  - wanted_to_buy
+  - service_offering
+  Listing.contactMethod:
+  - email
+  - phone
+  - message
+  Event.eventType:
+  - market
+  - workshop
+  - tour
+  - festival
+  - meeting
+  - other
+  Offering.kind:
+  - STAPLE
+  - COMPOSED
+  Connection.supplier_roles:
+  - FARM
+  - PROCESSOR
+  Connection.buyer_roles:
+  - RESTAURANT
+  - MERCHANT
+  - MARKET
+  - FARM
+entities:
+- name: AgritourismCampaign
+  declared_schema: false
+  fields: null
+  operations: 26
+  path_id_params:
+  - id
+  - participantId
+  - ticketTypeId
+- name: Association
+  declared_schema: false
+  fields: null
+  operations: 23
+  path_id_params:
+  - campaignId
+  - id
+  - membershipId
+  - slug
+  - tourId
+  - tourSlug
+- name: Basket
+  declared_schema: false
+  fields: null
+  operations: 5
+  path_id_params:
+  - id
+- name: CSAInterest
+  declared_schema: false
+  fields: null
+  operations: 11
+  path_id_params:
+  - id
+- name: Category
+  declared_schema: false
+  fields: null
+  operations: 1
+  path_id_params: null
+- name: Connection
+  declared_schema: false
+  fields: null
+  operations: 6
+  path_id_params:
+  - id
+- name: Cuisine
+  declared_schema: false
+  fields: null
+  operations: 1
+  path_id_params: null
+- name: Discussion
+  declared_schema: false
+  fields: null
+  operations: 10
+  path_id_params:
+  - id
+  - slug
+- name: Endorsement
+  declared_schema: false
+  fields: null
+  operations: 3
+  path_id_params: null
+- name: Error
+  declared_schema: true
+  fields:
+  - error
+  - error_description
+  operations: 0
+  path_id_params: null
+- name: Event
+  declared_schema: true
+  fields:
+  - id
+  - participantId
+  - title
+  - description
+  - startDate
+  - endDate
+  - address
+  - locationName
+  - eventType
+  - isRecurring
+  - recurrenceRule
+  operations: 29
+  path_id_params:
+  - id
+- name: Game
+  declared_schema: false
+  fields: null
+  operations: 12
+  path_id_params:
+  - gameId
+- name: Invitation
+  declared_schema: false
+  fields: null
+  operations: 3
+  path_id_params:
+  - token
+- name: Job
+  declared_schema: false
+  fields: null
+  operations: 8
+  path_id_params:
+  - jobId
+- name: Listing
+  declared_schema: true
+  fields:
+  - id
+  - participantId
+  - listingType
+  - title
+  - description
+  - quantity
+  - contactMethod
+  - radiusKm
+  - endDate
+  - wantedInReturn
+  - status
+  - createdAt
+  operations: 14
+  path_id_params:
+  - id
+- name: Notification
+  declared_schema: false
+  fields: null
+  operations: 10
+  path_id_params: null
+- name: OAuthClient
+  declared_schema: false
+  fields: null
+  operations: 7
+  path_id_params:
+  - id
+- name: Offering
+  declared_schema: false
+  fields: null
+  operations: 0
+  path_id_params: null
+- name: PackPrice
+  declared_schema: false
+  fields: null
+  operations: 0
+  path_id_params: null
+- name: Participant
+  declared_schema: true
+  fields:
+  - id
+  - name
+  - address
+  - primaryRole
+  - latitude
+  - longitude
+  - image
+  - status
+  operations: 108
+  path_id_params:
+  - announcementId
+  - connectionId
+  - filterId
+  - gameId
+  - id
+  - locationId
+  - offeringId
+  - participantId
+  - quoteId
+  - token
+  - userId
+- name: PersonalAccessToken
+  declared_schema: false
+  fields: null
+  operations: 2
+  path_id_params:
+  - id
+- name: PlaceTour
+  declared_schema: false
+  fields: null
+  operations: 4
+  path_id_params:
+  - participantId
+  - tourSlug
+- name: Product
+  declared_schema: false
+  fields: null
+  operations: 0
+  path_id_params: null
+- name: Profile
+  declared_schema: false
+  fields: null
+  operations: 9
+  path_id_params:
+  - id
+  - username
+- name: Recipe
+  declared_schema: false
+  fields: null
+  operations: 10
+  path_id_params:
+  - id
+- name: Review
+  declared_schema: false
+  fields: null
+  operations: 0
+  path_id_params: null
+- name: ServiceLocation
+  declared_schema: false
+  fields: null
+  operations: 0
+  path_id_params: null
+- name: Skill
+  declared_schema: false
+  fields: null
+  operations: 1
+  path_id_params: null
+- name: SpendChallenge
+  declared_schema: false
+  fields: null
+  operations: 8
+  path_id_params:
+  - id
+- name: Sponsorship
+  declared_schema: false
+  fields: null
+  operations: 2
+  path_id_params: null
+- name: Survey
+  declared_schema: false
+  fields: null
+  operations: 7
+  path_id_params:
+  - id
+- name: Task
+  declared_schema: false
+  fields: null
+  operations: 19
+  path_id_params:
+  - id
+- name: Thumb
+  declared_schema: false
+  fields: null
+  operations: 2
+  path_id_params:
+  - participantId
+- name: Ticket
+  declared_schema: false
+  fields: null
+  operations: 5
+  path_id_params:
+  - id
+- name: User
+  declared_schema: false
+  fields: null
+  operations: 16
+  path_id_params:
+  - userId
+- name: Webhook
+  declared_schema: false
+  fields: null
+  operations: 8
+  path_id_params:
+  - id
+relationships:
+- from: Listing
+  to: Participant
+  type: belongs_to
+  via: participantId / participant_id
+  evidence: Listing.participantId; CreateListingRequest.participant_id "ID of the business creating the listing (get from
+    /api/v2/participants/my-businesses)"
+- from: Event
+  to: Participant
+  type: belongs_to
+  via: participantId / participant_id
+  evidence: Event.participantId; CreateEventRequest.participant_id; POST /participants/{id}/events
+- from: Participant
+  to: Listing
+  type: has_many
+  via: GET /listings?participantId=
+  evidence: query param participantId on GET /listings
+- from: Participant
+  to: Event
+  type: has_many
+  via: GET /participants/{id}/events
+- from: Participant
+  to: Offering
+  type: has_many
+  via: GET /v2/participants/{id}/offerings
+- from: Offering
+  to: Product
+  type: belongs_to
+  via: product_id
+  evidence: 'MCP create_product: "kind=STAPLE: catalog food via product_id"; GET /products/search returns product_id'
+- from: Offering
+  to: PackPrice
+  type: has_many
+  via: offering_id
+  evidence: MCP create_pack_price(participant_id, offering_id, ...); /v2/participants/{id}/pack-prices/{quoteId}
+- from: Participant
+  to: ServiceLocation
+  type: has_many
+  via: GET /v2/participants/{id}/service-locations/{locationId}
+- from: Participant
+  to: Association
+  type: many_to_many
+  via: membership (membershipId)
+  evidence: /v2/participants/{id}/associations; /associations/{id}/members/{membershipId}; /admin/associations/{id}/memberships
+- from: Association
+  to: PlaceTour
+  type: has_many
+  via: /associations/{id}/place-tours/{tourId}
+- from: PlaceTour
+  to: Participant
+  type: has_many
+  via: stops (participant_ids)
+  evidence: MCP set_place_tour_stops(participant_ids)
+- from: Participant
+  to: Participant
+  type: many_to_many
+  via: Connection (supplier_id -> buyer_id, connectionId)
+  evidence: /v2/participants/{id}/connections/{connectionId}; MCP apply_connection(supplier_id, buyer_id, products)
+- from: Job
+  to: Participant
+  type: belongs_to
+  via: participant_id
+  evidence: MCP create_job(participant_id, ...); /jobs/{jobId}
+- from: Recipe
+  to: Cuisine
+  type: many_to_many
+  via: cuisine_ids / primary_cuisine_id
+  evidence: MCP create_recipe(cuisine_ids, primary_cuisine_id); GET /cuisines
+- from: Recipe
+  to: Product
+  type: has_many
+  via: ingredients[].product_id
+  evidence: MCP create_recipe "Link ingredients to catalog via product_id"
+- from: Recipe
+  to: Association
+  type: belongs_to
+  via: association_id (optional)
+- from: Event
+  to: User
+  type: has_many
+  via: RSVP
+  evidence: POST/DELETE /events/{id}/rsvp; GET /events/my-rsvps
+- from: Participant
+  to: Review
+  type: has_many
+  via: /v2/participants/{id}/reviews
+- from: Participant
+  to: User
+  type: many_to_many
+  via: place users (userId)
+  evidence: /place/{id}/users/{userId}; /v2/participants/{id}/users/{userId}
+- from: Participant
+  to: Survey
+  type: has_many
+  via: /business/surveys
+- from: Task
+  to: Participant
+  type: belongs_to
+  via: GET /participants/{id}/tasks
+- from: AgritourismCampaign
+  to: Ticket
+  type: has_many
+  via: /agritourism/tickets/{id}; ticket-types/{ticketTypeId}
+- from: AgritourismCampaign
+  to: Participant
+  type: many_to_many
+  via: locations (participantId)
+  evidence: /agritourism/campaigns/{id}/locations/{participantId}
+- from: OAuthClient
+  to: User
+  type: belongs_to
+  via: /oauth/clients (owner session)
+- from: PersonalAccessToken
+  to: User
+  type: belongs_to
+  via: /mcp/tokens/{id}
+- from: Webhook
+  to: User
+  type: belongs_to
+  via: /webhooks/{id}
+  evidence: 'privacy policy: deleting an account removes API keys and webhooks'
+core_graph_note: 'Participant (a place) is the hub: Listings, Events, Offerings, ServiceLocations, Jobs, Reviews, Tasks and
+  Users hang off it; Connections link Participants to Participants (supplier -> buyer) and are the edges the Local Food Score
+  is computed over (only FARM-supplier links count today, per the MCP SKILL.md). Terms of Service 7A names these entity relationships
+  as the proprietary core of the dataset.'

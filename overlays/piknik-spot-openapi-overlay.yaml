@@ -1,0 +1,2117 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Piknik.Spot OpenAPI
+  version: '2026-09-19'
+  description: 'Generated 2026-09-19 (method: generated). Applies on top of openapi/piknik-spot-openapi.yml WITHOUT mutating
+    it. Proposes a stable operationId for every one of the 683 operations (the source declares none), removes the localhost
+    development server, links the agent surfaces the provider publishes, and documents the place-summary rate limit observed
+    live. Parameter names for place-summary come from llms.txt and the live 400 body.'
+extends: openapi/piknik-spot-openapi.yml
+actions:
+- target: $.servers
+  description: Drop the http://localhost:3000/api development server from the consumer-facing view; the production server
+    is the only one an agent can call.
+  update: null
+- target: $.servers[?(@.url=='http://localhost:3000/api')]
+  description: Remove the development server entry.
+  remove: true
+- target: $.info
+  description: Add the machine-discoverable agent surfaces the provider publishes but the spec omits.
+  update:
+    termsOfService: https://piknik.spot/terms-of-service
+    x-llms-txt: https://piknik.spot/llms.txt
+    x-agent-card: https://piknik.spot/.well-known/agent-card.json
+    x-mcp-endpoint: https://piknik.spot/api/mcp
+    x-agent-ethics: https://piknik.spot/.well-known/agent-ethics.md
+    x-oauth-authorization-server: https://piknik.spot/.well-known/oauth-authorization-server
+    x-oauth-protected-resource: https://piknik.spot/.well-known/oauth-protected-resource
+- target: $.paths['/a2a'].get
+  update:
+    operationId: getA2a
+- target: $.paths['/a2a'].post
+  update:
+    operationId: postA2a
+- target: $.paths['/admin/agent-settings'].get
+  update:
+    operationId: getAdminAgentSettings
+- target: $.paths['/admin/agent-settings'].put
+  update:
+    operationId: putAdminAgentSettings
+- target: $.paths['/admin/announcements/cleanup'].post
+  update:
+    operationId: postAdminAnnouncementsCleanup
+- target: $.paths['/admin/announcements/cleanup'].get
+  update:
+    operationId: getAdminAnnouncementsCleanup
+- target: $.paths['/admin/associations/{id}/memberships/bulk'].post
+  update:
+    operationId: postAdminAssociationsIdMembershipsBulk
+- target: $.paths['/admin/associations/{id}/memberships'].get
+  update:
+    operationId: getAdminAssociationsIdMemberships
+- target: $.paths['/admin/associations/{id}/memberships'].delete
+  update:
+    operationId: deleteAdminAssociationsIdMemberships
+- target: $.paths['/admin/associations/{id}/memberships'].patch
+  update:
+    operationId: patchAdminAssociationsIdMemberships
+- target: $.paths['/admin/associations/{id}'].get
+  update:
+    operationId: getAdminAssociationsId
+- target: $.paths['/admin/associations/{id}'].put
+  update:
+    operationId: putAdminAssociationsId
+- target: $.paths['/admin/associations/{id}'].delete
+  update:
+    operationId: deleteAdminAssociationsId
+- target: $.paths['/admin/associations/{id}/surveys'].get
+  update:
+    operationId: getAdminAssociationsIdSurveys
+- target: $.paths['/admin/associations/{id}/surveys'].post
+  update:
+    operationId: postAdminAssociationsIdSurveys
+- target: $.paths['/admin/associations'].get
+  update:
+    operationId: getAdminAssociations
+- target: $.paths['/admin/associations'].post
+  update:
+    operationId: postAdminAssociations
+- target: $.paths['/admin/associations/verification-queue'].get
+  update:
+    operationId: getAdminAssociationsVerificationQueue
+- target: $.paths['/admin/associations/verify/{membershipId}'].put
+  update:
+    operationId: putAdminAssociationsVerifyMembershipId
+- target: $.paths['/admin/campaign-batch'].post
+  update:
+    operationId: postAdminCampaignBatch
+- target: $.paths['/admin/campaign-status'].get
+  update:
+    operationId: getAdminCampaignStatus
+- target: $.paths['/admin/categories/{id}'].get
+  update:
+    operationId: getAdminCategoriesId
+- target: $.paths['/admin/categories/{id}'].patch
+  update:
+    operationId: patchAdminCategoriesId
+- target: $.paths['/admin/categories/{id}'].delete
+  update:
+    operationId: deleteAdminCategoriesId
+- target: $.paths['/admin/categories/reorder'].post
+  update:
+    operationId: postAdminCategoriesReorder
+- target: $.paths['/admin/categories'].get
+  update:
+    operationId: getAdminCategories
+- target: $.paths['/admin/categories'].post
+  update:
+    operationId: postAdminCategories
+- target: $.paths['/admin/event-sources/{id}'].get
+  update:
+    operationId: getAdminEventSourcesId
+- target: $.paths['/admin/event-sources/{id}'].put
+  update:
+    operationId: putAdminEventSourcesId
+- target: $.paths['/admin/event-sources/{id}'].delete
+  update:
+    operationId: deleteAdminEventSourcesId
+- target: $.paths['/admin/event-sources'].get
+  update:
+    operationId: getAdminEventSources
+- target: $.paths['/admin/event-sources'].post
+  update:
+    operationId: postAdminEventSources
+- target: $.paths['/admin/events/recurrence'].post
+  update:
+    operationId: postAdminEventsRecurrence
+- target: $.paths['/admin/events/recurrence'].get
+  update:
+    operationId: getAdminEventsRecurrence
+- target: $.paths['/admin/fee-profiles/{id}/assignments/{assignmentId}'].delete
+  update:
+    operationId: deleteAdminFeeProfilesIdAssignmentsAssignmentId
+- target: $.paths['/admin/fee-profiles/{id}/assignments'].post
+  update:
+    operationId: postAdminFeeProfilesIdAssignments
+- target: $.paths['/admin/fee-profiles/{id}'].put
+  update:
+    operationId: putAdminFeeProfilesId
+- target: $.paths['/admin/fee-profiles/{id}'].delete
+  update:
+    operationId: deleteAdminFeeProfilesId
+- target: $.paths['/admin/fee-profiles'].get
+  update:
+    operationId: getAdminFeeProfiles
+- target: $.paths['/admin/fee-profiles'].post
+  update:
+    operationId: postAdminFeeProfiles
+- target: $.paths['/admin/for-towns-pdf'].post
+  update:
+    operationId: postAdminForTownsPdf
+- target: $.paths['/admin/frost-dates/import'].post
+  update:
+    operationId: postAdminFrostDatesImport
+- target: $.paths['/admin/frost-dates'].get
+  update:
+    operationId: getAdminFrostDates
+- target: $.paths['/admin/games/{id}'].put
+  update:
+    operationId: putAdminGamesId
+- target: $.paths['/admin/games/{id}'].get
+  update:
+    operationId: getAdminGamesId
+- target: $.paths['/admin/games/{id}'].delete
+  update:
+    operationId: deleteAdminGamesId
+- target: $.paths['/admin/games/place-interests'].get
+  update:
+    operationId: getAdminGamesPlaceInterests
+- target: $.paths['/admin/games/place-interests'].patch
+  update:
+    operationId: patchAdminGamesPlaceInterests
+- target: $.paths['/admin/games'].post
+  update:
+    operationId: postAdminGames
+- target: $.paths['/admin/games'].get
+  update:
+    operationId: getAdminGames
+- target: $.paths['/admin/geocode-missing'].post
+  update:
+    operationId: postAdminGeocodeMissing
+- target: $.paths['/admin/global-features'].get
+  update:
+    operationId: getAdminGlobalFeatures
+- target: $.paths['/admin/global-features'].post
+  update:
+    operationId: postAdminGlobalFeatures
+- target: $.paths['/admin/global-features/seed'].post
+  update:
+    operationId: postAdminGlobalFeaturesSeed
+- target: $.paths['/admin/grant-feature'].post
+  update:
+    operationId: postAdminGrantFeature
+- target: $.paths['/admin/grant-feature'].get
+  update:
+    operationId: getAdminGrantFeature
+- target: $.paths['/admin/missing-coords'].get
+  update:
+    operationId: getAdminMissingCoords
+- target: $.paths['/admin/neighborhoods/discover-osm'].get
+  update:
+    operationId: getAdminNeighborhoodsDiscoverOsm
+- target: $.paths['/admin/neighborhoods/waterloo-region/{id}'].put
+  update:
+    operationId: putAdminNeighborhoodsWaterlooRegionId
+- target: $.paths['/admin/neighborhoods/waterloo-region/{id}'].delete
+  update:
+    operationId: deleteAdminNeighborhoodsWaterlooRegionId
+- target: $.paths['/admin/neighborhoods/waterloo-region/rebuild'].post
+  update:
+    operationId: postAdminNeighborhoodsWaterlooRegionRebuild
+- target: $.paths['/admin/neighborhoods/waterloo-region'].get
+  update:
+    operationId: getAdminNeighborhoodsWaterlooRegion
+- target: $.paths['/admin/neighborhoods/waterloo-region'].post
+  update:
+    operationId: postAdminNeighborhoodsWaterlooRegion
+- target: $.paths['/admin/neighborhoods/waterloo-region'].put
+  update:
+    operationId: putAdminNeighborhoodsWaterlooRegion
+- target: $.paths['/admin/neighborhoods/waterloo-region/samples'].get
+  update:
+    operationId: getAdminNeighborhoodsWaterlooRegionSamples
+- target: $.paths['/admin/notifications'].get
+  update:
+    operationId: getAdminNotifications
+- target: $.paths['/admin/osm-explorer/connections'].get
+  update:
+    operationId: getAdminOsmExplorerConnections
+- target: $.paths['/admin/osm-explorer/ignored-names'].get
+  update:
+    operationId: getAdminOsmExplorerIgnoredNames
+- target: $.paths['/admin/osm-explorer/ignored-names'].post
+  update:
+    operationId: postAdminOsmExplorerIgnoredNames
+- target: $.paths['/admin/osm-explorer/local-food-score'].get
+  update:
+    operationId: getAdminOsmExplorerLocalFoodScore
+- target: $.paths['/admin/osm-explorer/neighborhood-match'].get
+  update:
+    operationId: getAdminOsmExplorerNeighborhoodMatch
+- target: $.paths['/admin/osm-explorer/reverse-geocode'].get
+  update:
+    operationId: getAdminOsmExplorerReverseGeocode
+- target: $.paths['/admin/osm-explorer'].get
+  update:
+    operationId: getAdminOsmExplorer
+- target: $.paths['/admin/osm-explorer/simulate'].post
+  update:
+    operationId: postAdminOsmExplorerSimulate
+- target: $.paths['/admin/participants/import'].post
+  update:
+    operationId: postAdminParticipantsImport
+- target: $.paths['/admin/participants/notify'].post
+  update:
+    operationId: postAdminParticipantsNotify
+- target: $.paths['/admin/participants'].get
+  update:
+    operationId: getAdminParticipants
+- target: $.paths['/admin/participants/template'].get
+  update:
+    operationId: getAdminParticipantsTemplate
+- target: $.paths['/admin/participants/verify/generate-link'].post
+  update:
+    operationId: postAdminParticipantsVerifyGenerateLink
+- target: $.paths['/admin/performance'].get
+  update:
+    operationId: getAdminPerformance
+- target: $.paths['/admin/places/google-places'].post
+  update:
+    operationId: postAdminPlacesGooglePlaces
+- target: $.paths['/admin/places/store-qr/{participantId}/pdf'].get
+  update:
+    operationId: getAdminPlacesStoreQrParticipantIdPdf
+- target: $.paths['/admin/places/store-qr'].get
+  update:
+    operationId: getAdminPlacesStoreQr
+- target: $.paths['/admin/places/store-qr'].put
+  update:
+    operationId: putAdminPlacesStoreQr
+- target: $.paths['/admin/planting-guides/import'].post
+  update:
+    operationId: postAdminPlantingGuidesImport
+- target: $.paths['/admin/planting-guides'].get
+  update:
+    operationId: getAdminPlantingGuides
+- target: $.paths['/admin/products/{id}'].get
+  update:
+    operationId: getAdminProductsId
+- target: $.paths['/admin/products/{id}'].patch
+  update:
+    operationId: patchAdminProductsId
+- target: $.paths['/admin/products/{id}'].delete
+  update:
+    operationId: deleteAdminProductsId
+- target: $.paths['/admin/products'].get
+  update:
+    operationId: getAdminProducts
+- target: $.paths['/admin/products'].post
+  update:
+    operationId: postAdminProducts
+- target: $.paths['/admin/provenance-categories'].get
+  update:
+    operationId: getAdminProvenanceCategories
+- target: $.paths['/admin/provenance-reports/place-interest'].get
+  update:
+    operationId: getAdminProvenanceReportsPlaceInterest
+- target: $.paths['/admin/provenance-reports/producer-demand'].get
+  update:
+    operationId: getAdminProvenanceReportsProducerDemand
+- target: $.paths['/admin/provenance-reports/producer-leads'].get
+  update:
+    operationId: getAdminProvenanceReportsProducerLeads
+- target: $.paths['/admin/provenance-reports/regional-trend'].get
+  update:
+    operationId: getAdminProvenanceReportsRegionalTrend
+- target: $.paths['/admin/real-estate-pdf/bulk'].post
+  update:
+    operationId: postAdminRealEstatePdfBulk
+- target: $.paths['/admin/real-estate-pdf/connectivity-audit'].get
+  update:
+    operationId: getAdminRealEstatePdfConnectivityAudit
+- target: $.paths['/admin/real-estate-pdf/cover-letter'].get
+  update:
+    operationId: getAdminRealEstatePdfCoverLetter
+- target: $.paths['/admin/recipes/db'].get
+  update:
+    operationId: getAdminRecipesDb
+- target: $.paths['/admin/regional-score/apply-connection'].post
+  update:
+    operationId: postAdminRegionalScoreApplyConnection
+- target: $.paths['/admin/regional-score/regions'].get
+  update:
+    operationId: getAdminRegionalScoreRegions
+- target: $.paths['/admin/score-cache'].get
+  update:
+    operationId: getAdminScoreCache
+- target: $.paths['/admin/score-cache'].post
+  update:
+    operationId: postAdminScoreCache
+- target: $.paths['/admin/set-gps'].post
+  update:
+    operationId: postAdminSetGps
+- target: $.paths['/admin/settings'].get
+  update:
+    operationId: getAdminSettings
+- target: $.paths['/admin/settings'].patch
+  update:
+    operationId: patchAdminSettings
+- target: $.paths['/admin/sponsorships/{id}'].patch
+  update:
+    operationId: patchAdminSponsorshipsId
+- target: $.paths['/admin/sponsorships/{id}'].delete
+  update:
+    operationId: deleteAdminSponsorshipsId
+- target: $.paths['/admin/sponsorships'].get
+  update:
+    operationId: getAdminSponsorships
+- target: $.paths['/admin/sponsorships'].post
+  update:
+    operationId: postAdminSponsorships
+- target: $.paths['/admin/stats'].get
+  update:
+    operationId: getAdminStats
+- target: $.paths['/admin/store-qr/default-layout'].get
+  update:
+    operationId: getAdminStoreQrDefaultLayout
+- target: $.paths['/admin/store-qr/default-layout'].put
+  update:
+    operationId: putAdminStoreQrDefaultLayout
+- target: $.paths['/admin/surveys/{id}'].get
+  update:
+    operationId: getAdminSurveysId
+- target: $.paths['/admin/surveys/{id}'].put
+  update:
+    operationId: putAdminSurveysId
+- target: $.paths['/admin/surveys/{id}'].delete
+  update:
+    operationId: deleteAdminSurveysId
+- target: $.paths['/admin/surveys'].get
+  update:
+    operationId: getAdminSurveys
+- target: $.paths['/admin/surveys'].post
+  update:
+    operationId: postAdminSurveys
+- target: $.paths['/admin/tasks'].get
+  update:
+    operationId: getAdminTasks
+- target: $.paths['/admin/template'].get
+  update:
+    operationId: getAdminTemplate
+- target: $.paths['/admin/users/{id}/admin'].put
+  update:
+    operationId: putAdminUsersIdAdmin
+- target: $.paths['/admin/users/{id}/email'].put
+  update:
+    operationId: putAdminUsersIdEmail
+- target: $.paths['/admin/users/admin-info'].get
+  update:
+    operationId: getAdminUsersAdminInfo
+- target: $.paths['/admin/users'].get
+  update:
+    operationId: getAdminUsers
+- target: $.paths['/admin/users/search'].get
+  update:
+    operationId: getAdminUsersSearch
+- target: $.paths['/admin/widget-access'].get
+  update:
+    operationId: getAdminWidgetAccess
+- target: $.paths['/admin/widget-access'].post
+  update:
+    operationId: postAdminWidgetAccess
+- target: $.paths['/admin/widget-access'].delete
+  update:
+    operationId: deleteAdminWidgetAccess
+- target: $.paths['/admin/widget-usage'].get
+  update:
+    operationId: getAdminWidgetUsage
+- target: $.paths['/agents/admin/ban_agent'].post
+  update:
+    operationId: postAgentsAdminBan_agent
+- target: $.paths['/agents/association/{id}/card'].get
+  update:
+    operationId: getAgentsAssociationIdCard
+- target: $.paths['/agents/association/{id}/get_benefits'].post
+  update:
+    operationId: postAgentsAssociationIdGet_benefits
+- target: $.paths['/agents/association/{id}/get_benefits'].get
+  update:
+    operationId: getAgentsAssociationIdGet_benefits
+- target: $.paths['/agents/association/{id}/get_info'].post
+  update:
+    operationId: postAgentsAssociationIdGet_info
+- target: $.paths['/agents/association/{id}/get_info'].get
+  update:
+    operationId: getAgentsAssociationIdGet_info
+- target: $.paths['/agents/association/{id}/list_members'].post
+  update:
+    operationId: postAgentsAssociationIdList_members
+- target: $.paths['/agents/association/{id}/list_members'].get
+  update:
+    operationId: getAgentsAssociationIdList_members
+- target: $.paths['/agents/association/{id}/membership_info'].post
+  update:
+    operationId: postAgentsAssociationIdMembership_info
+- target: $.paths['/agents/association/{id}/membership_info'].get
+  update:
+    operationId: getAgentsAssociationIdMembership_info
+- target: $.paths['/agents/participant/{id}/add_offering'].post
+  update:
+    operationId: postAgentsParticipantIdAdd_offering
+- target: $.paths['/agents/participant/{id}/card'].get
+  update:
+    operationId: getAgentsParticipantIdCard
+- target: $.paths['/agents/participant/{id}/challenge_status'].post
+  update:
+    operationId: postAgentsParticipantIdChallenge_status
+- target: $.paths['/agents/participant/{id}/get_analytics'].post
+  update:
+    operationId: postAgentsParticipantIdGet_analytics
+- target: $.paths['/agents/participant/{id}/get_associations'].post
+  update:
+    operationId: postAgentsParticipantIdGet_associations
+- target: $.paths['/agents/participant/{id}/get_capabilities'].post
+  update:
+    operationId: postAgentsParticipantIdGet_capabilities
+- target: $.paths['/agents/participant/{id}/get_events'].post
+  update:
+    operationId: postAgentsParticipantIdGet_events
+- target: $.paths['/agents/participant/{id}/get_hours'].post
+  update:
+    operationId: postAgentsParticipantIdGet_hours
+- target: $.paths['/agents/participant/{id}/get_messages'].post
+  update:
+    operationId: postAgentsParticipantIdGet_messages
+- target: $.paths['/agents/participant/{id}/get_profile'].post
+  update:
+    operationId: postAgentsParticipantIdGet_profile
+- target: $.paths['/agents/participant/{id}/get_resellers'].post
+  update:
+    operationId: postAgentsParticipantIdGet_resellers
+- target: $.paths['/agents/participant/{id}/get_reviews'].post
+  update:
+    operationId: postAgentsParticipantIdGet_reviews
+- target: $.paths['/agents/participant/{id}/get_suppliers'].post
+  update:
+    operationId: postAgentsParticipantIdGet_suppliers
+- target: $.paths['/agents/participant/{id}/list_offerings'].post
+  update:
+    operationId: postAgentsParticipantIdList_offerings
+- target: $.paths['/agents/participant/{id}/send_inquiry'].post
+  update:
+    operationId: postAgentsParticipantIdSend_inquiry
+- target: $.paths['/agents/participant/{id}/update_hours'].post
+  update:
+    operationId: postAgentsParticipantIdUpdate_hours
+- target: $.paths['/agents/participant/{id}/update_offering'].post
+  update:
+    operationId: postAgentsParticipantIdUpdate_offering
+- target: $.paths['/agents/participant/{id}/update_place'].post
+  update:
+    operationId: postAgentsParticipantIdUpdate_place
+- target: $.paths['/agents/platform/approve_task'].post
+  update:
+    operationId: postAgentsPlatformApprove_task
+- target: $.paths['/agents/platform/card'].get
+  update:
+    operationId: getAgentsPlatformCard
+- target: $.paths['/agents/platform/claim_task'].post
+  update:
+    operationId: postAgentsPlatformClaim_task
+- target: $.paths['/agents/platform/create_place'].post
+  update:
+    operationId: postAgentsPlatformCreate_place
+- target: $.paths['/agents/platform/discover_businesses'].post
+  update:
+    operationId: postAgentsPlatformDiscover_businesses
+- target: $.paths['/agents/platform/get_platform_info'].post
+  update:
+    operationId: postAgentsPlatformGet_platform_info
+- target: $.paths['/agents/platform/get_task'].post
+  update:
+    operationId: postAgentsPlatformGet_task
+- target: $.paths['/agents/platform/list_tasks'].post
+  update:
+    operationId: postAgentsPlatformList_tasks
+- target: $.paths['/agents/platform/rate_limit_status'].get
+  update:
+    operationId: getAgentsPlatformRate_limit_status
+- target: $.paths['/agents/platform/search_products'].post
+  update:
+    operationId: postAgentsPlatformSearch_products
+- target: $.paths['/agents/platform/submit_task_response'].post
+  update:
+    operationId: postAgentsPlatformSubmit_task_response
+- target: $.paths['/agents/platform/suggest_connection'].post
+  update:
+    operationId: postAgentsPlatformSuggest_connection
+- target: $.paths['/agents/platform/suggest_place'].post
+  update:
+    operationId: postAgentsPlatformSuggest_place
+- target: $.paths['/agents/platform/suggest_product'].post
+  update:
+    operationId: postAgentsPlatformSuggest_product
+- target: $.paths['/agents/public/place-summary'].get
+  update:
+    operationId: getAgentsPublicPlaceSummary
+- target: $.paths['/agents/registry'].get
+  update:
+    operationId: getAgentsRegistry
+- target: $.paths['/agents/task-processor/process'].post
+  update:
+    operationId: postAgentsTaskProcessorProcess
+- target: $.paths['/agents/tasks/create'].post
+  update:
+    operationId: postAgentsTasksCreate
+- target: $.paths['/agents/tasks/status/{taskId}'].get
+  update:
+    operationId: getAgentsTasksStatusTaskId
+- target: $.paths['/agritourism/campaigns/{id}/analytics'].get
+  update:
+    operationId: getAgritourismCampaignsIdAnalytics
+- target: $.paths['/agritourism/campaigns/{id}/locations/{participantId}'].delete
+  update:
+    operationId: deleteAgritourismCampaignsIdLocationsParticipantId
+- target: $.paths['/agritourism/campaigns/{id}/locations'].post
+  update:
+    operationId: postAgritourismCampaignsIdLocations
+- target: $.paths['/agritourism/campaigns/{id}/opt-in'].post
+  update:
+    operationId: postAgritourismCampaignsIdOptIn
+- target: $.paths['/agritourism/campaigns/{id}/participant-stats'].get
+  update:
+    operationId: getAgritourismCampaignsIdParticipantStats
+- target: $.paths['/agritourism/campaigns/{id}'].get
+  update:
+    operationId: getAgritourismCampaignsId
+- target: $.paths['/agritourism/campaigns/{id}'].put
+  update:
+    operationId: putAgritourismCampaignsId
+- target: $.paths['/agritourism/campaigns/{id}'].delete
+  update:
+    operationId: deleteAgritourismCampaignsId
+- target: $.paths['/agritourism/campaigns/{id}/scanner/attendees'].get
+  update:
+    operationId: getAgritourismCampaignsIdScannerAttendees
+- target: $.paths['/agritourism/campaigns/{id}/scanner/bulk-reconcile'].post
+  update:
+    operationId: postAgritourismCampaignsIdScannerBulkReconcile
+- target: $.paths['/agritourism/campaigns/{id}/scanner/checkin'].post
+  update:
+    operationId: postAgritourismCampaignsIdScannerCheckin
+- target: $.paths['/agritourism/campaigns/{id}/scanner/context'].get
+  update:
+    operationId: getAgritourismCampaignsIdScannerContext
+- target: $.paths['/agritourism/campaigns/{id}/scanner/guest-list'].get
+  update:
+    operationId: getAgritourismCampaignsIdScannerGuestList
+- target: $.paths['/agritourism/campaigns/{id}/scanner/lookup'].post
+  update:
+    operationId: postAgritourismCampaignsIdScannerLookup
+- target: $.paths['/agritourism/campaigns/{id}/scanner/stats'].get
+  update:
+    operationId: getAgritourismCampaignsIdScannerStats
+- target: $.paths['/agritourism/campaigns/{id}/scanner/undo-checkin'].post
+  update:
+    operationId: postAgritourismCampaignsIdScannerUndoCheckin
+- target: $.paths['/agritourism/campaigns/{id}/status'].post
+  update:
+    operationId: postAgritourismCampaignsIdStatus
+- target: $.paths['/agritourism/campaigns/{id}/stop-busyness'].get
+  update:
+    operationId: getAgritourismCampaignsIdStopBusyness
+- target: $.paths['/agritourism/campaigns/{id}/ticket-types/{ticketTypeId}'].patch
+  update:
+    operationId: patchAgritourismCampaignsIdTicketTypesTicketTypeId
+- target: $.paths['/agritourism/campaigns/{id}/ticket-types/{ticketTypeId}'].delete
+  update:
+    operationId: deleteAgritourismCampaignsIdTicketTypesTicketTypeId
+- target: $.paths['/agritourism/campaigns/{id}/ticket-types'].post
+  update:
+    operationId: postAgritourismCampaignsIdTicketTypes
+- target: $.paths['/agritourism/campaigns/all'].get
+  update:
+    operationId: getAgritourismCampaignsAll
+- target: $.paths['/agritourism/campaigns/create'].post
+  update:
+    operationId: postAgritourismCampaignsCreate
+- target: $.paths['/agritourism/campaigns/joinable'].get
+  update:
+    operationId: getAgritourismCampaignsJoinable
+- target: $.paths['/agritourism/campaigns/mine'].get
+  update:
+    operationId: getAgritourismCampaignsMine
+- target: $.paths['/agritourism/campaigns'].get
+  update:
+    operationId: getAgritourismCampaigns
+- target: $.paths['/agritourism/checkout'].post
+  update:
+    operationId: postAgritourismCheckout
+- target: $.paths['/agritourism/claim-free'].post
+  update:
+    operationId: postAgritourismClaimFree
+- target: $.paths['/agritourism/fee-profiles'].get
+  update:
+    operationId: getAgritourismFeeProfiles
+- target: $.paths['/agritourism/lookup'].post
+  update:
+    operationId: postAgritourismLookup
+- target: $.paths['/agritourism/my-associations'].get
+  update:
+    operationId: getAgritourismMyAssociations
+- target: $.paths['/agritourism/stripe-connect/dashboard'].get
+  update:
+    operationId: getAgritourismStripeConnectDashboard
+- target: $.paths['/agritourism/stripe-connect'].post
+  update:
+    operationId: postAgritourismStripeConnect
+- target: $.paths['/agritourism/stripe-connect/status'].get
+  update:
+    operationId: getAgritourismStripeConnectStatus
+- target: $.paths['/agritourism/ticket-types/{id}'].put
+  update:
+    operationId: putAgritourismTicketTypesId
+- target: $.paths['/agritourism/tickets/{id}/cancel'].post
+  update:
+    operationId: postAgritourismTicketsIdCancel
+- target: $.paths['/agritourism/tickets/{id}/download'].get
+  update:
+    operationId: getAgritourismTicketsIdDownload
+- target: $.paths['/agritourism/tickets/{id}/pass'].get
+  update:
+    operationId: getAgritourismTicketsIdPass
+- target: $.paths['/agritourism/tickets/{id}'].get
+  update:
+    operationId: getAgritourismTicketsId
+- target: $.paths['/agritourism/tickets'].get
+  update:
+    operationId: getAgritourismTickets
+- target: $.paths['/agritourism/validate'].post
+  update:
+    operationId: postAgritourismValidate
+- target: $.paths['/analytics/entity/{entityType}/{entityId}'].get
+  update:
+    operationId: getAnalyticsEntityEntityTypeEntityId
+- target: $.paths['/analytics/fallback'].post
+  update:
+    operationId: postAnalyticsFallback
+- target: $.paths['/analytics/fallback'].get
+  update:
+    operationId: getAnalyticsFallback
+- target: $.paths['/analytics/metrics'].get
+  update:
+    operationId: getAnalyticsMetrics
+- target: $.paths['/analytics/track'].post
+  update:
+    operationId: postAnalyticsTrack
+- target: $.paths['/associations/{id}/members/{membershipId}'].put
+  update:
+    operationId: putAssociationsIdMembersMembershipId
+- target: $.paths['/associations/{id}/members'].get
+  update:
+    operationId: getAssociationsIdMembers
+- target: $.paths['/associations/{id}/place-tours/{tourId}'].patch
+  update:
+    operationId: patchAssociationsIdPlaceToursTourId
+- target: $.paths['/associations/{id}/place-tours/{tourId}'].put
+  update:
+    operationId: putAssociationsIdPlaceToursTourId
+- target: $.paths['/associations/{id}/place-tours'].get
+  update:
+    operationId: getAssociationsIdPlaceTours
+- target: $.paths['/associations/{id}/place-tours'].post
+  update:
+    operationId: postAssociationsIdPlaceTours
+- target: $.paths['/associations/{id}/spend-challenge/activity-map'].get
+  update:
+    operationId: getAssociationsIdSpendChallengeActivityMap
+- target: $.paths['/associations/{id}/spend-challenge/campaigns/{campaignId}/open'].post
+  update:
+    operationId: postAssociationsIdSpendChallengeCampaignsCampaignIdOpen
+- target: $.paths['/associations/{id}/spend-challenge/campaigns/{campaignId}/poster'].get
+  update:
+    operationId: getAssociationsIdSpendChallengeCampaignsCampaignIdPoster
+- target: $.paths['/associations/{id}/spend-challenge/campaigns/{campaignId}'].patch
+  update:
+    operationId: patchAssociationsIdSpendChallengeCampaignsCampaignId
+- target: $.paths['/associations/{id}/spend-challenge/campaigns'].get
+  update:
+    operationId: getAssociationsIdSpendChallengeCampaigns
+- target: $.paths['/associations/{id}/spend-challenge/campaigns'].post
+  update:
+    operationId: postAssociationsIdSpendChallengeCampaigns
+- target: $.paths['/associations/{id}/spend-challenge/insights'].get
+  update:
+    operationId: getAssociationsIdSpendChallengeInsights
+- target: $.paths['/associations/{id}/spend-challenge'].get
+  update:
+    operationId: getAssociationsIdSpendChallenge
+- target: $.paths['/associations/{id}/spend-challenge'].put
+  update:
+    operationId: putAssociationsIdSpendChallenge
+- target: $.paths['/associations/by-slug/{slug}/tours/{tourSlug}'].get
+  update:
+    operationId: getAssociationsBySlugSlugToursTourSlug
+- target: $.paths['/associations/by-slug/{slug}/tours'].get
+  update:
+    operationId: getAssociationsBySlugSlugTours
+- target: $.paths['/auth/telegram/link'].post
+  update:
+    operationId: postAuthTelegramLink
+- target: $.paths['/auth/telegram/register-chat'].post
+  update:
+    operationId: postAuthTelegramRegisterChat
+- target: $.paths['/auth/telegram/verify'].post
+  update:
+    operationId: postAuthTelegramVerify
+- target: $.paths['/baskets/{id}'].get
+  update:
+    operationId: getBasketsId
+- target: $.paths['/baskets/{id}'].put
+  update:
+    operationId: putBasketsId
+- target: $.paths['/baskets/{id}'].delete
+  update:
+    operationId: deleteBasketsId
+- target: $.paths['/baskets'].post
+  update:
+    operationId: postBaskets
+- target: $.paths['/baskets'].get
+  update:
+    operationId: getBaskets
+- target: $.paths['/browse-products'].get
+  update:
+    operationId: getBrowseProducts
+- target: $.paths['/business/store-qr/apply-layout-all'].post
+  update:
+    operationId: postBusinessStoreQrApplyLayoutAll
+- target: $.paths['/business/store-qr/regenerate-token'].post
+  update:
+    operationId: postBusinessStoreQrRegenerateToken
+- target: $.paths['/business/store-qr'].get
+  update:
+    operationId: getBusinessStoreQr
+- target: $.paths['/business/store-qr'].put
+  update:
+    operationId: putBusinessStoreQr
+- target: $.paths['/business/store-qr/track'].post
+  update:
+    operationId: postBusinessStoreQrTrack
+- target: $.paths['/business/surveys/{id}'].get
+  update:
+    operationId: getBusinessSurveysId
+- target: $.paths['/business/surveys/{id}'].put
+  update:
+    operationId: putBusinessSurveysId
+- target: $.paths['/business/surveys/{id}'].delete
+  update:
+    operationId: deleteBusinessSurveysId
+- target: $.paths['/business/surveys'].get
+  update:
+    operationId: getBusinessSurveys
+- target: $.paths['/business/surveys'].post
+  update:
+    operationId: postBusinessSurveys
+- target: $.paths['/categories'].get
+  update:
+    operationId: getCategories
+- target: $.paths['/community/insights'].get
+  update:
+    operationId: getCommunityInsights
+- target: $.paths['/community/members'].get
+  update:
+    operationId: getCommunityMembers
+- target: $.paths['/community-food-score-pdf'].get
+  update:
+    operationId: getCommunityFoodScorePdf
+- target: $.paths['/config/client'].get
+  update:
+    operationId: getConfigClient
+- target: $.paths['/connections/{id}'].post
+  update:
+    operationId: postConnectionsId
+- target: $.paths['/connections/{id}'].put
+  update:
+    operationId: putConnectionsId
+- target: $.paths['/connections/{id}'].delete
+  update:
+    operationId: deleteConnectionsId
+- target: $.paths['/connections'].get
+  update:
+    operationId: getConnections
+- target: $.paths['/connections'].post
+  update:
+    operationId: postConnections
+- target: $.paths['/connections/status'].get
+  update:
+    operationId: getConnectionsStatus
+- target: $.paths['/contact'].post
+  update:
+    operationId: postContact
+- target: $.paths['/cron/ontario-weekly-snapshot'].post
+  update:
+    operationId: postCronOntarioWeeklySnapshot
+- target: $.paths['/cuisines'].get
+  update:
+    operationId: getCuisines
+- target: $.paths['/debug/features'].get
+  update:
+    operationId: getDebugFeatures
+- target: $.paths['/dev/chat'].get
+  update:
+    operationId: getDevChat
+- target: $.paths['/dev/chat'].post
+  update:
+    operationId: postDevChat
+- target: $.paths['/dev/login'].post
+  update:
+    operationId: postDevLogin
+- target: $.paths['/dev/users'].get
+  update:
+    operationId: getDevUsers
+- target: $.paths['/discussions/categories/{slug}/jobs'].get
+  update:
+    operationId: getDiscussionsCategoriesSlugJobs
+- target: $.paths['/discussions/categories'].get
+  update:
+    operationId: getDiscussionsCategories
+- target: $.paths['/discussions/locations'].get
+  update:
+    operationId: getDiscussionsLocations
+- target: $.paths['/discussions/posts/{id}/replies'].post
+  update:
+    operationId: postDiscussionsPostsIdReplies
+- target: $.paths['/discussions/posts/{id}'].get
+  update:
+    operationId: getDiscussionsPostsId
+- target: $.paths['/discussions/posts'].get
+  update:
+    operationId: getDiscussionsPosts
+- target: $.paths['/discussions/posts'].post
+  update:
+    operationId: postDiscussionsPosts
+- target: $.paths['/discussions/subscriptions'].get
+  update:
+    operationId: getDiscussionsSubscriptions
+- target: $.paths['/discussions/subscriptions'].post
+  update:
+    operationId: postDiscussionsSubscriptions
+- target: $.paths['/discussions/subscriptions'].delete
+  update:
+    operationId: deleteDiscussionsSubscriptions
+- target: $.paths['/endorsements/check'].post
+  update:
+    operationId: postEndorsementsCheck
+- target: $.paths['/endorsements'].post
+  update:
+    operationId: postEndorsements
+- target: $.paths['/endorsements'].delete
+  update:
+    operationId: deleteEndorsements
+- target: $.paths['/engagement-metrics'].get
+  update:
+    operationId: getEngagementMetrics
+- target: $.paths['/events/{id}/analytics'].get
+  update:
+    operationId: getEventsIdAnalytics
+- target: $.paths['/events/{id}/calendar'].get
+  update:
+    operationId: getEventsIdCalendar
+- target: $.paths['/events/{id}/instances'].get
+  update:
+    operationId: getEventsIdInstances
+- target: $.paths['/events/{id}/instances'].post
+  update:
+    operationId: postEventsIdInstances
+- target: $.paths['/events/{id}'].get
+  update:
+    operationId: getEventsId
+- target: $.paths['/events/{id}'].put
+  update:
+    operationId: putEventsId
+- target: $.paths['/events/{id}'].delete
+  update:
+    operationId: deleteEventsId
+- target: $.paths['/events/{id}/rsvp'].post
+  update:
+    operationId: postEventsIdRsvp
+- target: $.paths['/events/{id}/rsvp'].delete
+  update:
+    operationId: deleteEventsIdRsvp
+- target: $.paths['/events/analytics'].get
+  update:
+    operationId: getEventsAnalytics
+- target: $.paths['/events/digest'].post
+  update:
+    operationId: postEventsDigest
+- target: $.paths['/events/import/fetch'].get
+  update:
+    operationId: getEventsImportFetch
+- target: $.paths['/events/import'].post
+  update:
+    operationId: postEventsImport
+- target: $.paths['/events/import/sources'].get
+  update:
+    operationId: getEventsImportSources
+- target: $.paths['/events/map'].get
+  update:
+    operationId: getEventsMap
+- target: $.paths['/events/my-rsvps'].get
+  update:
+    operationId: getEventsMyRsvps
+- target: $.paths['/events'].get
+  update:
+    operationId: getEvents
+- target: $.paths['/events'].post
+  update:
+    operationId: postEvents
+- target: $.paths['/events/rsvp/{id}/download'].get
+  update:
+    operationId: getEventsRsvpIdDownload
+- target: $.paths['/events/tickets/attendees'].get
+  update:
+    operationId: getEventsTicketsAttendees
+- target: $.paths['/events/tickets/audit-csv'].get
+  update:
+    operationId: getEventsTicketsAuditCsv
+- target: $.paths['/events/tickets/bulk-checkin'].post
+  update:
+    operationId: postEventsTicketsBulkCheckin
+- target: $.paths['/events/tickets/bulk-reconcile'].post
+  update:
+    operationId: postEventsTicketsBulkReconcile
+- target: $.paths['/events/tickets/checkin'].post
+  update:
+    operationId: postEventsTicketsCheckin
+- target: $.paths['/events/tickets/guest-list'].get
+  update:
+    operationId: getEventsTicketsGuestList
+- target: $.paths['/events/tickets/lookup'].post
+  update:
+    operationId: postEventsTicketsLookup
+- target: $.paths['/events/tickets/scannable'].get
+  update:
+    operationId: getEventsTicketsScannable
+- target: $.paths['/events/tickets/stats'].get
+  update:
+    operationId: getEventsTicketsStats
+- target: $.paths['/events/tickets/verify'].post
+  update:
+    operationId: postEventsTicketsVerify
+- target: $.paths['/feature-flags'].get
+  update:
+    operationId: getFeatureFlags
+- target: $.paths['/feature-flags'].post
+  update:
+    operationId: postFeatureFlags
+- target: $.paths['/feedback'].post
+  update:
+    operationId: postFeedback
+- target: $.paths['/food-score/personal'].get
+  update:
+    operationId: getFoodScorePersonal
+- target: $.paths['/food-score/personal'].patch
+  update:
+    operationId: patchFoodScorePersonal
+- target: $.paths['/for-real-estate/connectivity-audit/preview'].get
+  update:
+    operationId: getForRealEstateConnectivityAuditPreview
+- target: $.paths['/for-real-estate/connectivity-audit'].post
+  update:
+    operationId: postForRealEstateConnectivityAudit
+- target: $.paths['/for-real-estate/connectivity-audit'].get
+  update:
+    operationId: getForRealEstateConnectivityAudit
+- target: $.paths['/games/{gameId}/leaderboard'].get
+  update:
+    operationId: getGamesGameIdLeaderboard
+- target: $.paths['/games/{gameId}/participating-businesses'].get
+  update:
+    operationId: getGamesGameIdParticipatingBusinesses
+- target: $.paths['/games/{gameId}'].get
+  update:
+    operationId: getGamesGameId
+- target: $.paths['/games/{gameId}/user-stats'].get
+  update:
+    operationId: getGamesGameIdUserStats
+- target: $.paths['/games/{gameId}/user-visits'].get
+  update:
+    operationId: getGamesGameIdUserVisits
+- target: $.paths['/games/active'].get
+  update:
+    operationId: getGamesActive
+- target: $.paths['/games/has-active'].get
+  update:
+    operationId: getGamesHasActive
+- target: $.paths['/games/match3/scores'].post
+  update:
+    operationId: postGamesMatch3Scores
+- target: $.paths['/games/match3/scores'].get
+  update:
+    operationId: getGamesMatch3Scores
+- target: $.paths['/games/my-challenges'].get
+  update:
+    operationId: getGamesMyChallenges
+- target: $.paths['/games/random-local-spot'].get
+  update:
+    operationId: getGamesRandomLocalSpot
+- target: $.paths['/games'].get
+  update:
+    operationId: getGames
+- target: $.paths['/geocode/reverse'].get
+  update:
+    operationId: getGeocodeReverse
+- target: $.paths['/geocode'].get
+  update:
+    operationId: getGeocode
+- target: $.paths['/global-features'].get
+  update:
+    operationId: getGlobalFeatures
+- target: $.paths['/invitations/{token}/decline'].post
+  update:
+    operationId: postInvitationsTokenDecline
+- target: $.paths['/invitations/{token}'].get
+  update:
+    operationId: getInvitationsToken
+- target: $.paths['/invitations/{token}'].post
+  update:
+    operationId: postInvitationsToken
+- target: $.paths['/jobs/{jobId}/candidates'].get
+  update:
+    operationId: getJobsJobIdCandidates
+- target: $.paths['/jobs/{jobId}'].get
+  update:
+    operationId: getJobsJobId
+- target: $.paths['/jobs/{jobId}'].put
+  update:
+    operationId: putJobsJobId
+- target: $.paths['/jobs/{jobId}'].delete
+  update:
+    operationId: deleteJobsJobId
+- target: $.paths['/jobs/public'].get
+  update:
+    operationId: getJobsPublic
+- target: $.paths['/jobs/recommendations'].get
+  update:
+    operationId: getJobsRecommendations
+- target: $.paths['/jobs'].post
+  update:
+    operationId: postJobs
+- target: $.paths['/jobs'].get
+  update:
+    operationId: getJobs
+- target: $.paths['/listings/{id}/accept'].post
+  update:
+    operationId: postListingsIdAccept
+- target: $.paths['/listings/{id}/confirm-acceptance'].post
+  update:
+    operationId: postListingsIdConfirmAcceptance
+- target: $.paths['/listings/{id}/confirm-direct-pickup'].post
+  update:
+    operationId: postListingsIdConfirmDirectPickup
+- target: $.paths['/listings/{id}/decline'].post
+  update:
+    operationId: postListingsIdDecline
+- target: $.paths['/listings/{id}/decline-acceptance'].post
+  update:
+    operationId: postListingsIdDeclineAcceptance
+- target: $.paths['/listings/{id}/fulfill'].post
+  update:
+    operationId: postListingsIdFulfill
+- target: $.paths['/listings/{id}/reactivate'].post
+  update:
+    operationId: postListingsIdReactivate
+- target: $.paths['/listings/{id}'].get
+  update:
+    operationId: getListingsId
+- target: $.paths['/listings/{id}'].put
+  update:
+    operationId: putListingsId
+- target: $.paths['/listings/{id}'].delete
+  update:
+    operationId: deleteListingsId
+- target: $.paths['/listings/{id}/view'].post
+  update:
+    operationId: postListingsIdView
+- target: $.paths['/listings/my'].get
+  update:
+    operationId: getListingsMy
+- target: $.paths['/listings'].get
+  update:
+    operationId: getListings
+- target: $.paths['/listings'].post
+  update:
+    operationId: postListings
+- target: $.paths['/local-food-score'].get
+  update:
+    operationId: getLocalFoodScore
+- target: $.paths['/local-food-score/sovereignty-index'].get
+  update:
+    operationId: getLocalFoodScoreSovereigntyIndex
+- target: $.paths['/local-food-score/system-metrics'].get
+  update:
+    operationId: getLocalFoodScoreSystemMetrics
+- target: $.paths['/local-food-score-narrative-pdf'].get
+  update:
+    operationId: getLocalFoodScoreNarrativePdf
+- target: $.paths['/local-food-score-pdf'].get
+  update:
+    operationId: getLocalFoodScorePdf
+- target: $.paths['/marketplace/contact'].post
+  update:
+    operationId: postMarketplaceContact
+- target: $.paths['/mcp/auth/start'].get
+  update:
+    operationId: getMcpAuthStart
+- target: $.paths['/mcp'].post
+  update:
+    operationId: postMcp
+- target: $.paths['/mcp'].get
+  update:
+    operationId: getMcp
+- target: $.paths['/mcp/sse'].get
+  update:
+    operationId: getMcpSse
+- target: $.paths['/mcp/token/generate'].post
+  update:
+    operationId: postMcpTokenGenerate
+- target: $.paths['/mcp/token/generate'].get
+  update:
+    operationId: getMcpTokenGenerate
+- target: $.paths['/mcp/tokens/{id}'].delete
+  update:
+    operationId: deleteMcpTokensId
+- target: $.paths['/mcp/tokens'].get
+  update:
+    operationId: getMcpTokens
+- target: $.paths['/me'].get
+  update:
+    operationId: getMe
+- target: $.paths['/my-businesses'].get
+  update:
+    operationId: getMyBusinesses
+- target: $.paths['/notifications/announcement-count'].get
+  update:
+    operationId: getNotificationsAnnouncementCount
+- target: $.paths['/notifications/debug'].get
+  update:
+    operationId: getNotificationsDebug
+- target: $.paths['/notifications/preferences'].get
+  update:
+    operationId: getNotificationsPreferences
+- target: $.paths['/notifications/preferences'].put
+  update:
+    operationId: putNotificationsPreferences
+- target: $.paths['/notifications'].get
+  update:
+    operationId: getNotifications
+- target: $.paths['/notifications'].put
+  update:
+    operationId: putNotifications
+- target: $.paths['/notifications/subscribe'].post
+  update:
+    operationId: postNotificationsSubscribe
+- target: $.paths['/notifications/subscribe'].delete
+  update:
+    operationId: deleteNotificationsSubscribe
+- target: $.paths['/notifications/test'].post
+  update:
+    operationId: postNotificationsTest
+- target: $.paths['/notifications/vapid-key'].get
+  update:
+    operationId: getNotificationsVapidKey
+- target: $.paths['/oauth/authorize'].get
+  update:
+    operationId: getOauthAuthorize
+- target: $.paths['/oauth/clients/{id}/reset-secret'].post
+  update:
+    operationId: postOauthClientsIdResetSecret
+- target: $.paths['/oauth/clients/{id}'].patch
+  update:
+    operationId: patchOauthClientsId
+- target: $.paths['/oauth/clients/{id}'].put
+  update:
+    operationId: putOauthClientsId
+- target: $.paths['/oauth/clients/{id}'].delete
+  update:
+    operationId: deleteOauthClientsId
+- target: $.paths['/oauth/clients/info'].get
+  update:
+    operationId: getOauthClientsInfo
+- target: $.paths['/oauth/clients'].post
+  update:
+    operationId: postOauthClients
+- target: $.paths['/oauth/clients'].get
+  update:
+    operationId: getOauthClients
+- target: $.paths['/oauth/register'].post
+  update:
+    operationId: postOauthRegister
+- target: $.paths['/oauth/revoke'].post
+  update:
+    operationId: postOauthRevoke
+- target: $.paths['/oauth/token'].post
+  update:
+    operationId: postOauthToken
+- target: $.paths['/oauth/userinfo'].get
+  update:
+    operationId: getOauthUserinfo
+- target: $.paths['/ontario-food-score-heatmap'].get
+  update:
+    operationId: getOntarioFoodScoreHeatmap
+- target: $.paths['/openapi/json'].get
+  update:
+    operationId: getOpenapiJson
+- target: $.paths['/openapi'].get
+  update:
+    operationId: getOpenapi
+- target: $.paths['/participants/{id}/events'].get
+  update:
+    operationId: getParticipantsIdEvents
+- target: $.paths['/participants/{id}/events'].post
+  update:
+    operationId: postParticipantsIdEvents
+- target: $.paths['/participants/{id}/notification-filters/{filterId}'].get
+  update:
+    operationId: getParticipantsIdNotificationFiltersFilterId
+- target: $.paths['/participants/{id}/notification-filters/{filterId}'].patch
+  update:
+    operationId: patchParticipantsIdNotificationFiltersFilterId
+- target: $.paths['/participants/{id}/notification-filters/{filterId}'].delete
+  update:
+    operationId: deleteParticipantsIdNotificationFiltersFilterId
+- target: $.paths['/participants/{id}/notification-filters'].get
+  update:
+    operationId: getParticipantsIdNotificationFilters
+- target: $.paths['/participants/{id}/notification-filters'].post
+  update:
+    operationId: postParticipantsIdNotificationFilters
+- target: $.paths['/participants/{id}'].get
+  update:
+    operationId: getParticipantsId
+- target: $.paths['/participants/{id}'].patch
+  update:
+    operationId: patchParticipantsId
+- target: $.paths['/participants/{id}/tasks'].get
+  update:
+    operationId: getParticipantsIdTasks
+- target: $.paths['/participants/search'].get
+  update:
+    operationId: getParticipantsSearch
+- target: $.paths['/piknik-durham-report-card-pdf'].get
+  update:
+    operationId: getPiknikDurhamReportCardPdf
+- target: $.paths['/place/{id}/og-image'].get
+  update:
+    operationId: getPlaceIdOgImage
+- target: $.paths['/place/{id}/users/{userId}'].put
+  update:
+    operationId: putPlaceIdUsersUserId
+- target: $.paths['/place/{id}/users/{userId}'].delete
+  update:
+    operationId: deletePlaceIdUsersUserId
+- target: $.paths['/place/{id}/users'].get
+  update:
+    operationId: getPlaceIdUsers
+- target: $.paths['/place/{id}/users'].post
+  update:
+    operationId: postPlaceIdUsers
+- target: $.paths['/place/challenge-interest'].post
+  update:
+    operationId: postPlaceChallengeInterest
+- target: $.paths['/place/challenge-interest'].get
+  update:
+    operationId: getPlaceChallengeInterest
+- target: $.paths['/place/challenge-opportunities'].get
+  update:
+    operationId: getPlaceChallengeOpportunities
+- target: $.paths['/place/games/{gameId}/participation'].patch
+  update:
+    operationId: patchPlaceGamesGameIdParticipation
+- target: $.paths['/place/games/{gameId}/qr-code/pdf'].get
+  update:
+    operationId: getPlaceGamesGameIdQrCodePdf
+- target: $.paths['/place/games/{gameId}/qr-code'].get
+  update:
+    operationId: getPlaceGamesGameIdQrCode
+- target: $.paths['/place/games'].get
+  update:
+    operationId: getPlaceGames
+- target: $.paths['/place/store-qr/{participantId}/qr-code/pdf'].get
+  update:
+    operationId: getPlaceStoreQrParticipantIdQrCodePdf
+- target: $.paths['/place/store-qr/{participantId}/qr-code'].get
+  update:
+    operationId: getPlaceStoreQrParticipantIdQrCode
+- target: $.paths['/place-tours/by-slug/{tourSlug}'].get
+  update:
+    operationId: getPlaceToursBySlugTourSlug
+- target: $.paths['/place-tours/for-place/{participantId}'].get
+  update:
+    operationId: getPlaceToursForPlaceParticipantId
+- target: $.paths['/place-tours/road-path'].post
+  update:
+    operationId: postPlaceToursRoadPath
+- target: $.paths['/place-tours'].get
+  update:
+    operationId: getPlaceTours
+- target: $.paths['/planting-calendar/products'].get
+  update:
+    operationId: getPlantingCalendarProducts
+- target: $.paths['/planting-calendar/zones'].get
+  update:
+    operationId: getPlantingCalendarZones
+- target: $.paths['/planting-calendar.ics'].get
+  update:
+    operationId: getPlantingCalendarIcs
+- target: $.paths['/products/search'].get
+  update:
+    operationId: getProductsSearch
+- target: $.paths['/products/validate-local-food'].post
+  update:
+    operationId: postProductsValidateLocalFood
+- target: $.paths['/profile/{username}'].get
+  update:
+    operationId: getProfileUsername
+- target: $.paths['/profile'].get
+  update:
+    operationId: getProfile
+- target: $.paths['/profile'].post
+  update:
+    operationId: postProfile
+- target: $.paths['/profile/skills/{id}'].delete
+  update:
+    operationId: deleteProfileSkillsId
+- target: $.paths['/profile/skills'].post
+  update:
+    operationId: postProfileSkills
+- target: $.paths['/profile/suggest-slug'].get
+  update:
+    operationId: getProfileSuggestSlug
+- target: $.paths['/profile/work-experience/{id}'].put
+  update:
+    operationId: putProfileWorkExperienceId
+- target: $.paths['/profile/work-experience/{id}'].delete
+  update:
+    operationId: deleteProfileWorkExperienceId
+- target: $.paths['/profile/work-experience'].post
+  update:
+    operationId: postProfileWorkExperience
+- target: $.paths['/recipes/{id}/comments'].get
+  update:
+    operationId: getRecipesIdComments
+- target: $.paths['/recipes/{id}/comments'].post
+  update:
+    operationId: postRecipesIdComments
+- target: $.paths['/recipes/{id}/comments'].delete
+  update:
+    operationId: deleteRecipesIdComments
+- target: $.paths['/recipes/{id}/flag'].post
+  update:
+    operationId: postRecipesIdFlag
+- target: $.paths['/recipes/{id}/local-sourcing'].get
+  update:
+    operationId: getRecipesIdLocalSourcing
+- target: $.paths['/recipes/{id}'].get
+  update:
+    operationId: getRecipesId
+- target: $.paths['/recipes/{id}'].patch
+  update:
+    operationId: patchRecipesId
+- target: $.paths['/recipes/{id}'].delete
+  update:
+    operationId: deleteRecipesId
+- target: $.paths['/recipes'].get
+  update:
+    operationId: getRecipes
+- target: $.paths['/recipes'].post
+  update:
+    operationId: postRecipes
+- target: $.paths['/recommendations'].get
+  update:
+    operationId: getRecommendations
+- target: $.paths['/recommendations'].post
+  update:
+    operationId: postRecommendations
+- target: $.paths['/regional-score/analyze'].get
+  update:
+    operationId: getRegionalScoreAnalyze
+- target: $.paths['/regional-score/simulate'].post
+  update:
+    operationId: postRegionalScoreSimulate
+- target: $.paths['/scan/checkin'].post
+  update:
+    operationId: postScanCheckin
+- target: $.paths['/scan/nearby'].get
+  update:
+    operationId: getScanNearby
+- target: $.paths['/seasonal-guide'].get
+  update:
+    operationId: getSeasonalGuide
+- target: $.paths['/skills/search'].get
+  update:
+    operationId: getSkillsSearch
+- target: $.paths['/sms/inbound'].post
+  update:
+    operationId: postSmsInbound
+- target: $.paths['/spend-challenge/associations/{id}/campaign'].get
+  update:
+    operationId: getSpendChallengeAssociationsIdCampaign
+- target: $.paths['/spend-challenge/associations/{id}'].get
+  update:
+    operationId: getSpendChallengeAssociationsId
+- target: $.paths['/spend-challenge/associations/{id}/share-card'].get
+  update:
+    operationId: getSpendChallengeAssociationsIdShareCard
+- target: $.paths['/spend-challenge/log'].post
+  update:
+    operationId: postSpendChallengeLog
+- target: $.paths['/spend-challenge/my-logs'].get
+  update:
+    operationId: getSpendChallengeMyLogs
+- target: $.paths['/spend-challenge/nearby'].get
+  update:
+    operationId: getSpendChallengeNearby
+- target: $.paths['/spend-challenge/participant/{id}/impact'].get
+  update:
+    operationId: getSpendChallengeParticipantIdImpact
+- target: $.paths['/spend-challenge/rankings'].get
+  update:
+    operationId: getSpendChallengeRankings
+- target: $.paths['/sponsor/applications'].get
+  update:
+    operationId: getSponsorApplications
+- target: $.paths['/sponsor/applications'].post
+  update:
+    operationId: postSponsorApplications
+- target: $.paths['/sponsorships'].get
+  update:
+    operationId: getSponsorships
+- target: $.paths['/sponsorships'].post
+  update:
+    operationId: postSponsorships
+- target: $.paths['/surveys'].post
+  update:
+    operationId: postSurveys
+- target: $.paths['/surveys'].get
+  update:
+    operationId: getSurveys
+- target: $.paths['/tasks/{id}/abandon'].post
+  update:
+    operationId: postTasksIdAbandon
+- target: $.paths['/tasks/{id}/claim'].post
+  update:
+    operationId: postTasksIdClaim
+- target: $.paths['/tasks/{id}/confirm-dropoff'].post
+  update:
+    operationId: postTasksIdConfirmDropoff
+- target: $.paths['/tasks/{id}/confirm-pickup'].post
+  update:
+    operationId: postTasksIdConfirmPickup
+- target: $.paths['/tasks/{id}/messages'].get
+  update:
+    operationId: getTasksIdMessages
+- target: $.paths['/tasks/{id}/messages'].post
+  update:
+    operationId: postTasksIdMessages
+- target: $.paths['/tasks/{id}/reject'].post
+  update:
+    operationId: postTasksIdReject
+- target: $.paths['/tasks/{id}'].get
+  update:
+    operationId: getTasksId
+- target: $.paths['/tasks/{id}/submit-response'].post
+  update:
+    operationId: postTasksIdSubmitResponse
+- target: $.paths['/tasks/{id}/unclaim'].post
+  update:
+    operationId: postTasksIdUnclaim
+- target: $.paths['/tasks/{id}/update'].put
+  update:
+    operationId: putTasksIdUpdate
+- target: $.paths['/tasks/{id}/update'].delete
+  update:
+    operationId: deleteTasksIdUpdate
+- target: $.paths['/tasks/{id}/update-response'].patch
+  update:
+    operationId: patchTasksIdUpdateResponse
+- target: $.paths['/tasks/{id}/verify'].post
+  update:
+    operationId: postTasksIdVerify
+- target: $.paths['/tasks/create'].post
+  update:
+    operationId: postTasksCreate
+- target: $.paths['/tasks/nearby'].get
+  update:
+    operationId: getTasksNearby
+- target: $.paths['/tasks/nearby'].post
+  update:
+    operationId: postTasksNearby
+- target: $.paths['/tasks/public'].get
+  update:
+    operationId: getTasksPublic
+- target: $.paths['/tasks/trigger-proximity-check'].post
+  update:
+    operationId: postTasksTriggerProximityCheck
+- target: $.paths['/telegram/create-listing'].post
+  update:
+    operationId: postTelegramCreateListing
+- target: $.paths['/telegram/inbound'].post
+  update:
+    operationId: postTelegramInbound
+- target: $.paths['/test/telegram-notify'].post
+  update:
+    operationId: postTestTelegramNotify
+- target: $.paths['/thumbs/{participantId}'].get
+  update:
+    operationId: getThumbsParticipantId
+- target: $.paths['/thumbs/{participantId}'].post
+  update:
+    operationId: postThumbsParticipantId
+- target: $.paths['/upload/avatar'].post
+  update:
+    operationId: postUploadAvatar
+- target: $.paths['/upload/place-image'].post
+  update:
+    operationId: postUploadPlaceImage
+- target: $.paths['/upload/place-image'].delete
+  update:
+    operationId: deleteUploadPlaceImage
+- target: $.paths['/upload/recipe-image'].post
+  update:
+    operationId: postUploadRecipeImage
+- target: $.paths['/upload/widget-brand-image'].post
+  update:
+    operationId: postUploadWidgetBrandImage
+- target: $.paths['/upload/widget-brand-image'].delete
+  update:
+    operationId: deleteUploadWidgetBrandImage
+- target: $.paths['/upload-image'].post
+  update:
+    operationId: postUploadImage
+- target: $.paths['/user/delete-account'].get
+  update:
+    operationId: getUserDeleteAccount
+- target: $.paths['/user/delete-account'].post
+  update:
+    operationId: postUserDeleteAccount
+- target: $.paths['/user/delivery-stats'].get
+  update:
+    operationId: getUserDeliveryStats
+- target: $.paths['/user/feature-preferences'].get
+  update:
+    operationId: getUserFeaturePreferences
+- target: $.paths['/user/feature-preferences'].patch
+  update:
+    operationId: patchUserFeaturePreferences
+- target: $.paths['/user/game-permissions'].get
+  update:
+    operationId: getUserGamePermissions
+- target: $.paths['/user/location'].post
+  update:
+    operationId: postUserLocation
+- target: $.paths['/user/location'].get
+  update:
+    operationId: getUserLocation
+- target: $.paths['/user/tasks'].get
+  update:
+    operationId: getUserTasks
+- target: $.paths['/users/{userId}/follows'].get
+  update:
+    operationId: getUsersUserIdFollows
+- target: $.paths['/users/me/social-links/phone/code'].post
+  update:
+    operationId: postUsersMeSocialLinksPhoneCode
+- target: $.paths['/users/me/social-links/phone'].delete
+  update:
+    operationId: deleteUsersMeSocialLinksPhone
+- target: $.paths['/users/me/social-links'].get
+  update:
+    operationId: getUsersMeSocialLinks
+- target: $.paths['/users/me/social-links/telegram/code'].post
+  update:
+    operationId: postUsersMeSocialLinksTelegramCode
+- target: $.paths['/users/me/social-links/telegram'].delete
+  update:
+    operationId: deleteUsersMeSocialLinksTelegram
+- target: $.paths['/users/search'].get
+  update:
+    operationId: getUsersSearch
+- target: $.paths['/v2/admin/business-claims/{id}'].put
+  update:
+    operationId: putV2AdminBusinessClaimsId
+- target: $.paths['/v2/admin/business-claims/{id}'].get
+  update:
+    operationId: getV2AdminBusinessClaimsId
+- target: $.paths['/v2/admin/business-claims/release'].post
+  update:
+    operationId: postV2AdminBusinessClaimsRelease
+- target: $.paths['/v2/admin/business-claims'].get
+  update:
+    operationId: getV2AdminBusinessClaims
+- target: $.paths['/v2/admin/users/search'].get
+  update:
+    operationId: getV2AdminUsersSearch
+- target: $.paths['/v2/associations/{slug}/campaigns'].get
+  update:
+    operationId: getV2AssociationsSlugCampaigns
+- target: $.paths['/v2/associations/{slug}/chat'].post
+  update:
+    operationId: postV2AssociationsSlugChat
+- target: $.paths['/v2/associations/{slug}/jobs'].get
+  update:
+    operationId: getV2AssociationsSlugJobs
+- target: $.paths['/v2/associations/{slug}/members'].get
+  update:
+    operationId: getV2AssociationsSlugMembers
+- target: $.paths['/v2/associations/{slug}'].get
+  update:
+    operationId: getV2AssociationsSlug
+- target: $.paths['/v2/associations/available'].get
+  update:
+    operationId: getV2AssociationsAvailable
+- target: $.paths['/v2/auth/verify-email/confirm'].post
+  update:
+    operationId: postV2AuthVerifyEmailConfirm
+- target: $.paths['/v2/auth/verify-email'].post
+  update:
+    operationId: postV2AuthVerifyEmail
+- target: $.paths['/v2/csa/budget-context'].get
+  update:
+    operationId: getV2CsaBudgetContext
+- target: $.paths['/v2/csa/demand-map'].get
+  update:
+    operationId: getV2CsaDemandMap
+- target: $.paths['/v2/csa/interests/{id}/activity'].get
+  update:
+    operationId: getV2CsaInterestsIdActivity
+- target: $.paths['/v2/csa/interests/{id}/selections'].post
+  update:
+    operationId: postV2CsaInterestsIdSelections
+- target: $.paths['/v2/csa/interests/my-inquiries'].get
+  update:
+    operationId: getV2CsaInterestsMyInquiries
+- target: $.paths['/v2/csa/interests/my-inquiries'].delete
+  update:
+    operationId: deleteV2CsaInterestsMyInquiries
+- target: $.paths['/v2/csa/interests'].post
+  update:
+    operationId: postV2CsaInterests
+- target: $.paths['/v2/csa/unclaimed-notifications/opt-out'].post
+  update:
+    operationId: postV2CsaUnclaimedNotificationsOptOut
+- target: $.paths['/v2/csa/unclaimed-notifications/opt-out'].get
+  update:
+    operationId: getV2CsaUnclaimedNotificationsOptOut
+- target: $.paths['/v2/csa-leads/{id}/quick-reply'].post
+  update:
+    operationId: postV2CsaLeadsIdQuickReply
+- target: $.paths['/v2/csa-leads/{id}'].patch
+  update:
+    operationId: patchV2CsaLeadsId
+- target: $.paths['/v2/follow'].post
+  update:
+    operationId: postV2Follow
+- target: $.paths['/v2/follow'].delete
+  update:
+    operationId: deleteV2Follow
+- target: $.paths['/v2/followed-announcements'].get
+  update:
+    operationId: getV2FollowedAnnouncements
+- target: $.paths['/v2/following'].get
+  update:
+    operationId: getV2Following
+- target: $.paths['/v2/metadata'].get
+  update:
+    operationId: getV2Metadata
+- target: $.paths['/v2/notifications/announcements'].get
+  update:
+    operationId: getV2NotificationsAnnouncements
+- target: $.paths['/v2/notifications/announcements'].put
+  update:
+    operationId: putV2NotificationsAnnouncements
+- target: $.paths['/v2/offerings/{id}/sources'].get
+  update:
+    operationId: getV2OfferingsIdSources
+- target: $.paths['/v2/participants/{id}/announcements/{announcementId}'].put
+  update:
+    operationId: putV2ParticipantsIdAnnouncementsAnnouncementId
+- target: $.paths['/v2/participants/{id}/announcements/{announcementId}'].delete
+  update:
+    operationId: deleteV2ParticipantsIdAnnouncementsAnnouncementId
+- target: $.paths['/v2/participants/{id}/announcements'].get
+  update:
+    operationId: getV2ParticipantsIdAnnouncements
+- target: $.paths['/v2/participants/{id}/announcements'].post
+  update:
+    operationId: postV2ParticipantsIdAnnouncements
+- target: $.paths['/v2/participants/{id}/associations'].get
+  update:
+    operationId: getV2ParticipantsIdAssociations
+- target: $.paths['/v2/participants/{id}/associations'].post
+  update:
+    operationId: postV2ParticipantsIdAssociations
+- target: $.paths['/v2/participants/{id}/associations'].put
+  update:
+    operationId: putV2ParticipantsIdAssociations
+- target: $.paths['/v2/participants/{id}/associations'].delete
+  update:
+    operationId: deleteV2ParticipantsIdAssociations
+- target: $.paths['/v2/participants/{id}/capabilities'].get
+  update:
+    operationId: getV2ParticipantsIdCapabilities
+- target: $.paths['/v2/participants/{id}/capabilities'].post
+  update:
+    operationId: postV2ParticipantsIdCapabilities
+- target: $.paths['/v2/participants/{id}/capabilities'].put
+  update:
+    operationId: putV2ParticipantsIdCapabilities
+- target: $.paths['/v2/participants/{id}/challenges'].get
+  update:
+    operationId: getV2ParticipantsIdChallenges
+- target: $.paths['/v2/participants/{id}/chat'].post
+  update:
+    operationId: postV2ParticipantsIdChat
+- target: $.paths['/v2/participants/{id}/chat-metrics'].get
+  update:
+    operationId: getV2ParticipantsIdChatMetrics
+- target: $.paths['/v2/participants/{id}/claim/generate-link'].post
+  update:
+    operationId: postV2ParticipantsIdClaimGenerateLink
+- target: $.paths['/v2/participants/{id}/claim'].post
+  update:
+    operationId: postV2ParticipantsIdClaim
+- target: $.paths['/v2/participants/{id}/claim'].get
+  update:
+    operationId: getV2ParticipantsIdClaim
+- target: $.paths['/v2/participants/{id}/connections/{connectionId}'].put
+  update:
+    operationId: putV2ParticipantsIdConnectionsConnectionId
+- target: $.paths['/v2/participants/{id}/connections/{connectionId}'].delete
+  update:
+    operationId: deleteV2ParticipantsIdConnectionsConnectionId
+- target: $.paths['/v2/participants/{id}/connections'].get
+  update:
+    operationId: getV2ParticipantsIdConnections
+- target: $.paths['/v2/participants/{id}/connections'].post
+  update:
+    operationId: postV2ParticipantsIdConnections
+- target: $.paths['/v2/participants/{id}/csa-analytics'].get
+  update:
+    operationId: getV2ParticipantsIdCsaAnalytics
+- target: $.paths['/v2/participants/{id}/csa-availability'].patch
+  update:
+    operationId: patchV2ParticipantsIdCsaAvailability
+- target: $.paths['/v2/participants/{id}/csa-demand-breakdown'].get
+  update:
+    operationId: getV2ParticipantsIdCsaDemandBreakdown
+- target: $.paths['/v2/participants/{id}/csa-empty-context'].get
+  update:
+    operationId: getV2ParticipantsIdCsaEmptyContext
+- target: $.paths['/v2/participants/{id}/csa-leads'].get
+  update:
+    operationId: getV2ParticipantsIdCsaLeads
+- target: $.paths['/v2/participants/{id}/csa-rematch'].post
+  update:
+    operationId: postV2ParticipantsIdCsaRematch
+- target: $.paths['/v2/participants/{id}/featured-in'].get
+  update:
+    operationId: getV2ParticipantsIdFeaturedIn
+- target: $.paths['/v2/participants/{id}/followers'].get
+  update:
+    operationId: getV2ParticipantsIdFollowers
+- target: $.paths['/v2/participants/{id}/followers'].post
+  update:
+    operationId: postV2ParticipantsIdFollowers
+- target: $.paths['/v2/participants/{id}/games'].get
+  update:
+    operationId: getV2ParticipantsIdGames
+- target: $.paths['/v2/participants/{id}/messages'].get
+  update:
+    operationId: getV2ParticipantsIdMessages
+- target: $.paths['/v2/participants/{id}/messages'].post
+  update:
+    operationId: postV2ParticipantsIdMessages
+- target: $.paths['/v2/participants/{id}/messages'].put
+  update:
+    operationId: putV2ParticipantsIdMessages
+- target: $.paths['/v2/participants/{id}/offerings/{offeringId}'].delete
+  update:
+    operationId: deleteV2ParticipantsIdOfferingsOfferingId
+- target: $.paths['/v2/participants/{id}/offerings/{offeringId}'].get
+  update:
+    operationId: getV2ParticipantsIdOfferingsOfferingId
+- target: $.paths['/v2/participants/{id}/offerings/{offeringId}'].put
+  update:
+    operationId: putV2ParticipantsIdOfferingsOfferingId
+- target: $.paths['/v2/participants/{id}/offerings'].get
+  update:
+    operationId: getV2ParticipantsIdOfferings
+- target: $.paths['/v2/participants/{id}/offerings'].post
+  update:
+    operationId: postV2ParticipantsIdOfferings
+- target: $.paths['/v2/participants/{id}/pack-prices/{quoteId}'].patch
+  update:
+    operationId: patchV2ParticipantsIdPackPricesQuoteId
+- target: $.paths['/v2/participants/{id}/pack-prices/{quoteId}'].delete
+  update:
+    operationId: deleteV2ParticipantsIdPackPricesQuoteId
+- target: $.paths['/v2/participants/{id}/pack-prices'].get
+  update:
+    operationId: getV2ParticipantsIdPackPrices
+- target: $.paths['/v2/participants/{id}/pack-prices'].post
+  update:
+    operationId: postV2ParticipantsIdPackPrices
+- target: $.paths['/v2/participants/{id}/reviews'].get
+  update:
+    operationId: getV2ParticipantsIdReviews
+- target: $.paths['/v2/participants/{id}/reviews'].post
+  update:
+    operationId: postV2ParticipantsIdReviews
+- target: $.paths['/v2/participants/{id}/reviews'].put
+  update:
+    operationId: putV2ParticipantsIdReviews
+- target: $.paths['/v2/participants/{id}/reviews'].delete
+  update:
+    operationId: deleteV2ParticipantsIdReviews
+- target: $.paths['/v2/participants/{id}'].get
+  update:
+    operationId: getV2ParticipantsId
+- target: $.paths['/v2/participants/{id}'].put
+  update:
+    operationId: putV2ParticipantsId
+- target: $.paths['/v2/participants/{id}'].patch
+  update:
+    operationId: patchV2ParticipantsId
+- target: $.paths['/v2/participants/{id}'].delete
+  update:
+    operationId: deleteV2ParticipantsId
+- target: $.paths['/v2/participants/{id}/service-locations/{locationId}/geocode'].post
+  update:
+    operationId: postV2ParticipantsIdServiceLocationsLocationIdGeocode
+- target: $.paths['/v2/participants/{id}/service-locations/{locationId}'].get
+  update:
+    operationId: getV2ParticipantsIdServiceLocationsLocationId
+- target: $.paths['/v2/participants/{id}/service-locations/{locationId}'].put
+  update:
+    operationId: putV2ParticipantsIdServiceLocationsLocationId
+- target: $.paths['/v2/participants/{id}/service-locations/{locationId}'].delete
+  update:
+    operationId: deleteV2ParticipantsIdServiceLocationsLocationId
+- target: $.paths['/v2/participants/{id}/service-locations'].get
+  update:
+    operationId: getV2ParticipantsIdServiceLocations
+- target: $.paths['/v2/participants/{id}/service-locations'].post
+  update:
+    operationId: postV2ParticipantsIdServiceLocations
+- target: $.paths['/v2/participants/{id}/service-locations'].put
+  update:
+    operationId: putV2ParticipantsIdServiceLocations
+- target: $.paths['/v2/participants/{id}/users/{userId}'].put
+  update:
+    operationId: putV2ParticipantsIdUsersUserId
+- target: $.paths['/v2/participants/{id}/users/{userId}'].delete
+  update:
+    operationId: deleteV2ParticipantsIdUsersUserId
+- target: $.paths['/v2/participants/{id}/users'].get
+  update:
+    operationId: getV2ParticipantsIdUsers
+- target: $.paths['/v2/participants/{id}/users'].post
+  update:
+    operationId: postV2ParticipantsIdUsers
+- target: $.paths['/v2/participants/claim/{token}'].get
+  update:
+    operationId: getV2ParticipantsClaimToken
+- target: $.paths['/v2/participants/claim/{token}'].post
+  update:
+    operationId: postV2ParticipantsClaimToken
+- target: $.paths['/v2/participants/connection-suggestions/{id}'].put
+  update:
+    operationId: putV2ParticipantsConnectionSuggestionsId
+- target: $.paths['/v2/participants/connection-suggestions'].post
+  update:
+    operationId: postV2ParticipantsConnectionSuggestions
+- target: $.paths['/v2/participants/connection-suggestions'].get
+  update:
+    operationId: getV2ParticipantsConnectionSuggestions
+- target: $.paths['/v2/participants/my-businesses'].get
+  update:
+    operationId: getV2ParticipantsMyBusinesses
+- target: $.paths['/v2/participants/nearby'].get
+  update:
+    operationId: getV2ParticipantsNearby
+- target: $.paths['/v2/participants/offerings/suggestions/{id}'].put
+  update:
+    operationId: putV2ParticipantsOfferingsSuggestionsId
+- target: $.paths['/v2/participants/personal-profile'].get
+  update:
+    operationId: getV2ParticipantsPersonalProfile
+- target: $.paths['/v2/participants'].get
+  update:
+    operationId: getV2Participants
+- target: $.paths['/v2/participants'].post
+  update:
+    operationId: postV2Participants
+- target: $.paths['/v2/participants/suggestions/{id}'].put
+  update:
+    operationId: putV2ParticipantsSuggestionsId
+- target: $.paths['/v2/participants/suggestions/{id}'].delete
+  update:
+    operationId: deleteV2ParticipantsSuggestionsId
+- target: $.paths['/v2/participants/suggestions/{id}'].patch
+  update:
+    operationId: patchV2ParticipantsSuggestionsId
+- target: $.paths['/v2/participants/suggestions'].post
+  update:
+    operationId: postV2ParticipantsSuggestions
+- target: $.paths['/v2/participants/suggestions'].get
+  update:
+    operationId: getV2ParticipantsSuggestions
+- target: $.paths['/v2/participants/verify/{token}/mute'].patch
+  update:
+    operationId: patchV2ParticipantsVerifyTokenMute
+- target: $.paths['/v2/participants/verify/{token}'].get
+  update:
+    operationId: getV2ParticipantsVerifyToken
+- target: $.paths['/v2/participants/verify/{token}'].post
+  update:
+    operationId: postV2ParticipantsVerifyToken
+- target: $.paths['/v2/participants/verify/{token}'].put
+  update:
+    operationId: putV2ParticipantsVerifyToken
+- target: $.paths['/v2/participants/verify/{token}'].patch
+  update:
+    operationId: patchV2ParticipantsVerifyToken
+- target: $.paths['/v2/resiliency/score'].get
+  update:
+    operationId: getV2ResiliencyScore
+- target: $.paths['/v2'].get
+  update:
+    operationId: getV2
+- target: $.paths['/v2/search'].get
+  update:
+    operationId: getV2Search
+- target: $.paths['/v2/service-locations/bulk'].get
+  update:
+    operationId: getV2ServiceLocationsBulk
+- target: $.paths['/v2/surveys/{id}/respond'].post
+  update:
+    operationId: postV2SurveysIdRespond
+- target: $.paths['/v2/surveys/{id}/results'].get
+  update:
+    operationId: getV2SurveysIdResults
+- target: $.paths['/v2/surveys/active'].get
+  update:
+    operationId: getV2SurveysActive
+- target: $.paths['/v2/surveys/aggregate'].get
+  update:
+    operationId: getV2SurveysAggregate
+- target: $.paths['/v2/users/{userId}/suggestions'].get
+  update:
+    operationId: getV2UsersUserIdSuggestions
+- target: $.paths['/v2/visit/{participantId}'].get
+  update:
+    operationId: getV2VisitParticipantId
+- target: $.paths['/validation/places'].post
+  update:
+    operationId: postValidationPlaces
+- target: $.paths['/validation/places'].get
+  update:
+    operationId: getValidationPlaces
+- target: $.paths['/voice/twilio'].post
+  update:
+    operationId: postVoiceTwilio
+- target: $.paths['/voice/vapi'].post
+  update:
+    operationId: postVoiceVapi
+- target: $.paths['/webhooks/{id}'].get
+  update:
+    operationId: getWebhooksId
+- target: $.paths['/webhooks/{id}'].put
+  update:
+    operationId: putWebhooksId
+- target: $.paths['/webhooks/{id}'].delete
+  update:
+    operationId: deleteWebhooksId
+- target: $.paths['/webhooks/process'].post
+  update:
+    operationId: postWebhooksProcess
+- target: $.paths['/webhooks'].get
+  update:
+    operationId: getWebhooks
+- target: $.paths['/webhooks'].post
+  update:
+    operationId: postWebhooks
+- target: $.paths['/webhooks/stripe'].post
+  update:
+    operationId: postWebhooksStripe
+- target: $.paths['/webhooks/test'].post
+  update:
+    operationId: postWebhooksTest
+- target: $.paths['/widget/analytics'].get
+  update:
+    operationId: getWidgetAnalytics
+- target: $.paths['/widget/branding'].get
+  update:
+    operationId: getWidgetBranding
+- target: $.paths['/widget/branding'].put
+  update:
+    operationId: putWidgetBranding
+- target: $.paths['/widget/keys/{keyId}'].put
+  update:
+    operationId: putWidgetKeysKeyId
+- target: $.paths['/widget/keys/{keyId}'].delete
+  update:
+    operationId: deleteWidgetKeysKeyId
+- target: $.paths['/widget/keys'].get
+  update:
+    operationId: getWidgetKeys
+- target: $.paths['/widget/keys'].post
+  update:
+    operationId: postWidgetKeys
+- target: $.paths['/widget/listings/{id}/email-pdfs'].post
+  update:
+    operationId: postWidgetListingsIdEmailPdfs
+- target: $.paths['/widget/listings/{id}'].patch
+  update:
+    operationId: patchWidgetListingsId
+- target: $.paths['/widget/listings/{id}'].delete
+  update:
+    operationId: deleteWidgetListingsId
+- target: $.paths['/widget/listings'].get
+  update:
+    operationId: getWidgetListings
+- target: $.paths['/widget/listings'].post
+  update:
+    operationId: postWidgetListings
+- target: $.paths['/agents/public/place-summary'].get
+  description: Document the rate limit observed live (30 req/min with X-RateLimit-* headers) and the published caps.
+  update:
+    x-rate-limit:
+      limit: 30
+      window: 1 minute
+      headers:
+      - X-RateLimit-Limit
+      - X-RateLimit-Remaining
+      - X-RateLimit-Reset
+    parameters:
+    - name: id
+      in: query
+      schema:
+        type: string
+    - name: q
+      in: query
+      schema:
+        type: string
+    - name: lat
+      in: query
+      schema:
+        type: number
+    - name: lng
+      in: query
+      schema:
+        type: number
+    - name: radius_km
+      in: query
+      schema:
+        type: number
+        maximum: 50
+    - name: limit
+      in: query
+      schema:
+        type: integer
+        maximum: 5
+    - name: role
+      in: query
+      schema:
+        type: string

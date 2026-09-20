@@ -1,0 +1,79 @@
+generated: '2026-09-19'
+method: searched
+source: >-
+  https://piknik.spot/.well-known/oauth-authorization-server + /.well-known/oauth-protected-resource +
+  /.well-known/agent-card.json + live MCP initialize + openapi/_original/piknik-spot-openapi.json +
+  https://piknik.spot/llms.txt. Standards asserted only where a fetched document or the spec itself
+  declares them; no marketing claims.
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: OpenAPI securitySchemes.oauth2 (authorizationCode flow, 4 scopes) and RFC 8414 metadata (authorization_code + refresh_token grants) at /.well-known/oauth-authorization-server (200).
+  - id: oauth2-pkce
+    conforms: true
+    evidence: code_challenge_methods_supported [S256, plain] in the authorization-server metadata.
+  - id: rfc8414-authorization-server-metadata
+    conforms: true
+    evidence: /.well-known/oauth-authorization-server returns valid metadata with issuer https://piknik.spot (200, 902 bytes).
+  - id: rfc9728-protected-resource-metadata
+    conforms: true
+    evidence: /.well-known/oauth-protected-resource returns resource https://piknik.spot/api/mcp with authorization_servers and scopes_supported (200); a live 401 from tools/call carries WWW-Authenticate Bearer resource_metadata="..." pointing at it.
+  - id: rfc7591-dynamic-client-registration
+    conforms: true
+    evidence: registration_endpoint https://piknik.spot/api/oauth/register in the RFC 8414 document; OpenAPI summary on POST /oauth/register reads "Dynamic Client Registration (DCR) endpoint per RFC 7591".
+  - id: rfc7009-token-revocation
+    conforms: true
+    evidence: revocation_endpoint https://piknik.spot/api/oauth/revoke with revocation_endpoint_auth_methods_supported in the RFC 8414 document; POST /oauth/revoke in the OpenAPI.
+  - id: rfc6750-bearer-token
+    conforms: true
+    evidence: bearer_methods_supported [header] in the protected-resource document; OpenAPI bearerAuth (http bearer, JWT).
+  - id: oidc-discovery
+    conforms: false
+    evidence: /.well-known/openid-configuration returns 404; GET /oauth/userinfo exists in the OpenAPI but no OIDC discovery document or id_token issuance is published.
+  - id: mcp
+    conforms: true
+    evidence: Live initialize on https://piknik.spot/api/mcp returned protocolVersion 2025-03-26 with tools/prompts/resources/logging capabilities; tools/list returned 62 tools with inputSchema; GET /api/mcp/sse declared in the OpenAPI.
+  - id: mcp-authorization-spec
+    conforms: true
+    evidence: MCP authorization flow as specified — RFC 9728 protected-resource discovery via WWW-Authenticate resource_metadata, RFC 8414 AS metadata, PKCE, dynamic client registration — all observed live on 2026-09-19.
+  - id: a2a-1.0
+    conforms: true
+    evidence: Agent card at /.well-known/agent-card.json graded conformant (capabilities object, protocolVersion 1.0, skills array, JSONRPC binding); anonymous message/send returned a Task object. See a2a/piknik-spot-a2a.yml.
+  - id: json-rpc-2.0
+    conforms: true
+    evidence: Both the MCP and A2A endpoints answer with {"jsonrpc":"2.0", "id", "result"|"error"} envelopes; auth failures use code -32001.
+  - id: llms-txt
+    conforms: true
+    evidence: https://piknik.spot/llms.txt (200, text/plain) follows the llms.txt shape — H1, blockquote summary, H2 sections of markdown links.
+  - id: openapi-3.0
+    conforms: true
+    evidence: https://piknik.spot/openapi.json is a valid OpenAPI 3.0.3 document (509 paths, 683 operations). The YAML twin at /api/openapi does NOT parse (unquoted colons in eight summary/description scalars).
+  - id: ical-rfc5545
+    conforms: true
+    evidence: CreateEventRequest.recurrence_rule is described as an "iCal recurrence rule (e.g., FREQ=WEEKLY;BYDAY=SA)"; GET /events/{id}/calendar and GET /planting-calendar.ics export iCalendar.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: /.well-known/security.txt and /security.txt both 404. Security contact is published only as info@piknik.spot in agent-ethics.md.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Every declared 4xx uses application/json with the {error, error_description} Error schema; zero application/problem+json media types in the spec.
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: No Deprecation/Sunset headers documented and no operation carries deprecated:true.
+  - id: ietf-ratelimit-headers
+    conforms: false
+    evidence: The public place-summary endpoint emits the legacy X-RateLimit-Limit / X-RateLimit-Remaining / X-RateLimit-Reset family (observed live), not the IETF RateLimit-* fields.
+  - id: apis-json
+    conforms: false
+    evidence: /apis.json, /apis.yml and /.well-known/apis.json all 404.
+  - id: rfc9116-api-catalog
+    conforms: false
+    evidence: /.well-known/api-catalog 404.
+domain_standard:
+  market: local food systems / agri-food directories
+  finding: >-
+    No sector data standard is declared in the contract (no Open Food Network / DFC "Data Food
+    Consortium" ontology, no GS1, no schema.org FoodEstablishment markup in the API), and the sector
+    has no regulator-mandated interchange standard, so nothing is asserted here. The only
+    cross-domain standard the contract itself declares is iCalendar RRULE (above). Reward-only field;
+    honest absence.

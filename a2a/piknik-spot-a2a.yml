@@ -1,0 +1,145 @@
+generated: '2026-09-19'
+method: probed
+source: https://piknik.spot/.well-known/agent-card.json
+card:
+  file: a2a/piknik-spot-agent-card.json
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: piknik.spot
+  also_served_at: /.well-known/agent.json
+  note: >-
+    Served at BOTH the A2A 1.0 canonical path and the pre-0.3 legacy path from the same host, with
+    byte-identical bodies (cmp) and content-type application/a2a+json. Ownership is not in question:
+    the card's provider.organization is "Piknik.Spot" with provider.url https://piknik.spot, its url
+    is https://piknik.spot/api/a2a on the same host that serves the provider's OpenAPI (servers[]
+    https://piknik.spot/api, info.contact info@piknik.spot) and MCP server, the provider's own
+    llms.txt names this exact URL as "A2A agent card", and robots.txt and the terms of service both
+    designate it as the only authorized programmatic access point. The provider was surfaced from
+    a2aregistry.org, which lists this same card.
+x-evidence:
+  fetched: '2026-09-19'
+  url: https://piknik.spot/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/a2a+json
+  body_bytes: 2476
+  body_parses_as: JSON object with AgentCard shape (name, url, version, protocolVersion, capabilities, skills all present)
+  corroborating_probes:
+  - url: https://piknik.spot/.well-known/agent.json
+    http_status: 200
+    note: byte-identical to the canonical card
+  - url: https://piknik.spot/api/a2a
+    http_status: 405
+    method: GET
+    note: 'Body: {"error":"Use POST JSON-RPC message/send","attribution":"Data from Piknik (piknik.spot)..."} — the endpoint exists and expects the JSON-RPC POST the card declares.'
+  - url: https://piknik.spot/api/a2a
+    http_status: 200
+    method: POST message/send (anonymous, text "bakery Waterloo")
+    note: >-
+      Returned a completed Task object (kind: task, status.state: completed) with an agent message and
+      the provider's attribution string — the public search skills are callable without credentials,
+      exactly as the card's description says. One request was made to verify the surface.
+  - url: https://piknik.spot/api/a2a
+    http_status: 401
+    method: POST agent/getAuthenticatedExtendedCard (anonymous)
+    note: 'JSON-RPC error -32001 "Authentication required. Send Authorization: Bearer <pik_pat_ or OAuth JWT>." — the extended card the capabilities block advertises is gated as declared.'
+agent_card:
+  name: Piknik.Spot
+  description: Find local farms, bakeries, markets, shops, and restaurants. Ask in plain language. Browse surplus, wanted, and for-sale listings. Find public events. Find jobs and volunteer posts. Sign in for the extra skills on this agent.
+  version: 1.0.0
+  protocol_version: '1.0'
+  url: https://piknik.spot/api/a2a
+  preferred_transport: JSONRPC
+  documentation_url: https://piknik.spot/llms.txt
+  icon_url: https://piknik.spot/favicon.ico
+  provider:
+    organization: Piknik.Spot
+    url: https://piknik.spot
+  supported_interfaces:
+  - url: https://piknik.spot/api/a2a
+    protocol_binding: JSONRPC
+    protocol_version: '1.0'
+  capabilities:
+    streaming: false
+    push_notifications: false
+    extended_agent_card: true
+  default_input_modes: [text/plain, application/json]
+  default_output_modes: [text/plain, application/json]
+  security_schemes:
+    bearer:
+      type: http
+      scheme: bearer
+      bearer_format: JWT
+      description: Personal access token from Settings -> Developer, or an OAuth access token.
+  skill_count: 5
+  skills:
+  - id: search-local-food-places
+    name: Search local food places
+    tags: [local-food, farms, markets]
+  - id: get-place-summary
+    name: Get a public place summary
+    tags: [place]
+  - id: search-marketplace-listings
+    name: Search marketplace listings
+    tags: [marketplace, surplus]
+  - id: search-events
+    name: Search events
+    tags: [events]
+  - id: search-jobs
+    name: Search jobs
+    tags: [jobs]
+conformance:
+  spec: A2A 1.0.0
+  grade: conformant
+  protocol_version: '1.0'
+  preferred_transport: JSONRPC
+  hard_checks:
+    capabilities_is_object: true
+    protocol_version_present: true
+    skills_is_array: true
+  optional_fields:
+    preferred_transport: true
+    default_input_modes: true
+    default_output_modes: true
+  grade_basis: >-
+    All three hard checks pass: capabilities is an OBJECT with streaming, pushNotifications and
+    extendedAgentCard as fields; protocolVersion "1.0" is present at the top level AND repeated on
+    supportedInterfaces[0]; skills is an ARRAY of five fully-populated skills, each with id, name,
+    description, tags, examples, inputModes and outputModes. All three optional discriminators are
+    also present (preferredTransport, defaultInputModes, defaultOutputModes), so the card is
+    conformant rather than near-conformant.
+  deviations:
+  - field: url / preferredTransport / protocolVersion alongside supportedInterfaces
+    observed: the card carries BOTH the 0.3-era top-level triple and the 1.0 supportedInterfaces[] array
+    note: >-
+      Redundant rather than wrong — both shapes agree (same URL, JSONRPC, 1.0) — and it makes the card
+      readable by 0.3 and 1.0 clients alike. Recorded because the two shapes coexist in the wild.
+  - field: securitySchemes.bearer
+    observed: flat OpenAPI-style object {type, scheme, bearerFormat, description}
+    note: >-
+      A2A 1.0.0's protobuf-JSON mapping wraps each scheme in a oneof (httpAuthSecurityScheme, ...).
+      A strict 1.0 reader looking for that wrapper will not find it. No top-level security[]
+      requirements array is declared either, so the card does not say which skills need the bearer
+      scheme; the prose description ("Sign in for the extra skills") and the live probes do.
+  - field: skills
+    observed: five read-only public skills; the write surface (suggest_place, create_listing, create_event, jobs, tours) is absent from the card
+    note: >-
+      The card is a narrow projection. Piknik's REST contract exposes 683 operations and its MCP
+      server 62 tools; the A2A surface is deliberately public-search-only, with more skills promised
+      on the authenticated extended card (extendedAgentCard: true) that this pass could not read.
+  - field: capabilities.extensions / signatures
+    observed: absent
+    note: No JWS signature block; authenticity rests on TLS to piknik.spot.
+surface_relationship:
+  note: >-
+    Piknik publishes three agent surfaces that are NOT projections of one another. A2A: five
+    read-only search skills at https://piknik.spot/api/a2a plus per-place and per-association agent
+    cards at /api/agents/participant/{id}/card and /api/agents/association/{id}/card (declared in the
+    OpenAPI under the "A2A Agents" tag, 47 operations). MCP: one remote server at
+    https://piknik.spot/api/mcp with 62 tools, public reads anonymous and writes OAuth/PAT-gated (see
+    mcp/piknik-spot-mcp.yml). REST: 683 operations under https://piknik.spot/api, including the A2A
+    endpoint itself as POST /a2a and the MCP endpoint as POST /mcp, so both agent surfaces are
+    first-class parts of the published OpenAPI rather than side channels.
+registry_listing:
+  a2aregistry_org: true
+  note: The provider entered the catalog from the a2aregistry.org harvest of 2026-09-19 (415 agents), which lists this card.

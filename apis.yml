@@ -23,6 +23,22 @@ tags:
 - Agriculture
 - Farmers Markets
 - Marketplace
+- Event
+- Job
+- Recipes
+- Geolocation
+- Community
+- Food Systems
+- MCP
+- A2A
+- agent-native
+- Ontario
+- Canada
+tags_raw:
+- Local Food
+- Agriculture
+- Farmers Markets
+- Marketplace
 - Events
 - Jobs
 - Recipes
@@ -46,6 +62,14 @@ apis:
   humanURL: https://piknik.spot/api/docs
   baseURL: https://piknik.spot/api
   tags:
+  - Local Food
+  - Marketplace
+  - Event
+  - Job
+  - Recipes
+  - Geolocation
+  - Authentication
+  tags_raw:
   - Local Food
   - Marketplace
   - Events
@@ -100,6 +124,11 @@ apis:
   humanURL: https://piknik.spot/skills/piknik-mcp/SKILL.md
   baseURL: https://piknik.spot/api/mcp
   tags:
+  - MCP
+  - agent-native
+  - Local Food
+  - Authentication
+  tags_raw:
   - MCP
   - agent-native
   - Local Food

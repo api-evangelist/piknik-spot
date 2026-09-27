@@ -1,0 +1,523 @@
+openapi: 3.2.0
+info:
+  title: Piknik Spot OAuth API
+  version: 1.0.0
+  contact:
+    name: Piknik.Spot API Support
+    url: https://piknik.spot
+    email: info@piknik.spot
+  license:
+    name: Proprietary
+    url: https://piknik.spot/terms
+  description: 'Operations tagged OAuth across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://piknik.spot/api
+  description: Production Server
+- url: http://localhost:3000/api
+  description: Development Server
+tags:
+- name: OAuth
+paths:
+  /oauth/authorize:
+    get:
+      summary: GET /oauth/authorize
+      description: Endpoint for /oauth/authorize
+      tags:
+      - OAuth
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: redirect_uri
+        in: query
+        schema:
+          type: string
+        description: redirect_uri parameter
+      - name: response_type
+        in: query
+        schema:
+          type: string
+        description: response_type parameter
+      - name: approved
+        in: query
+        schema:
+          type: string
+        description: approved parameter
+      operationId: getOauthAuthorize
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /oauth/clients/{id}/reset-secret:
+    post:
+      summary: POST /oauth/clients/{id}/reset-secret
+      description: Endpoint for /oauth/clients/{id}/reset-secret
+      tags:
+      - OAuth
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: postOauthClientsByIdResetSecret
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /oauth/clients/{id}:
+    patch:
+      summary: PATCH /oauth/clients/{id}
+      description: Endpoint for /oauth/clients/{id}
+      tags:
+      - OAuth
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: patchOauthClientsById
+      x-operation-id-source: derived
+    put:
+      summary: PUT /oauth/clients/{id}
+      description: Endpoint for /oauth/clients/{id}
+      tags:
+      - OAuth
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: putOauthClientsById
+      x-operation-id-source: derived
+    delete:
+      summary: DELETE /oauth/clients/{id}
+      description: Endpoint for /oauth/clients/{id}
+      tags:
+      - OAuth
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: deleteOauthClientsById
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /oauth/clients/info:
+    get:
+      summary: GET /oauth/clients/info
+      description: Endpoint for /oauth/clients/info
+      tags:
+      - OAuth
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: client_id
+        in: query
+        schema:
+          type: string
+        description: client_id parameter
+      operationId: getOauthClientsInfo
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /oauth/clients:
+    post:
+      summary: POST /oauth/clients
+      description: Endpoint for /oauth/clients
+      tags:
+      - OAuth
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postOauthClients
+      x-operation-id-source: derived
+    get:
+      summary: GET /oauth/clients
+      description: Endpoint for /oauth/clients
+      tags:
+      - OAuth
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      operationId: getOauthClients
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /oauth/register:
+    post:
+      summary: Dynamic Client Registration (DCR) endpoint per RFC 7591
+      tags:
+      - OAuth
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postOauthRegister
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /oauth/revoke:
+    post:
+      summary: POST /oauth/revoke
+      description: Endpoint for /oauth/revoke
+      tags:
+      - OAuth
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      operationId: postOauthRevoke
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /oauth/token:
+    post:
+      summary: POST /oauth/token
+      description: Endpoint for /oauth/token
+      tags:
+      - OAuth
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      operationId: postOauthToken
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /oauth/userinfo:
+    get:
+      summary: GET /oauth/userinfo
+      description: Endpoint for /oauth/userinfo
+      tags:
+      - OAuth
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      operationId: getOauthUserinfo
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        error_description:
+          type: string
+          description: Detailed error description
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: next-auth.session-token
+      description: Session-based authentication for web browsers
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for external applications and AI agents
+      flows:
+        authorizationCode:
+          authorizationUrl: https://piknik.spot/api/oauth/authorize
+          tokenUrl: https://piknik.spot/api/oauth/token
+          refreshUrl: https://piknik.spot/api/oauth/token
+          scopes:
+            marketplace:write: Create and manage marketplace listings
+            events:write: Create and manage community events
+            read:profile: Read user profile information
+            write:profile: Update user profile information
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
+x-refined-from:
+- piknik-spot-openapi.json
+- piknik-spot-openapi.yml

@@ -31,7 +31,7 @@ tags:
 - Food Systems
 - MCP
 - A2A
-- agent-native
+- Agent-Native
 - Ontario
 - Canada
 tags_raw:
@@ -51,81 +51,21 @@ tags_raw:
 - Ontario
 - Canada
 apis:
-- name: Piknik.Spot REST API
-  description: REST API under https://piknik.spot/api covering participants (places), offerings and pack prices,
-    service locations, marketplace listings, events and RSVPs, jobs, recipes, associations and place tours, CSA
-    interests, spend challenges, delivery tasks, geocoding, the Local Food Score, OAuth 2.0 client management and
-    an unauthenticated public place-summary endpoint for AI agents (max 5 results, 30 requests per minute). Described
-    by a provider-hosted OpenAPI 3.0.3 document with 509 paths and 683 operations; the same document is served as
-    YAML at /api/openapi. Authentication is an OAuth 2.0 bearer JWT or a pik_pat_ personal access token; browser
-    sessions use a next-auth cookie.
-  humanURL: https://piknik.spot/api/docs
-  baseURL: https://piknik.spot/api
-  tags:
-  - Local Food
-  - Marketplace
-  - Event
-  - Job
-  - Recipes
-  - Geolocation
-  - Authentication
-  tags_raw:
-  - Local Food
-  - Marketplace
-  - Events
-  - Jobs
-  - Recipes
-  - Geolocation
-  - OAuth 2.0
-  properties:
-  - type: OpenAPI
-    url: openapi/piknik-spot-openapi.yml
-  - type: OpenAPI
-    name: Provider-hosted OpenAPI 3.0.3 (JSON, 683 operations)
-    url: https://piknik.spot/openapi.json
-  - type: Documentation
-    url: https://piknik.spot/api/docs
-  - type: APIReference
-    url: https://piknik.spot/api/docs
-  - type: GettingStarted
-    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
-  - type: Authentication
-    url: authentication/piknik-spot-authentication.yml
-  - type: OAuthScopes
-    url: scopes/piknik-spot-scopes.yml
-  - type: Conventions
-    url: conventions/piknik-spot-conventions.yml
-  - type: Idempotency
-    url: conventions/piknik-spot-conventions.yml
-  - type: ErrorCatalog
-    url: errors/piknik-spot-problem-types.yml
-  - type: DataModel
-    url: data-model/piknik-spot-data-model.yml
-  - type: RateLimits
-    url: rate-limits/piknik-spot-rate-limits.yml
-  - type: Overlay
-    url: overlays/piknik-spot-openapi-overlay.yaml
-  - type: Webhooks
-    url: asyncapi/piknik-spot-webhooks.yml
-  - type: AgentSkill
-    url: skills/_index.yml
-  - type: OpenAPI
-    url: https://piknik.spot/api/openapi
-    name: Provider-hosted OpenAPI (YAML twin) — does not parse; see lifecycle/
-  image: https://piknik.spot/icons/icon-512x512.png
 - name: Piknik.Spot MCP Server
-  description: Hosted, remote Model Context Protocol server (protocol 2025-03-26, Streamable HTTP with an SSE endpoint
-    at /api/mcp/sse) exposing 62 tools and 7 piknik:// resources for local-food discovery, Local Food Score analysis,
-    marketplace listings, events, jobs, recipes, products and pack prices, service locations, supplier-buyer connections,
-    associations and walking tours. tools/list, initialize, prompts/list and resources/list answer anonymously;
-    write tools return a JSON-RPC -32001 error with a WWW-Authenticate Bearer challenge pointing at RFC 9728 protected-resource
-    metadata until the client authorizes via OAuth 2.0 (authorization code + PKCE, dynamic client registration)
-    or presents a pik_pat_ personal access token.
+  description: >-
+    Hosted, remote Model Context Protocol server (protocol 2025-03-26, Streamable HTTP with an SSE endpoint
+    at /api/mcp/sse) exposing 62 tools and 7 piknik:// resources for local-food discovery, Local Food
+    Score analysis, marketplace listings, events, jobs, recipes, products and pack prices, service locations,
+    supplier-buyer connections, associations and walking tours. tools/list, initialize, prompts/list and
+    resources/list answer anonymously; write tools return a JSON-RPC -32001 error with a WWW-Authenticate
+    Bearer challenge pointing at RFC 9728 protected-resource metadata until the client authorizes via
+    OAuth 2.0 (authorization code + PKCE, dynamic client registration) or presents a pik_pat_ personal
+    access token.
   humanURL: https://piknik.spot/skills/piknik-mcp/SKILL.md
   baseURL: https://piknik.spot/api/mcp
   tags:
   - MCP
-  - agent-native
+  - Agent-Native
   - Local Food
   - Authentication
   tags_raw:
@@ -158,15 +98,20 @@ apis:
     url: https://piknik.spot/llms.txt
   image: https://piknik.spot/icons/icon-512x512.png
 - name: Piknik.Spot A2A Agent
-  description: 'Agent-to-Agent (A2A 1.0) agent served from the provider''s own host: the agent card at /.well-known/agent-card.json
-    (also at the legacy /.well-known/agent.json, byte-identical) declares five public skills (search local food
-    places, get a public place summary, search marketplace listings, search events, search jobs) over a JSON-RPC
-    binding at https://piknik.spot/api/a2a. Anonymous message/send works for public search; the extended agent card
-    and additional skills require a bearer token (pik_pat_ or OAuth JWT). Per-place and per-association agent cards
-    are also exposed under /api/agents/participant/{id}/card and /api/agents/association/{id}/card.'
+  description: >-
+    Agent-to-Agent (A2A 1.0) agent served from the provider's own host: the agent card at /.well-known/agent-card.json
+    (also at the legacy /.well-known/agent.json, byte-identical) declares five public skills (search local
+    food places, get a public place summary, search marketplace listings, search events, search jobs)
+    over a JSON-RPC binding at https://piknik.spot/api/a2a. Anonymous message/send works for public search;
+    the extended agent card and additional skills require a bearer token (pik_pat_ or OAuth JWT). Per-place
+    and per-association agent cards are also exposed under /api/agents/participant/{id}/card and /api/agents/association/{id}/card.
   humanURL: https://piknik.spot/.well-known/agent-card.json
   baseURL: https://piknik.spot/api/a2a
   tags:
+  - A2A
+  - Agent-Native
+  - Local Food
+  tags_raw:
   - A2A
   - agent-native
   - Local Food
@@ -183,6 +128,2798 @@ apis:
   - type: RateLimits
     url: rate-limits/piknik-spot-rate-limits.yml
   image: https://piknik.spot/icons/icon-512x512.png
+- aid: piknik-spot:piknik-spot-a2a-agents-api
+  name: Piknik.Spot A2A Agents API
+  description: The A2A Agents API from Piknik.Spot — 43 operation(s) for a2a agents.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - A2A Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-a2a-agents-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-a2a-api
+  name: Piknik.Spot A2a API
+  description: The A2a API from Piknik.Spot — 1 operation(s) for a2a.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - A2a
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-a2a-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-admin-api
+  name: Piknik.Spot Admin API
+  description: The Admin API from Piknik.Spot — 91 operation(s) for admin.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Admin
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-admin-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-agritourism-api
+  name: Piknik.Spot Agritourism API
+  description: The Agritourism API from Piknik.Spot — 37 operation(s) for agritourism.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Agritourism
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-agritourism-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-ai-agents-api
+  name: Piknik.Spot AI Agents API
+  description: The AI Agents API from Piknik.Spot — 6 operation(s) for ai agents.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - AI Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-ai-agents-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-analytics-api
+  name: Piknik.Spot Analytics API
+  description: The Analytics API from Piknik.Spot — 6 operation(s) for analytics.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-analytics-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-associations-api
+  name: Piknik.Spot Associations API
+  description: The Associations API from Piknik.Spot — 19 operation(s) for associations.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Associations
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-associations-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-authentication-api
+  name: Piknik.Spot Authentication API
+  description: The Authentication API from Piknik.Spot — 5 operation(s) for authentication.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-baskets-api
+  name: Piknik.Spot Baskets API
+  description: The Baskets API from Piknik.Spot — 2 operation(s) for baskets.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Baskets
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-baskets-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-browse-products-api
+  name: Piknik.Spot Browse Products API
+  description: The Browse Products API from Piknik.Spot — 1 operation(s) for browse products.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Browse Products
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-browse-products-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-business-api
+  name: Piknik.Spot Business API
+  description: The Business API from Piknik.Spot — 4 operation(s) for business.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Business
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-business-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-categories-api
+  name: Piknik.Spot Categories API
+  description: The Categories API from Piknik.Spot — 1 operation(s) for categories.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-categories-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-community-api
+  name: Piknik.Spot Community API
+  description: The Community API from Piknik.Spot — 2 operation(s) for community.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Community
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-community-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-community-food-score-pdf-api
+  name: Piknik.Spot Community Food Score Pdf API
+  description: >-
+    The Community Food Score Pdf API from Piknik.Spot — 1 operation(s) for community food score pdf.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Community Food Score Pdf
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-community-food-score-pdf-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-config-api
+  name: Piknik.Spot Config API
+  description: The Config API from Piknik.Spot — 1 operation(s) for config.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Config
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-config-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-connections-api
+  name: Piknik.Spot Connections API
+  description: The Connections API from Piknik.Spot — 3 operation(s) for connections.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Connections
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-connections-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-contact-api
+  name: Piknik.Spot Contact API
+  description: The Contact API from Piknik.Spot — 1 operation(s) for contact.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Contact
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-contact-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-cron-api
+  name: Piknik.Spot Cron API
+  description: The Cron API from Piknik.Spot — 1 operation(s) for cron.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Cron
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-cron-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-csa-api
+  name: Piknik.Spot CSA API
+  description: The CSA API from Piknik.Spot — 9 operation(s) for csa.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - CSA
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-csa-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-cuisines-api
+  name: Piknik.Spot Cuisines API
+  description: The Cuisines API from Piknik.Spot — 1 operation(s) for cuisines.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Cuisines
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-cuisines-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-debug-api
+  name: Piknik.Spot Debug API
+  description: The Debug API from Piknik.Spot — 1 operation(s) for debug.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Debug
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-debug-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-dev-api
+  name: Piknik.Spot Dev API
+  description: The Dev API from Piknik.Spot — 3 operation(s) for dev.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Dev
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-dev-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-discussions-api
+  name: Piknik.Spot Discussions API
+  description: The Discussions API from Piknik.Spot — 7 operation(s) for discussions.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Discussions
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-discussions-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-endorsements-api
+  name: Piknik.Spot Endorsements API
+  description: The Endorsements API from Piknik.Spot — 2 operation(s) for endorsements.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Endorsements
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-endorsements-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-engagement-metrics-api
+  name: Piknik.Spot Engagement Metrics API
+  description: The Engagement Metrics API from Piknik.Spot — 1 operation(s) for engagement metrics.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Engagement Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-engagement-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-events-api
+  name: Piknik.Spot Events API
+  description: The Events API from Piknik.Spot — 25 operation(s) for events.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-events-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-feature-flags-api
+  name: Piknik.Spot Feature Flags API
+  description: The Feature Flags API from Piknik.Spot — 1 operation(s) for feature flags.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Feature Flags
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-feature-flags-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-feedback-api
+  name: Piknik.Spot Feedback API
+  description: The Feedback API from Piknik.Spot — 1 operation(s) for feedback.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Feedback
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-feedback-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-follow-api
+  name: Piknik.Spot Follow API
+  description: The Follow API from Piknik.Spot — 1 operation(s) for follow.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Follow
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-follow-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-followed-announcements-api
+  name: Piknik.Spot Followed Announcements API
+  description: >-
+    The Followed Announcements API from Piknik.Spot — 1 operation(s) for followed announcements.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Followed Announcements
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-followed-announcements-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-following-api
+  name: Piknik.Spot Following API
+  description: The Following API from Piknik.Spot — 1 operation(s) for following.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Following
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-following-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-food-score-api
+  name: Piknik.Spot Food Score API
+  description: The Food Score API from Piknik.Spot — 1 operation(s) for food score.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Food Score
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-food-score-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-for-real-estate-api
+  name: Piknik.Spot For Real Estate API
+  description: The For Real Estate API from Piknik.Spot — 2 operation(s) for for real estate.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - For Real Estate
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-for-real-estate-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-games-api
+  name: Piknik.Spot Games API
+  description: The Games API from Piknik.Spot — 11 operation(s) for games.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Games
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-games-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-geocode-api
+  name: Piknik.Spot Geocode API
+  description: The Geocode API from Piknik.Spot — 2 operation(s) for geocode.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Geocode
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-geocode-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-global-features-api
+  name: Piknik.Spot Global Features API
+  description: The Global Features API from Piknik.Spot — 1 operation(s) for global features.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Global Features
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-global-features-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-invitations-api
+  name: Piknik.Spot Invitations API
+  description: The Invitations API from Piknik.Spot — 2 operation(s) for invitations.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Invitations
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-invitations-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-jobs-api
+  name: Piknik.Spot Jobs API
+  description: The Jobs API from Piknik.Spot — 5 operation(s) for jobs.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-local-food-score-api
+  name: Piknik.Spot Local Food Score API
+  description: The Local Food Score API from Piknik.Spot — 3 operation(s) for local food score.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Local Food Score
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-local-food-score-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-local-food-score-narrative-pdf-api
+  name: Piknik.Spot Local Food Score Narrative Pdf API
+  description: >-
+    The Local Food Score Narrative Pdf API from Piknik.Spot — 1 operation(s) for local food score narrative
+    pdf.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Local Food Score Narrative Pdf
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-local-food-score-narrative-pdf-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-local-food-score-pdf-api
+  name: Piknik.Spot Local Food Score Pdf API
+  description: The Local Food Score Pdf API from Piknik.Spot — 1 operation(s) for local food score pdf.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Local Food Score Pdf
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-local-food-score-pdf-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-marketplace-api
+  name: Piknik.Spot Marketplace API
+  description: The Marketplace API from Piknik.Spot — 15 operation(s) for marketplace.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Marketplace
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-marketplace-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-mcp-api
+  name: Piknik.Spot MCP API
+  description: The MCP API from Piknik.Spot — 6 operation(s) for mcp.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - MCP
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-mcp-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-me-api
+  name: Piknik.Spot Me API
+  description: The Me API from Piknik.Spot — 1 operation(s) for me.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Me
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-me-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-metadata-api
+  name: Piknik.Spot Metadata API
+  description: The Metadata API from Piknik.Spot — 1 operation(s) for metadata.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-metadata-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-my-businesses-api
+  name: Piknik.Spot My Businesses API
+  description: The My Businesses API from Piknik.Spot — 1 operation(s) for my businesses.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - My Businesses
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-my-businesses-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-notifications-api
+  name: Piknik.Spot Notifications API
+  description: The Notifications API from Piknik.Spot — 8 operation(s) for notifications.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-oauth-api
+  name: Piknik.Spot OAuth API
+  description: The OAuth API from Piknik.Spot — 9 operation(s) for oauth.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - OAuth
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-oauth-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-offerings-api
+  name: Piknik.Spot Offerings API
+  description: The Offerings API from Piknik.Spot — 1 operation(s) for offerings.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Offerings
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-offerings-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-ontario-food-score-heatmap-api
+  name: Piknik.Spot Ontario Food Score Heatmap API
+  description: >-
+    The Ontario Food Score Heatmap API from Piknik.Spot — 1 operation(s) for ontario food score heatmap.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Ontario Food Score Heatmap
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-ontario-food-score-heatmap-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-participants-api
+  name: Piknik.Spot Participants API
+  description: The Participants API from Piknik.Spot — 49 operation(s) for participants.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Participants
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-participants-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-piknik-durham-report-card-pdf-api
+  name: Piknik.Spot Piknik Durham Report Card Pdf API
+  description: >-
+    The Piknik Durham Report Card Pdf API from Piknik.Spot — 1 operation(s) for piknik durham report card
+    pdf.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Piknik Durham Report Card Pdf
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-piknik-durham-report-card-pdf-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-piknik-spot-api-api
+  name: Piknik.Spot Piknik.Spot API
+  description: The Piknik.Spot API API from Piknik.Spot — 1 operation(s) for piknik.spot api.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Piknik.Spot API
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-piknik-spot-api-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-place-api
+  name: Piknik.Spot Place API
+  description: The Place API from Piknik.Spot — 11 operation(s) for place.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Place
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-place-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-place-tours-api
+  name: Piknik.Spot Place Tours API
+  description: The Place Tours API from Piknik.Spot — 4 operation(s) for place tours.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Place Tours
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-place-tours-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-planting-calendar-api
+  name: Piknik.Spot Planting Calendar API
+  description: The Planting Calendar API from Piknik.Spot — 1 operation(s) for planting calendar.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Planting Calendar
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-planting-calendar-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-planting-calendar-ics-api
+  name: Piknik.Spot Planting Calendar.ics API
+  description: >-
+    The Planting Calendar.ics API from Piknik.Spot — 1 operation(s) for planting calendar.ics.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Planting Calendar.ics
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-planting-calendar-ics-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-products-api
+  name: Piknik.Spot Products API
+  description: The Products API from Piknik.Spot — 3 operation(s) for products.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-products-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-profile-api
+  name: Piknik.Spot Profile API
+  description: The Profile API from Piknik.Spot — 7 operation(s) for profile.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Profile
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-profile-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-recipes-api
+  name: Piknik.Spot Recipes API
+  description: The Recipes API from Piknik.Spot — 5 operation(s) for recipes.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Recipes
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-recipes-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-recommendations-api
+  name: Piknik.Spot Recommendations API
+  description: The Recommendations API from Piknik.Spot — 1 operation(s) for recommendations.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Recommendations
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-recommendations-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-regional-score-api
+  name: Piknik.Spot Regional Score API
+  description: The Regional Score API from Piknik.Spot — 2 operation(s) for regional score.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Regional Score
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-regional-score-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-resiliency-api
+  name: Piknik.Spot Resiliency API
+  description: The Resiliency API from Piknik.Spot — 1 operation(s) for resiliency.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Resiliency
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-resiliency-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-scan-api
+  name: Piknik.Spot Scan API
+  description: The Scan API from Piknik.Spot — 2 operation(s) for scan.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Scan
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-scan-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-search-api
+  name: Piknik.Spot Search API
+  description: The Search API from Piknik.Spot — 1 operation(s) for search.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-search-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-seasonal-guide-api
+  name: Piknik.Spot Seasonal Guide API
+  description: The Seasonal Guide API from Piknik.Spot — 1 operation(s) for seasonal guide.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Seasonal Guide
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-seasonal-guide-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-service-locations-api
+  name: Piknik.Spot Service Locations API
+  description: The Service Locations API from Piknik.Spot — 1 operation(s) for service locations.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Service Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-service-locations-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-skills-api
+  name: Piknik.Spot Skills API
+  description: The Skills API from Piknik.Spot — 1 operation(s) for skills.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Skills
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-skills-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-sms-api
+  name: Piknik.Spot Sms API
+  description: The Sms API from Piknik.Spot — 1 operation(s) for sms.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Sms
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-sms-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-spend-challenge-api
+  name: Piknik.Spot Spend Challenge API
+  description: The Spend Challenge API from Piknik.Spot — 8 operation(s) for spend challenge.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Spend Challenge
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-spend-challenge-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-sponsor-api
+  name: Piknik.Spot Sponsor API
+  description: The Sponsor API from Piknik.Spot — 1 operation(s) for sponsor.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Sponsor
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-sponsor-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-sponsorships-api
+  name: Piknik.Spot Sponsorships API
+  description: The Sponsorships API from Piknik.Spot — 1 operation(s) for sponsorships.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Sponsorships
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-sponsorships-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-surveys-api
+  name: Piknik.Spot Surveys API
+  description: The Surveys API from Piknik.Spot — 7 operation(s) for surveys.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Surveys
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-surveys-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-tasks-api
+  name: Piknik.Spot Tasks API
+  description: The Tasks API from Piknik.Spot — 16 operation(s) for tasks.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-telegram-api
+  name: Piknik.Spot Telegram API
+  description: The Telegram API from Piknik.Spot — 2 operation(s) for telegram.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Telegram
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-telegram-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-test-api
+  name: Piknik.Spot Test API
+  description: The Test API from Piknik.Spot — 1 operation(s) for test.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Test
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-test-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-thumbs-api
+  name: Piknik.Spot Thumbs API
+  description: The Thumbs API from Piknik.Spot — 1 operation(s) for thumbs.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Thumbs
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-thumbs-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-upload-api
+  name: Piknik.Spot Upload API
+  description: The Upload API from Piknik.Spot — 4 operation(s) for upload.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Upload
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-upload-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-upload-image-api
+  name: Piknik.Spot Upload Image API
+  description: The Upload Image API from Piknik.Spot — 1 operation(s) for upload image.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Upload Image
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-upload-image-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-user-api
+  name: Piknik.Spot User API
+  description: The User API from Piknik.Spot — 6 operation(s) for user.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-user-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-users-api
+  name: Piknik.Spot Users API
+  description: The Users API from Piknik.Spot — 8 operation(s) for users.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-users-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-validation-api
+  name: Piknik.Spot Validation API
+  description: The Validation API from Piknik.Spot — 1 operation(s) for validation.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Validation
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-validation-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-visit-api
+  name: Piknik.Spot Visit API
+  description: The Visit API from Piknik.Spot — 1 operation(s) for visit.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Visit
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-visit-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-voice-api
+  name: Piknik.Spot Voice API
+  description: The Voice API from Piknik.Spot — 2 operation(s) for voice.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Voice
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-voice-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-webhooks-api
+  name: Piknik.Spot Webhooks API
+  description: The Webhooks API from Piknik.Spot — 5 operation(s) for webhooks.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-widget-api
+  name: Piknik.Spot Widget API
+  description: The Widget API from Piknik.Spot — 3 operation(s) for widget.
+  humanURL: https://piknik.spot/api/docs
+  baseURL: https://piknik.spot/api
+  tags:
+  - Widget
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-widget-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
+- aid: piknik-spot:piknik-spot-open-api-api
+  name: Piknik.Spot Open API
+  description: The Open API API from Piknik.Spot — 2 operation(s) for open api.
+  humanURL: https://piknik.spot/skills/piknik-mcp/SKILL.md
+  baseURL: https://piknik.spot/api/mcp
+  tags:
+  - Open API
+  properties:
+  - type: OpenAPI
+    url: openapi/piknik-spot-open-api-api-openapi.yml
+  - type: Documentation
+    url: https://piknik.spot/api/docs
+  - type: APIReference
+    url: https://piknik.spot/api/docs
+  - type: GettingStarted
+    url: https://piknik.spot/skills/piknik-rest-api/SKILL.md
+  - type: Authentication
+    url: authentication/piknik-spot-authentication.yml
+  - type: OAuthScopes
+    url: scopes/piknik-spot-scopes.yml
+  - type: Conventions
+    url: conventions/piknik-spot-conventions.yml
+  - type: Idempotency
+    url: conventions/piknik-spot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/piknik-spot-problem-types.yml
+  - type: DataModel
+    url: data-model/piknik-spot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/piknik-spot-rate-limits.yml
+  - type: Webhooks
+    url: asyncapi/piknik-spot-webhooks.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -256,3 +2993,10 @@ x-enrichment:
   status: enriched
   artifacts_added: 36
   pass: local-v3
+x-a2a:
+  verified: true
+  probed: '2026-09-26'
+  url: "https://piknik.spot/.well-known/agent-card.json"
+  grade: "conformant"
+  protocol_version: "1.0"
+  control: 404

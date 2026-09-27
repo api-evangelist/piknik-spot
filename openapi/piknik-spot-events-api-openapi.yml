@@ -1,0 +1,1442 @@
+openapi: 3.2.0
+info:
+  title: Piknik Spot Events API
+  version: 1.0.0
+  contact:
+    name: Piknik.Spot API Support
+    url: https://piknik.spot
+    email: info@piknik.spot
+  license:
+    name: Proprietary
+    url: https://piknik.spot/terms
+  description: 'Operations tagged Events across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://piknik.spot/api
+  description: Production Server
+- url: http://localhost:3000/api
+  description: Development Server
+tags:
+- name: Events
+paths:
+  /events/{id}/analytics:
+    get:
+      summary: GET /api/events/[id]/analytics
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: getEventsByIdAnalytics
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/{id}/calendar:
+    get:
+      summary: GET /events/{id}/calendar
+      description: Endpoint for /events/{id}/calendar
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      - name: format
+        in: query
+        schema:
+          type: string
+        description: format parameter
+      operationId: getEventsByIdCalendar
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/{id}/instances:
+    get:
+      summary: GET /events/{id}/instances
+      description: Endpoint for /events/{id}/instances
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of results
+      operationId: getEventsByIdInstances
+      x-operation-id-source: derived
+    post:
+      summary: POST /events/{id}/instances
+      description: Endpoint for /events/{id}/instances
+      tags:
+      - Events
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of results
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postEventsByIdInstances
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/{id}:
+    get:
+      summary: GET /events/{id}
+      description: Endpoint for /events/{id}
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: getEventsById
+      x-operation-id-source: derived
+    put:
+      summary: PUT /events/{id}
+      description: Endpoint for /events/{id}
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: putEventsById
+      x-operation-id-source: derived
+    delete:
+      summary: DELETE /events/{id}
+      description: Endpoint for /events/{id}
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: deleteEventsById
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/{id}/rsvp:
+    post:
+      summary: POST /events/{id}/rsvp
+      description: Endpoint for /events/{id}/rsvp
+      tags:
+      - Events
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postEventsByIdRsvp
+      x-operation-id-source: derived
+    delete:
+      summary: DELETE /events/{id}/rsvp
+      description: Endpoint for /events/{id}/rsvp
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: deleteEventsByIdRsvp
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/analytics:
+    get:
+      summary: GET /events/analytics
+      description: Endpoint for /events/analytics
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: days
+        in: query
+        schema:
+          type: string
+        description: days parameter
+      operationId: getEventsAnalytics
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/digest:
+    post:
+      summary: POST /api/events/digest
+      tags:
+      - Events
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      operationId: postEventsDigest
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/import/fetch:
+    get:
+      summary: GET /events/import/fetch
+      description: Endpoint for /events/import/fetch
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: sourceId
+        in: query
+        schema:
+          type: string
+        description: sourceId parameter
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of results
+      operationId: getEventsImportFetch
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/import:
+    post:
+      summary: POST /events/import
+      description: Endpoint for /events/import
+      tags:
+      - Events
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postEventsImport
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/import/sources:
+    get:
+      summary: GET /events/import/sources
+      description: Endpoint for /events/import/sources
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: activeOnly
+        in: query
+        schema:
+          type: string
+        description: activeOnly parameter
+      operationId: getEventsImportSources
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/map:
+    get:
+      summary: GET /events/map
+      description: Endpoint for /events/map
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: lat
+        in: query
+        schema:
+          type: number
+          format: double
+        description: Latitude coordinate
+      - name: lng
+        in: query
+        schema:
+          type: number
+          format: double
+        description: Longitude coordinate
+      - name: radius
+        in: query
+        schema:
+          type: integer
+        description: Search radius in kilometers
+      operationId: getEventsMap
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/my-rsvps:
+    get:
+      summary: GET /events/my-rsvps
+      description: Endpoint for /events/my-rsvps
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      operationId: getEventsMyRsvps
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events:
+    get:
+      summary: GET /events
+      description: Endpoint for /events
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      operationId: getEvents
+      x-operation-id-source: derived
+    post:
+      summary: Create Event
+      description: Create a new event (market, workshop, tour, etc.). Supports recurring events with iCal recurrence rules.
+      tags:
+      - Events
+      responses: {}
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEventRequest'
+      operationId: postEvents
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/rsvp/{id}/download:
+    get:
+      summary: GET /events/rsvp/{id}/download
+      description: Endpoint for /events/rsvp/{id}/download
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: getEventsRsvpByIdDownload
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/tickets/attendees:
+    get:
+      summary: GET /events/tickets/attendees
+      description: Endpoint for /events/tickets/attendees
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: eventId
+        in: query
+        schema:
+          type: string
+        description: eventId parameter
+      - name: page
+        in: query
+        schema:
+          type: string
+        description: page parameter
+      - name: pageSize
+        in: query
+        schema:
+          type: string
+        description: pageSize parameter
+      - name: filter
+        in: query
+        schema:
+          type: string
+        description: filter parameter
+      - name: search
+        in: query
+        schema:
+          type: string
+        description: Search query string
+      operationId: getEventsTicketsAttendees
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/tickets/audit-csv:
+    get:
+      summary: GET /events/tickets/audit-csv
+      description: Endpoint for /events/tickets/audit-csv
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: eventId
+        in: query
+        schema:
+          type: string
+        description: eventId parameter
+      operationId: getEventsTicketsAuditCsv
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/tickets/bulk-checkin:
+    post:
+      summary: POST /events/tickets/bulk-checkin
+      description: Endpoint for /events/tickets/bulk-checkin
+      tags:
+      - Events
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postEventsTicketsBulkCheckin
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/tickets/bulk-reconcile:
+    post:
+      summary: POST /events/tickets/bulk-reconcile
+      description: Endpoint for /events/tickets/bulk-reconcile
+      tags:
+      - Events
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postEventsTicketsBulkReconcile
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/tickets/checkin:
+    post:
+      summary: POST /events/tickets/checkin
+      description: Endpoint for /events/tickets/checkin
+      tags:
+      - Events
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postEventsTicketsCheckin
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/tickets/guest-list:
+    get:
+      summary: GET /events/tickets/guest-list
+      description: Endpoint for /events/tickets/guest-list
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: eventId
+        in: query
+        schema:
+          type: string
+        description: eventId parameter
+      - name: format
+        in: query
+        schema:
+          type: string
+        description: format parameter
+      operationId: getEventsTicketsGuestList
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/tickets/lookup:
+    post:
+      summary: POST /events/tickets/lookup
+      description: Endpoint for /events/tickets/lookup
+      tags:
+      - Events
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postEventsTicketsLookup
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/tickets/scannable:
+    get:
+      summary: GET /events/tickets/scannable
+      description: Endpoint for /events/tickets/scannable
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: participantId
+        in: query
+        schema:
+          type: string
+        description: Participant identifier
+      - name: eventId
+        in: query
+        schema:
+          type: string
+        description: eventId parameter
+      operationId: getEventsTicketsScannable
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/tickets/stats:
+    get:
+      summary: GET /events/tickets/stats
+      description: Endpoint for /events/tickets/stats
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: eventId
+        in: query
+        schema:
+          type: string
+        description: eventId parameter
+      operationId: getEventsTicketsStats
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /events/tickets/verify:
+    post:
+      summary: POST /events/tickets/verify
+      description: Endpoint for /events/tickets/verify
+      tags:
+      - Events
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postEventsTicketsVerify
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /participants/{id}/events:
+    get:
+      summary: GET /participants/{id}/events
+      description: Endpoint for /participants/{id}/events
+      tags:
+      - Events
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      - name: status
+        in: query
+        schema:
+          type: string
+        description: status parameter
+      - name: includePrivate
+        in: query
+        schema:
+          type: string
+        description: includePrivate parameter
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of results
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        description: Pagination offset
+      operationId: getParticipantsByIdEvents
+      x-operation-id-source: derived
+    post:
+      summary: POST /participants/{id}/events
+      description: Endpoint for /participants/{id}/events
+      tags:
+      - Events
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      - name: status
+        in: query
+        schema:
+          type: string
+        description: status parameter
+      - name: includePrivate
+        in: query
+        schema:
+          type: string
+        description: includePrivate parameter
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of results
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        description: Pagination offset
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postParticipantsByIdEvents
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+components:
+  schemas:
+    CreateEventRequest:
+      type: object
+      required:
+      - participant_id
+      - title
+      - description
+      - start_date
+      - end_date
+      - address
+      properties:
+        participant_id:
+          type: string
+          description: ID of the business creating the event
+        title:
+          type: string
+        description:
+          type: string
+        start_date:
+          type: string
+          format: date-time
+          description: ISO 8601 format
+        end_date:
+          type: string
+          format: date-time
+          description: ISO 8601 format
+        address:
+          type: string
+        location_name:
+          type:
+          - string
+          - 'null'
+        event_type:
+          type: string
+          enum:
+          - market
+          - workshop
+          - tour
+          - festival
+          - meeting
+          - other
+        is_recurring:
+          type: boolean
+          default: false
+        recurrence_rule:
+          type:
+          - string
+          - 'null'
+          description: iCal recurrence rule (e.g., FREQ=WEEKLY;BYDAY=SA)
+        registration_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        error_description:
+          type: string
+          description: Detailed error description
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: next-auth.session-token
+      description: Session-based authentication for web browsers
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for external applications and AI agents
+      flows:
+        authorizationCode:
+          authorizationUrl: https://piknik.spot/api/oauth/authorize
+          tokenUrl: https://piknik.spot/api/oauth/token
+          refreshUrl: https://piknik.spot/api/oauth/token
+          scopes:
+            marketplace:write: Create and manage marketplace listings
+            events:write: Create and manage community events
+            read:profile: Read user profile information
+            write:profile: Update user profile information
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
+x-refined-from:
+- piknik-spot-openapi.json
+- piknik-spot-openapi.yml

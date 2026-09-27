@@ -1,0 +1,1983 @@
+openapi: 3.2.0
+info:
+  title: Piknik Spot A2A Agents API
+  version: 1.0.0
+  contact:
+    name: Piknik.Spot API Support
+    url: https://piknik.spot
+    email: info@piknik.spot
+  license:
+    name: Proprietary
+    url: https://piknik.spot/terms
+  description: 'Operations tagged A2A Agents across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://piknik.spot/api
+  description: Production Server
+- url: http://localhost:3000/api
+  description: Development Server
+tags:
+- name: A2A Agents
+paths:
+  /agents/admin/ban_agent:
+    post:
+      summary: POST /agents/admin/ban_agent
+      description: Endpoint for /agents/admin/ban_agent
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsAdminBanAgent
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/association/{id}/card:
+    get:
+      summary: GET /agents/association/{id}/card
+      description: Endpoint for /agents/association/{id}/card
+      tags:
+      - A2A Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: getAgentsAssociationByIdCard
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/association/{id}/get_benefits:
+    post:
+      summary: POST /agents/association/{id}/get_benefits
+      description: Endpoint for /agents/association/{id}/get_benefits
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: postAgentsAssociationByIdGetBenefits
+      x-operation-id-source: derived
+    get:
+      summary: GET /agents/association/{id}/get_benefits
+      description: Endpoint for /agents/association/{id}/get_benefits
+      tags:
+      - A2A Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: getAgentsAssociationByIdGetBenefits
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/association/{id}/get_info:
+    post:
+      summary: POST /agents/association/{id}/get_info
+      description: Endpoint for /agents/association/{id}/get_info
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: postAgentsAssociationByIdGetInfo
+      x-operation-id-source: derived
+    get:
+      summary: GET /agents/association/{id}/get_info
+      description: Endpoint for /agents/association/{id}/get_info
+      tags:
+      - A2A Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: getAgentsAssociationByIdGetInfo
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/association/{id}/list_members:
+    post:
+      summary: POST /agents/association/{id}/list_members
+      description: Endpoint for /agents/association/{id}/list_members
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: postAgentsAssociationByIdListMembers
+      x-operation-id-source: derived
+    get:
+      summary: GET /agents/association/{id}/list_members
+      description: Endpoint for /agents/association/{id}/list_members
+      tags:
+      - A2A Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: getAgentsAssociationByIdListMembers
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/association/{id}/membership_info:
+    post:
+      summary: POST /agents/association/{id}/membership_info
+      description: Endpoint for /agents/association/{id}/membership_info
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: postAgentsAssociationByIdMembershipInfo
+      x-operation-id-source: derived
+    get:
+      summary: GET /agents/association/{id}/membership_info
+      description: Endpoint for /agents/association/{id}/membership_info
+      tags:
+      - A2A Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: getAgentsAssociationByIdMembershipInfo
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/add_offering:
+    post:
+      summary: POST /agents/participant/{id}/add_offering
+      description: Endpoint for /agents/participant/{id}/add_offering
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsParticipantByIdAddOffering
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/card:
+    get:
+      summary: GET /agents/participant/{id}/card
+      description: Endpoint for /agents/participant/{id}/card
+      tags:
+      - A2A Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: getAgentsParticipantByIdCard
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/challenge_status:
+    post:
+      summary: POST /agents/participant/{id}/challenge_status
+      description: Endpoint for /agents/participant/{id}/challenge_status
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: postAgentsParticipantByIdChallengeStatus
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/get_analytics:
+    post:
+      summary: POST /agents/participant/{id}/get_analytics
+      description: Endpoint for /agents/participant/{id}/get_analytics
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: postAgentsParticipantByIdGetAnalytics
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/get_associations:
+    post:
+      summary: POST /agents/participant/{id}/get_associations
+      description: Endpoint for /agents/participant/{id}/get_associations
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: postAgentsParticipantByIdGetAssociations
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/get_capabilities:
+    post:
+      summary: POST /agents/participant/{id}/get_capabilities
+      description: Endpoint for /agents/participant/{id}/get_capabilities
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: postAgentsParticipantByIdGetCapabilities
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/get_events:
+    post:
+      summary: POST /agents/participant/{id}/get_events
+      description: Endpoint for /agents/participant/{id}/get_events
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsParticipantByIdGetEvents
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/get_hours:
+    post:
+      summary: POST /agents/participant/{id}/get_hours
+      description: Endpoint for /agents/participant/{id}/get_hours
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsParticipantByIdGetHours
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/get_messages:
+    post:
+      summary: POST /agents/participant/{id}/get_messages
+      description: Endpoint for /agents/participant/{id}/get_messages
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsParticipantByIdGetMessages
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/get_profile:
+    post:
+      summary: POST /agents/participant/{id}/get_profile
+      description: Endpoint for /agents/participant/{id}/get_profile
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: postAgentsParticipantByIdGetProfile
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/get_resellers:
+    post:
+      summary: POST /agents/participant/{id}/get_resellers
+      description: Endpoint for /agents/participant/{id}/get_resellers
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: postAgentsParticipantByIdGetResellers
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/get_reviews:
+    post:
+      summary: POST /agents/participant/{id}/get_reviews
+      description: Endpoint for /agents/participant/{id}/get_reviews
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsParticipantByIdGetReviews
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/get_suppliers:
+    post:
+      summary: POST /agents/participant/{id}/get_suppliers
+      description: Endpoint for /agents/participant/{id}/get_suppliers
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: postAgentsParticipantByIdGetSuppliers
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/list_offerings:
+    post:
+      summary: POST /agents/participant/{id}/list_offerings
+      description: Endpoint for /agents/participant/{id}/list_offerings
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsParticipantByIdListOfferings
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/send_inquiry:
+    post:
+      summary: POST /agents/participant/{id}/send_inquiry
+      description: Endpoint for /agents/participant/{id}/send_inquiry
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsParticipantByIdSendInquiry
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/update_hours:
+    post:
+      summary: POST /agents/participant/{id}/update_hours
+      description: Endpoint for /agents/participant/{id}/update_hours
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsParticipantByIdUpdateHours
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/update_offering:
+    post:
+      summary: POST /agents/participant/{id}/update_offering
+      description: Endpoint for /agents/participant/{id}/update_offering
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsParticipantByIdUpdateOffering
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/participant/{id}/update_place:
+    post:
+      summary: POST /agents/participant/{id}/update_place
+      description: Endpoint for /agents/participant/{id}/update_place
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsParticipantByIdUpdatePlace
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/platform/approve_task:
+    post:
+      summary: POST /agents/platform/approve_task
+      description: Endpoint for /agents/platform/approve_task
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsPlatformApproveTask
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/platform/card:
+    get:
+      summary: GET /agents/platform/card
+      description: Endpoint for /agents/platform/card
+      tags:
+      - A2A Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      operationId: getAgentsPlatformCard
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/platform/claim_task:
+    post:
+      summary: POST /agents/platform/claim_task
+      description: Endpoint for /agents/platform/claim_task
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsPlatformClaimTask
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/platform/create_place:
+    post:
+      summary: POST /agents/platform/create_place
+      description: Endpoint for /agents/platform/create_place
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsPlatformCreatePlace
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/platform/discover_businesses:
+    post:
+      summary: POST /agents/platform/discover_businesses
+      description: Endpoint for /agents/platform/discover_businesses
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsPlatformDiscoverBusinesses
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/platform/get_platform_info:
+    post:
+      summary: POST /agents/platform/get_platform_info
+      description: Endpoint for /agents/platform/get_platform_info
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsPlatformGetPlatformInfo
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/platform/get_task:
+    post:
+      summary: POST /agents/platform/get_task
+      description: Endpoint for /agents/platform/get_task
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsPlatformGetTask
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/platform/list_tasks:
+    post:
+      summary: POST /agents/platform/list_tasks
+      description: Endpoint for /agents/platform/list_tasks
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsPlatformListTasks
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/platform/rate_limit_status:
+    get:
+      summary: GET /agents/platform/rate_limit_status
+      description: Endpoint for /agents/platform/rate_limit_status
+      tags:
+      - A2A Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      operationId: getAgentsPlatformRateLimitStatus
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/platform/search_products:
+    post:
+      summary: POST /agents/platform/search_products
+      description: Endpoint for /agents/platform/search_products
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsPlatformSearchProducts
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/platform/submit_task_response:
+    post:
+      summary: POST /agents/platform/submit_task_response
+      description: Endpoint for /agents/platform/submit_task_response
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsPlatformSubmitTaskResponse
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/platform/suggest_connection:
+    post:
+      summary: POST /agents/platform/suggest_connection
+      description: Endpoint for /agents/platform/suggest_connection
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsPlatformSuggestConnection
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/platform/suggest_place:
+    post:
+      summary: POST /agents/platform/suggest_place
+      description: Endpoint for /agents/platform/suggest_place
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsPlatformSuggestPlace
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/platform/suggest_product:
+    post:
+      summary: POST /agents/platform/suggest_product
+      description: Endpoint for /agents/platform/suggest_product
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsPlatformSuggestProduct
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/public/place-summary:
+    get:
+      summary: Thin public place summaries for AI agents
+      description: Thin public place summaries for AI agents.
+      tags:
+      - A2A Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      operationId: getAgentsPublicPlaceSummary
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/registry:
+    get:
+      summary: GET /agents/registry
+      description: Endpoint for /agents/registry
+      tags:
+      - A2A Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: lat
+        in: query
+        schema:
+          type: number
+          format: double
+        description: Latitude coordinate
+      - name: lng
+        in: query
+        schema:
+          type: number
+          format: double
+        description: Longitude coordinate
+      - name: radius
+        in: query
+        schema:
+          type: integer
+        description: Search radius in kilometers
+      operationId: getAgentsRegistry
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/task-processor/process:
+    post:
+      summary: POST /agents/task-processor/process
+      description: Endpoint for /agents/task-processor/process
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsTaskProcessorProcess
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/tasks/create:
+    post:
+      summary: POST /agents/tasks/create
+      description: Endpoint for /agents/tasks/create
+      tags:
+      - A2A Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postAgentsTasksCreate
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /agents/tasks/status/{taskId}:
+    get:
+      summary: GET /agents/tasks/status/{taskId}
+      description: Endpoint for /agents/tasks/status/{taskId}
+      tags:
+      - A2A Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: taskId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: taskId identifier
+      operationId: getAgentsTasksStatusByTaskId
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        error_description:
+          type: string
+          description: Detailed error description
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: next-auth.session-token
+      description: Session-based authentication for web browsers
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for external applications and AI agents
+      flows:
+        authorizationCode:
+          authorizationUrl: https://piknik.spot/api/oauth/authorize
+          tokenUrl: https://piknik.spot/api/oauth/token
+          refreshUrl: https://piknik.spot/api/oauth/token
+          scopes:
+            marketplace:write: Create and manage marketplace listings
+            events:write: Create and manage community events
+            read:profile: Read user profile information
+            write:profile: Update user profile information
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
+x-refined-from:
+- piknik-spot-openapi.json
+- piknik-spot-openapi.yml

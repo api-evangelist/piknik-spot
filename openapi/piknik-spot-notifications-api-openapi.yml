@@ -1,0 +1,520 @@
+openapi: 3.2.0
+info:
+  title: Piknik Spot Notifications API
+  version: 1.0.0
+  contact:
+    name: Piknik.Spot API Support
+    url: https://piknik.spot
+    email: info@piknik.spot
+  license:
+    name: Proprietary
+    url: https://piknik.spot/terms
+  description: 'Operations tagged Notifications across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://piknik.spot/api
+  description: Production Server
+- url: http://localhost:3000/api
+  description: Development Server
+tags:
+- name: Notifications
+paths:
+  /notifications/announcement-count:
+    get:
+      summary: GET /notifications/announcement-count
+      description: Endpoint for /notifications/announcement-count
+      tags:
+      - Notifications
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      operationId: getNotificationsAnnouncementCount
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /notifications/debug:
+    get:
+      summary: GET /notifications/debug
+      description: Endpoint for /notifications/debug
+      tags:
+      - Notifications
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      operationId: getNotificationsDebug
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /notifications/preferences:
+    get:
+      summary: GET /notifications/preferences
+      description: Endpoint for /notifications/preferences
+      tags:
+      - Notifications
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      operationId: getNotificationsPreferences
+      x-operation-id-source: derived
+    put:
+      summary: PUT /notifications/preferences
+      description: Endpoint for /notifications/preferences
+      tags:
+      - Notifications
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: putNotificationsPreferences
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /notifications:
+    get:
+      summary: GET /notifications
+      description: Endpoint for /notifications
+      tags:
+      - Notifications
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of results
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        description: Pagination offset
+      operationId: getNotifications
+      x-operation-id-source: derived
+    put:
+      summary: PUT /notifications
+      description: Endpoint for /notifications
+      tags:
+      - Notifications
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of results
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        description: Pagination offset
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: putNotifications
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /notifications/subscribe:
+    post:
+      summary: POST /notifications/subscribe
+      description: Endpoint for /notifications/subscribe
+      tags:
+      - Notifications
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postNotificationsSubscribe
+      x-operation-id-source: derived
+    delete:
+      summary: DELETE /notifications/subscribe
+      description: Endpoint for /notifications/subscribe
+      tags:
+      - Notifications
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      operationId: deleteNotificationsSubscribe
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /notifications/test:
+    post:
+      summary: POST /notifications/test
+      description: Endpoint for /notifications/test
+      tags:
+      - Notifications
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      operationId: postNotificationsTest
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /notifications/vapid-key:
+    get:
+      summary: GET /notifications/vapid-key
+      description: Endpoint for /notifications/vapid-key
+      tags:
+      - Notifications
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      operationId: getNotificationsVapidKey
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /v2/notifications/announcements:
+    get:
+      summary: GET /v2/notifications/announcements
+      description: Endpoint for /v2/notifications/announcements
+      tags:
+      - Notifications
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: string
+        description: page parameter
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of results
+      operationId: getV2NotificationsAnnouncements
+      x-operation-id-source: derived
+    put:
+      summary: PUT /v2/notifications/announcements
+      description: Endpoint for /v2/notifications/announcements
+      tags:
+      - Notifications
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: string
+        description: page parameter
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of results
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: putV2NotificationsAnnouncements
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        error_description:
+          type: string
+          description: Detailed error description
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: next-auth.session-token
+      description: Session-based authentication for web browsers
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for external applications and AI agents
+      flows:
+        authorizationCode:
+          authorizationUrl: https://piknik.spot/api/oauth/authorize
+          tokenUrl: https://piknik.spot/api/oauth/token
+          refreshUrl: https://piknik.spot/api/oauth/token
+          scopes:
+            marketplace:write: Create and manage marketplace listings
+            events:write: Create and manage community events
+            read:profile: Read user profile information
+            write:profile: Update user profile information
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
+x-refined-from:
+- piknik-spot-openapi.json
+- piknik-spot-openapi.yml

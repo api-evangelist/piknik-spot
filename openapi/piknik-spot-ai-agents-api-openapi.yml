@@ -1,0 +1,332 @@
+openapi: 3.2.0
+info:
+  title: Piknik Spot AI Agents API
+  version: 1.0.0
+  contact:
+    name: Piknik.Spot API Support
+    url: https://piknik.spot
+    email: info@piknik.spot
+  license:
+    name: Proprietary
+    url: https://piknik.spot/terms
+  description: 'Operations tagged AI Agents across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://piknik.spot/api
+  description: Production Server
+- url: http://localhost:3000/api
+  description: Development Server
+tags:
+- name: AI Agents
+paths:
+  /mcp/auth/start:
+    get:
+      summary: Simplified MCP OAuth authorization endpoint
+      tags:
+      - AI Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      operationId: getMcpAuthStart
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /mcp:
+    post:
+      summary: POST /mcp
+      description: Endpoint for /mcp
+      tags:
+      - AI Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postMcp
+      x-operation-id-source: derived
+    get:
+      summary: GET /mcp
+      description: Endpoint for /mcp
+      tags:
+      - AI Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      operationId: getMcp
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /mcp/sse:
+    get:
+      summary: GET /mcp/sse
+      description: Endpoint for /mcp/sse
+      tags:
+      - AI Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      operationId: getMcpSse
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /mcp/token/generate:
+    post:
+      summary: Generate a Personal Access Token for MCP / API clients (e.g. Cursor mcp.json)
+      description: Generate a Personal Access Token for MCP / API clients (e.g. Cursor mcp.json).
+      tags:
+      - AI Agents
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postMcpTokenGenerate
+      x-operation-id-source: derived
+    get:
+      summary: Generate a Personal Access Token for MCP / API clients (e.g. Cursor mcp.json)
+      description: Generate a Personal Access Token for MCP / API clients (e.g. Cursor mcp.json).
+      tags:
+      - AI Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      operationId: getMcpTokenGenerate
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /mcp/tokens/{id}:
+    delete:
+      summary: DELETE /mcp/tokens/{id}
+      description: Endpoint for /mcp/tokens/{id}
+      tags:
+      - AI Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: deleteMcpTokensById
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /mcp/tokens:
+    get:
+      summary: GET /mcp/tokens
+      description: Endpoint for /mcp/tokens
+      tags:
+      - AI Agents
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      operationId: getMcpTokens
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        error_description:
+          type: string
+          description: Detailed error description
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: next-auth.session-token
+      description: Session-based authentication for web browsers
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for external applications and AI agents
+      flows:
+        authorizationCode:
+          authorizationUrl: https://piknik.spot/api/oauth/authorize
+          tokenUrl: https://piknik.spot/api/oauth/token
+          refreshUrl: https://piknik.spot/api/oauth/token
+          scopes:
+            marketplace:write: Create and manage marketplace listings
+            events:write: Create and manage community events
+            read:profile: Read user profile information
+            write:profile: Update user profile information
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
+x-refined-from:
+- piknik-spot-openapi.json
+- piknik-spot-openapi.yml

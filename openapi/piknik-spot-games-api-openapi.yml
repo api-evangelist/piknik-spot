@@ -1,0 +1,579 @@
+openapi: 3.2.0
+info:
+  title: Piknik Spot Games API
+  version: 1.0.0
+  contact:
+    name: Piknik.Spot API Support
+    url: https://piknik.spot
+    email: info@piknik.spot
+  license:
+    name: Proprietary
+    url: https://piknik.spot/terms
+  description: 'Operations tagged Games across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://piknik.spot/api
+  description: Production Server
+- url: http://localhost:3000/api
+  description: Development Server
+tags:
+- name: Games
+paths:
+  /games/{gameId}/leaderboard:
+    get:
+      summary: GET /games/{gameId}/leaderboard
+      description: Endpoint for /games/{gameId}/leaderboard
+      tags:
+      - Games
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: gameId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: gameId identifier
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of results
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        description: Pagination offset
+      - name: userId
+        in: query
+        schema:
+          type: string
+        description: userId parameter
+      operationId: getGamesByGameIdLeaderboard
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /games/{gameId}/participating-businesses:
+    get:
+      summary: GET /games/{gameId}/participating-businesses
+      description: Endpoint for /games/{gameId}/participating-businesses
+      tags:
+      - Games
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: gameId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: gameId identifier
+      operationId: getGamesByGameIdParticipatingBusinesses
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /games/{gameId}:
+    get:
+      summary: GET /games/{gameId}
+      description: Endpoint for /games/{gameId}
+      tags:
+      - Games
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: gameId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: gameId identifier
+      operationId: getGamesByGameId
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /games/{gameId}/user-stats:
+    get:
+      summary: GET /games/{gameId}/user-stats
+      description: Endpoint for /games/{gameId}/user-stats
+      tags:
+      - Games
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: gameId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: gameId identifier
+      operationId: getGamesByGameIdUserStats
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /games/{gameId}/user-visits:
+    get:
+      summary: GET /games/{gameId}/user-visits
+      description: Endpoint for /games/{gameId}/user-visits
+      tags:
+      - Games
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: gameId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: gameId identifier
+      operationId: getGamesByGameIdUserVisits
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /games/active:
+    get:
+      summary: GET /games/active
+      description: Endpoint for /games/active
+      tags:
+      - Games
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: centerLat
+        in: query
+        schema:
+          type: number
+          format: double
+        description: centerLat parameter
+      - name: centerLng
+        in: query
+        schema:
+          type: number
+          format: double
+        description: centerLng parameter
+      operationId: getGamesActive
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /games/has-active:
+    get:
+      summary: GET /games/has-active
+      description: Endpoint for /games/has-active
+      tags:
+      - Games
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      operationId: getGamesHasActive
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /games/match3/scores:
+    post:
+      summary: POST - Submit a new Match3 score
+      tags:
+      - Games
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: mode
+        in: query
+        schema:
+          type: string
+        description: mode parameter
+      - name: level
+        in: query
+        schema:
+          type: string
+        description: level parameter
+      - name: participantId
+        in: query
+        schema:
+          type: string
+        description: Participant identifier
+      - name: anonymousUserId
+        in: query
+        schema:
+          type: string
+        description: anonymousUserId parameter
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of results
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postGamesMatch3Scores
+      x-operation-id-source: derived
+    get:
+      summary: POST - Submit a new Match3 score
+      tags:
+      - Games
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: mode
+        in: query
+        schema:
+          type: string
+        description: mode parameter
+      - name: level
+        in: query
+        schema:
+          type: string
+        description: level parameter
+      - name: participantId
+        in: query
+        schema:
+          type: string
+        description: Participant identifier
+      - name: anonymousUserId
+        in: query
+        schema:
+          type: string
+        description: anonymousUserId parameter
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of results
+      operationId: getGamesMatch3Scores
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /games/my-challenges:
+    get:
+      summary: GET /games/my-challenges
+      description: Endpoint for /games/my-challenges
+      tags:
+      - Games
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      operationId: getGamesMyChallenges
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /games/random-local-spot:
+    get:
+      summary: GET /games/random-local-spot
+      description: Endpoint for /games/random-local-spot
+      tags:
+      - Games
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      operationId: getGamesRandomLocalSpot
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /games:
+    get:
+      summary: GET /games
+      description: Endpoint for /games
+      tags:
+      - Games
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security: []
+      parameters:
+      - name: includeStats
+        in: query
+        schema:
+          type: string
+        description: includeStats parameter
+      operationId: getGames
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        error_description:
+          type: string
+          description: Detailed error description
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: next-auth.session-token
+      description: Session-based authentication for web browsers
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for external applications and AI agents
+      flows:
+        authorizationCode:
+          authorizationUrl: https://piknik.spot/api/oauth/authorize
+          tokenUrl: https://piknik.spot/api/oauth/token
+          refreshUrl: https://piknik.spot/api/oauth/token
+          scopes:
+            marketplace:write: Create and manage marketplace listings
+            events:write: Create and manage community events
+            read:profile: Read user profile information
+            write:profile: Update user profile information
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
+x-refined-from:
+- piknik-spot-openapi.json
+- piknik-spot-openapi.yml

@@ -1,0 +1,582 @@
+openapi: 3.2.0
+info:
+  title: Piknik Spot Recipes API
+  version: 1.0.0
+  contact:
+    name: Piknik.Spot API Support
+    url: https://piknik.spot
+    email: info@piknik.spot
+  license:
+    name: Proprietary
+    url: https://piknik.spot/terms
+  description: 'Operations tagged Recipes across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://piknik.spot/api
+  description: Production Server
+- url: http://localhost:3000/api
+  description: Development Server
+tags:
+- name: Recipes
+paths:
+  /recipes/{id}/comments:
+    get:
+      summary: GET /recipes/{id}/comments
+      description: Endpoint for /recipes/{id}/comments
+      tags:
+      - Recipes
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      - name: commentId
+        in: query
+        schema:
+          type: string
+        description: commentId parameter
+      operationId: getRecipesByIdComments
+      x-operation-id-source: derived
+    post:
+      summary: POST /recipes/{id}/comments
+      description: Endpoint for /recipes/{id}/comments
+      tags:
+      - Recipes
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      - name: commentId
+        in: query
+        schema:
+          type: string
+        description: commentId parameter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postRecipesByIdComments
+      x-operation-id-source: derived
+    delete:
+      summary: DELETE /recipes/{id}/comments
+      description: Endpoint for /recipes/{id}/comments
+      tags:
+      - Recipes
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      - name: commentId
+        in: query
+        schema:
+          type: string
+        description: commentId parameter
+      operationId: deleteRecipesByIdComments
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /recipes/{id}/flag:
+    post:
+      summary: POST /recipes/{id}/flag
+      description: Endpoint for /recipes/{id}/flag
+      tags:
+      - Recipes
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postRecipesByIdFlag
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /recipes/{id}/local-sourcing:
+    get:
+      summary: GET /recipes/{id}/local-sourcing
+      description: Endpoint for /recipes/{id}/local-sourcing
+      tags:
+      - Recipes
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      - name: lat
+        in: query
+        schema:
+          type: number
+          format: double
+        description: Latitude coordinate
+      - name: lng
+        in: query
+        schema:
+          type: number
+          format: double
+        description: Longitude coordinate
+      - name: radiusKm
+        in: query
+        schema:
+          type: integer
+        description: radiusKm parameter
+      operationId: getRecipesByIdLocalSourcing
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /recipes/{id}:
+    get:
+      summary: GET /recipes/{id}
+      description: Endpoint for /recipes/{id}
+      tags:
+      - Recipes
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: getRecipesById
+      x-operation-id-source: derived
+    patch:
+      summary: PATCH /recipes/{id}
+      description: Endpoint for /recipes/{id}
+      tags:
+      - Recipes
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: patchRecipesById
+      x-operation-id-source: derived
+    delete:
+      summary: DELETE /recipes/{id}
+      description: Endpoint for /recipes/{id}
+      tags:
+      - Recipes
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: id identifier
+      operationId: deleteRecipesById
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+  /recipes:
+    get:
+      summary: GET /recipes
+      description: Endpoint for /recipes
+      tags:
+      - Recipes
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: cuisine
+        in: query
+        schema:
+          type: boolean
+        description: cuisine parameter
+      - name: region
+        in: query
+        schema:
+          type: string
+        description: region parameter
+      - name: associationId
+        in: query
+        schema:
+          type: string
+        description: associationId parameter
+      - name: diet
+        in: query
+        schema:
+          type: string
+        description: diet parameter
+      - name: meal
+        in: query
+        schema:
+          type: string
+        description: meal parameter
+      - name: glutenFriendly
+        in: query
+        schema:
+          type: string
+        description: glutenFriendly parameter
+      - name: status
+        in: query
+        schema:
+          type: string
+        description: status parameter
+      - name: mine
+        in: query
+        schema:
+          type: boolean
+        description: Filter to only user's own items
+      - name: q
+        in: query
+        schema:
+          type: string
+        description: Search query string
+      operationId: getRecipes
+      x-operation-id-source: derived
+    post:
+      summary: POST /recipes
+      description: Endpoint for /recipes
+      tags:
+      - Recipes
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearerAuth: []
+      - cookieAuth: []
+      parameters:
+      - name: cuisine
+        in: query
+        schema:
+          type: boolean
+        description: cuisine parameter
+      - name: region
+        in: query
+        schema:
+          type: string
+        description: region parameter
+      - name: associationId
+        in: query
+        schema:
+          type: string
+        description: associationId parameter
+      - name: diet
+        in: query
+        schema:
+          type: string
+        description: diet parameter
+      - name: meal
+        in: query
+        schema:
+          type: string
+        description: meal parameter
+      - name: glutenFriendly
+        in: query
+        schema:
+          type: string
+        description: glutenFriendly parameter
+      - name: status
+        in: query
+        schema:
+          type: string
+        description: status parameter
+      - name: mine
+        in: query
+        schema:
+          type: boolean
+        description: Filter to only user's own items
+      - name: q
+        in: query
+        schema:
+          type: string
+        description: Search query string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: postRecipes
+      x-operation-id-source: derived
+    servers:
+    - url: https://piknik.spot/api
+      description: Production Server
+    - url: http://localhost:3000/api
+      description: Development Server
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        error_description:
+          type: string
+          description: Detailed error description
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: next-auth.session-token
+      description: Session-based authentication for web browsers
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for external applications and AI agents
+      flows:
+        authorizationCode:
+          authorizationUrl: https://piknik.spot/api/oauth/authorize
+          tokenUrl: https://piknik.spot/api/oauth/token
+          refreshUrl: https://piknik.spot/api/oauth/token
+          scopes:
+            marketplace:write: Create and manage marketplace listings
+            events:write: Create and manage community events
+            read:profile: Read user profile information
+            write:profile: Update user profile information
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
+x-refined-from:
+- piknik-spot-openapi.json
+- piknik-spot-openapi.yml

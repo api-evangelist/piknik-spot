@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot Spend Challenge API
+  title: Piknik.Spot Spend Challenge API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged Spend Challenge across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -58,11 +58,6 @@ paths:
         description: slug parameter
       operationId: getSpendChallengeAssociationsByIdCampaign
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /spend-challenge/associations/{id}:
     get:
       summary: GET /spend-challenge/associations/{id}
@@ -98,11 +93,6 @@ paths:
         description: id identifier
       operationId: getSpendChallengeAssociationsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /spend-challenge/associations/{id}/share-card:
     get:
       summary: Fetch an image (remote URL or local file path) and return a base64 data URI
@@ -137,11 +127,6 @@ paths:
         description: id identifier
       operationId: getSpendChallengeAssociationsByIdShareCard
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /spend-challenge/log:
     post:
       summary: POST /spend-challenge/log
@@ -176,11 +161,6 @@ paths:
               type: object
       operationId: postSpendChallengeLog
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /spend-challenge/my-logs:
     get:
       summary: GET /spend-challenge/my-logs
@@ -215,11 +195,6 @@ paths:
         description: anonymousId parameter
       operationId: getSpendChallengeMyLogs
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /spend-challenge/nearby:
     get:
       summary: GET /spend-challenge/nearby
@@ -266,11 +241,6 @@ paths:
         description: radiusKm parameter
       operationId: getSpendChallengeNearby
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /spend-challenge/participant/{id}/impact:
     get:
       summary: GET /spend-challenge/participant/{id}/impact
@@ -306,11 +276,6 @@ paths:
         description: id identifier
       operationId: getSpendChallengeParticipantByIdImpact
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /spend-challenge/rankings:
     get:
       summary: GET /spend-challenge/rankings
@@ -339,11 +304,6 @@ paths:
       security: []
       operationId: getSpendChallengeRankings
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Error:
@@ -379,6 +339,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

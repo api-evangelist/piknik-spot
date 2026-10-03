@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot Admin API
+  title: Piknik.Spot Admin API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged Admin across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -83,11 +83,6 @@ paths:
               type: object
       operationId: putAdminAgentSettings
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/announcements/cleanup:
     post:
       summary: POST /admin/announcements/cleanup
@@ -153,11 +148,6 @@ paths:
       - cookieAuth: []
       operationId: getAdminAnnouncementsCleanup
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/associations/{id}/memberships/bulk:
     post:
       summary: POST /admin/associations/{id}/memberships/bulk
@@ -201,11 +191,6 @@ paths:
               type: object
       operationId: postAdminAssociationsByIdMembershipsBulk
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/associations/{id}/memberships:
     get:
       summary: GET /admin/associations/{id}/memberships
@@ -321,11 +306,6 @@ paths:
               type: object
       operationId: patchAdminAssociationsByIdMemberships
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/associations/{id}:
     get:
       summary: GET /admin/associations/{id}
@@ -441,11 +421,6 @@ paths:
         description: id identifier
       operationId: deleteAdminAssociationsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/associations/{id}/surveys:
     get:
       summary: GET /admin/associations/{id}/surveys
@@ -525,11 +500,6 @@ paths:
               type: object
       operationId: postAdminAssociationsByIdSurveys
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/associations:
     get:
       summary: GET /admin/associations
@@ -637,11 +607,6 @@ paths:
               type: object
       operationId: postAdminAssociations
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/associations/verification-queue:
     get:
       summary: GET /admin/associations/verification-queue
@@ -683,11 +648,6 @@ paths:
         description: Maximum number of results
       operationId: getAdminAssociationsVerificationQueue
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/associations/verify/{membershipId}:
     put:
       summary: PUT /admin/associations/verify/{membershipId}
@@ -731,11 +691,6 @@ paths:
               type: object
       operationId: putAdminAssociationsVerifyByMembershipId
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/campaign-batch:
     post:
       summary: POST /api/admin/campaign-batch
@@ -771,11 +726,6 @@ paths:
               type: object
       operationId: postAdminCampaignBatch
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/campaign-status:
     get:
       summary: GET /admin/campaign-status
@@ -806,11 +756,6 @@ paths:
       - cookieAuth: []
       operationId: getAdminCampaignStatus
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/categories/{id}:
     get:
       summary: GET /admin/categories/{id}
@@ -926,11 +871,6 @@ paths:
         description: id identifier
       operationId: deleteAdminCategoriesById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/categories/reorder:
     post:
       summary: POST /api/admin/categories/reorder
@@ -966,11 +906,6 @@ paths:
               type: object
       operationId: postAdminCategoriesReorder
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/categories:
     get:
       summary: GET /admin/categories
@@ -1036,11 +971,6 @@ paths:
               type: object
       operationId: postAdminCategories
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/event-sources/{id}:
     get:
       summary: GET /admin/event-sources/{id}
@@ -1156,11 +1086,6 @@ paths:
         description: id identifier
       operationId: deleteAdminEventSourcesById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/event-sources:
     get:
       summary: GET /admin/event-sources
@@ -1258,11 +1183,6 @@ paths:
               type: object
       operationId: postAdminEventSources
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/events/recurrence:
     post:
       summary: POST /admin/events/recurrence
@@ -1328,11 +1248,6 @@ paths:
       - cookieAuth: []
       operationId: getAdminEventsRecurrence
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/fee-profiles/{id}/assignments/{assignmentId}:
     delete:
       summary: DELETE /admin/fee-profiles/{id}/assignments/{assignmentId}
@@ -1376,11 +1291,6 @@ paths:
         description: assignmentId identifier
       operationId: deleteAdminFeeProfilesByIdAssignmentsByAssignmentId
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/fee-profiles/{id}/assignments:
     post:
       summary: POST /admin/fee-profiles/{id}/assignments
@@ -1424,11 +1334,6 @@ paths:
               type: object
       operationId: postAdminFeeProfilesByIdAssignments
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/fee-profiles/{id}:
     put:
       summary: PUT /admin/fee-profiles/{id}
@@ -1508,11 +1413,6 @@ paths:
         description: id identifier
       operationId: deleteAdminFeeProfilesById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/fee-profiles:
     get:
       summary: GET /admin/fee-profiles
@@ -1578,11 +1478,6 @@ paths:
               type: object
       operationId: postAdminFeeProfiles
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/for-towns-pdf:
     post:
       summary: POST /admin/for-towns-pdf
@@ -1619,11 +1514,6 @@ paths:
               type: object
       operationId: postAdminForTownsPdf
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/frost-dates/import:
     post:
       summary: POST /admin/frost-dates/import
@@ -1654,11 +1544,6 @@ paths:
       - cookieAuth: []
       operationId: postAdminFrostDatesImport
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/frost-dates:
     get:
       summary: GET /admin/frost-dates
@@ -1689,11 +1574,6 @@ paths:
       - cookieAuth: []
       operationId: getAdminFrostDates
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/games/{id}:
     put:
       summary: PUT /admin/games/{id}
@@ -1803,11 +1683,6 @@ paths:
         description: id identifier
       operationId: deleteAdminGamesById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/games/place-interests:
     get:
       summary: GET /admin/games/place-interests
@@ -1881,11 +1756,6 @@ paths:
               type: object
       operationId: patchAdminGamesPlaceInterests
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/games:
     post:
       summary: POST /admin/games
@@ -1947,11 +1817,6 @@ paths:
       security: []
       operationId: getAdminGames
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/geocode-missing:
     post:
       summary: POST /admin/geocode-missing
@@ -1988,11 +1853,6 @@ paths:
               type: object
       operationId: postAdminGeocodeMissing
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/global-features:
     get:
       summary: GET /api/admin/global-features
@@ -2046,11 +1906,6 @@ paths:
       security: []
       operationId: postAdminGlobalFeatures
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/global-features/seed:
     post:
       summary: POST /api/admin/global-features/seed
@@ -2078,11 +1933,6 @@ paths:
       security: []
       operationId: postAdminGlobalFeaturesSeed
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/grant-feature:
     post:
       summary: POST /api/admin/grant-feature
@@ -2158,11 +2008,6 @@ paths:
         description: userId parameter
       operationId: getAdminGrantFeature
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/missing-coords:
     get:
       summary: GET /admin/missing-coords
@@ -2193,11 +2038,6 @@ paths:
       - cookieAuth: []
       operationId: getAdminMissingCoords
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/neighborhoods/discover-osm:
     get:
       summary: GET /admin/neighborhoods/discover-osm
@@ -2226,11 +2066,6 @@ paths:
       security: []
       operationId: getAdminNeighborhoodsDiscoverOsm
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/neighborhoods/waterloo-region/{id}:
     put:
       summary: PUT /admin/neighborhoods/waterloo-region/{id}
@@ -2306,11 +2141,6 @@ paths:
         description: id identifier
       operationId: deleteAdminNeighborhoodsWaterlooRegionById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/neighborhoods/waterloo-region/rebuild:
     post:
       summary: POST /admin/neighborhoods/waterloo-region/rebuild
@@ -2345,11 +2175,6 @@ paths:
               type: object
       operationId: postAdminNeighborhoodsWaterlooRegionRebuild
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/neighborhoods/waterloo-region:
     get:
       summary: GET /admin/neighborhoods/waterloo-region
@@ -2444,11 +2269,6 @@ paths:
               type: object
       operationId: putAdminNeighborhoodsWaterlooRegion
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/neighborhoods/waterloo-region/samples:
     get:
       summary: GET /admin/neighborhoods/waterloo-region/samples
@@ -2483,11 +2303,6 @@ paths:
         description: Search radius in kilometers
       operationId: getAdminNeighborhoodsWaterlooRegionSamples
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/notifications:
     get:
       summary: GET /admin/notifications
@@ -2518,11 +2333,6 @@ paths:
       - cookieAuth: []
       operationId: getAdminNotifications
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/osm-explorer/connections:
     get:
       summary: GET /admin/osm-explorer/connections
@@ -2553,11 +2363,6 @@ paths:
       - cookieAuth: []
       operationId: getAdminOsmExplorerConnections
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/osm-explorer/ignored-names:
     get:
       summary: GET /admin/osm-explorer/ignored-names
@@ -2623,11 +2428,6 @@ paths:
               type: object
       operationId: postAdminOsmExplorerIgnoredNames
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/osm-explorer/local-food-score:
     get:
       summary: GET /admin/osm-explorer/local-food-score
@@ -2676,11 +2476,6 @@ paths:
         description: Search radius in kilometers
       operationId: getAdminOsmExplorerLocalFoodScore
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/osm-explorer/neighborhood-match:
     get:
       summary: GET /admin/osm-explorer/neighborhood-match
@@ -2717,11 +2512,6 @@ paths:
         description: name parameter
       operationId: getAdminOsmExplorerNeighborhoodMatch
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/osm-explorer/reverse-geocode:
     get:
       summary: GET /admin/osm-explorer/reverse-geocode
@@ -2765,11 +2555,6 @@ paths:
         description: Longitude coordinate
       operationId: getAdminOsmExplorerReverseGeocode
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/osm-explorer:
     get:
       summary: GET /admin/osm-explorer
@@ -2821,11 +2606,6 @@ paths:
         description: east parameter
       operationId: getAdminOsmExplorer
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/osm-explorer/simulate:
     post:
       summary: POST /admin/osm-explorer/simulate
@@ -2862,11 +2642,6 @@ paths:
               type: object
       operationId: postAdminOsmExplorerSimulate
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/participants/import:
     post:
       summary: POST /admin/participants/import
@@ -2897,11 +2672,6 @@ paths:
       - cookieAuth: []
       operationId: postAdminParticipantsImport
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/participants/notify:
     post:
       summary: POST /api/admin/participants/notify
@@ -2937,11 +2707,6 @@ paths:
               type: object
       operationId: postAdminParticipantsNotify
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/participants:
     get:
       summary: GET /admin/participants
@@ -2970,11 +2735,6 @@ paths:
       security: []
       operationId: getAdminParticipants
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/participants/template:
     get:
       summary: GET /admin/participants/template
@@ -3005,11 +2765,6 @@ paths:
       - cookieAuth: []
       operationId: getAdminParticipantsTemplate
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/participants/verify/generate-link:
     post:
       summary: POST /api/admin/participants/verify/generate-link
@@ -3045,11 +2800,6 @@ paths:
               type: object
       operationId: postAdminParticipantsVerifyGenerateLink
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/performance:
     get:
       summary: GET /admin/performance
@@ -3086,11 +2836,6 @@ paths:
         description: timeRange parameter
       operationId: getAdminPerformance
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/places/google-places:
     post:
       summary: POST /admin/places/google-places
@@ -3127,11 +2872,6 @@ paths:
               type: object
       operationId: postAdminPlacesGooglePlaces
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/places/store-qr/{participantId}/pdf:
     get:
       summary: GET /admin/places/store-qr/{participantId}/pdf
@@ -3174,11 +2914,6 @@ paths:
         description: size parameter
       operationId: getAdminPlacesStoreQrByParticipantIdPdf
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/places/store-qr:
     get:
       summary: GET /admin/places/store-qr
@@ -3256,11 +2991,6 @@ paths:
               type: object
       operationId: putAdminPlacesStoreQr
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/planting-guides/import:
     post:
       summary: POST /admin/planting-guides/import
@@ -3291,11 +3021,6 @@ paths:
       - cookieAuth: []
       operationId: postAdminPlantingGuidesImport
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/planting-guides:
     get:
       summary: GET /admin/planting-guides
@@ -3326,11 +3051,6 @@ paths:
       - cookieAuth: []
       operationId: getAdminPlantingGuides
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/products/{id}:
     get:
       summary: GET /admin/products/{id}
@@ -3446,11 +3166,6 @@ paths:
         description: id identifier
       operationId: deleteAdminProductsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/products:
     get:
       summary: GET /admin/products
@@ -3516,11 +3231,6 @@ paths:
               type: object
       operationId: postAdminProducts
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/provenance-categories:
     get:
       summary: GET /api/admin/provenance-categories?days=30[&participantId=...]
@@ -3559,11 +3269,6 @@ paths:
         description: Participant identifier
       operationId: getAdminProvenanceCategories
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/provenance-reports/place-interest:
     get:
       summary: GET /api/admin/provenance-reports/place-interest?participantId=...&days=30
@@ -3602,11 +3307,6 @@ paths:
         description: days parameter
       operationId: getAdminProvenanceReportsPlaceInterest
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/provenance-reports/producer-demand:
     get:
       summary: GET /api/admin/provenance-reports/producer-demand?producerId=...&days=30
@@ -3645,11 +3345,6 @@ paths:
         description: days parameter
       operationId: getAdminProvenanceReportsProducerDemand
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/provenance-reports/producer-leads:
     get:
       summary: GET /api/admin/provenance-reports/producer-leads?producerId=...&days=30
@@ -3688,11 +3383,6 @@ paths:
         description: days parameter
       operationId: getAdminProvenanceReportsProducerLeads
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/provenance-reports/regional-trend:
     get:
       summary: GET /api/admin/provenance-reports/regional-trend?days=90[®ion=...]
@@ -3731,11 +3421,6 @@ paths:
         description: region parameter
       operationId: getAdminProvenanceReportsRegionalTrend
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/real-estate-pdf/bulk:
     post:
       summary: POST /admin/real-estate-pdf/bulk
@@ -3766,11 +3451,6 @@ paths:
       - cookieAuth: []
       operationId: postAdminRealEstatePdfBulk
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/real-estate-pdf/connectivity-audit:
     get:
       summary: GET /admin/real-estate-pdf/connectivity-audit
@@ -3827,11 +3507,6 @@ paths:
         description: brandImageShape parameter
       operationId: getAdminRealEstatePdfConnectivityAudit
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/real-estate-pdf/cover-letter:
     get:
       summary: GET /admin/real-estate-pdf/cover-letter
@@ -3878,11 +3553,6 @@ paths:
         description: agentName parameter
       operationId: getAdminRealEstatePdfCoverLetter
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/recipes/db:
     get:
       summary: GET /admin/recipes/db
@@ -3911,11 +3581,6 @@ paths:
       security: []
       operationId: getAdminRecipesDb
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/regional-score/apply-connection:
     post:
       summary: POST /admin/regional-score/apply-connection
@@ -3952,11 +3617,6 @@ paths:
               type: object
       operationId: postAdminRegionalScoreApplyConnection
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/regional-score/regions:
     get:
       summary: GET /admin/regional-score/regions
@@ -3985,11 +3645,6 @@ paths:
       security: []
       operationId: getAdminRegionalScoreRegions
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/score-cache:
     get:
       summary: GET /admin/score-cache
@@ -4055,11 +3710,6 @@ paths:
               type: object
       operationId: postAdminScoreCache
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/set-gps:
     post:
       summary: POST /admin/set-gps
@@ -4096,11 +3746,6 @@ paths:
               type: object
       operationId: postAdminSetGps
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/settings:
     get:
       summary: Get admin settings
@@ -4164,11 +3809,6 @@ paths:
               type: object
       operationId: patchAdminSettings
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/sponsorships/{id}:
     patch:
       summary: PATCH /admin/sponsorships/{id}
@@ -4244,11 +3884,6 @@ paths:
         description: id identifier
       operationId: deleteAdminSponsorshipsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/sponsorships:
     get:
       summary: GET /admin/sponsorships
@@ -4310,11 +3945,6 @@ paths:
               type: object
       operationId: postAdminSponsorships
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/stats:
     get:
       summary: GET /admin/stats
@@ -4351,11 +3981,6 @@ paths:
         description: timeRange parameter
       operationId: getAdminStats
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/store-qr/default-layout:
     get:
       summary: GET /admin/store-qr/default-layout
@@ -4421,11 +4046,6 @@ paths:
               type: object
       operationId: putAdminStoreQrDefaultLayout
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/surveys/{id}:
     get:
       summary: GET /admin/surveys/{id}
@@ -4541,11 +4161,6 @@ paths:
         description: id identifier
       operationId: deleteAdminSurveysById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/surveys:
     get:
       summary: GET /admin/surveys
@@ -4633,11 +4248,6 @@ paths:
               type: object
       operationId: postAdminSurveys
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/tasks:
     get:
       summary: GET /admin/tasks
@@ -4674,11 +4284,6 @@ paths:
         description: status parameter
       operationId: getAdminTasks
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/template:
     get:
       summary: GET /admin/template
@@ -4715,11 +4320,6 @@ paths:
         description: type parameter
       operationId: getAdminTemplate
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/users/{id}/admin:
     put:
       summary: PUT /admin/users/{id}/admin
@@ -4763,11 +4363,6 @@ paths:
               type: object
       operationId: putAdminUsersByIdAdmin
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/users/{id}/email:
     put:
       summary: PUT /admin/users/{id}/email
@@ -4811,11 +4406,6 @@ paths:
               type: object
       operationId: putAdminUsersByIdEmail
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/users/admin-info:
     get:
       summary: GET /admin/users/admin-info
@@ -4846,11 +4436,6 @@ paths:
       - cookieAuth: []
       operationId: getAdminUsersAdminInfo
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/users:
     get:
       summary: GET /admin/users
@@ -4881,11 +4466,6 @@ paths:
       - cookieAuth: []
       operationId: getAdminUsers
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/users/search:
     get:
       summary: GET /api/admin/users/search?email=xxx
@@ -4919,11 +4499,6 @@ paths:
         description: email parameter
       operationId: getAdminUsersSearch
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/widget-access:
     get:
       summary: GET /api/admin/widget-access
@@ -5042,11 +4617,6 @@ paths:
         description: userId parameter
       operationId: deleteAdminWidgetAccess
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /admin/widget-usage:
     get:
       summary: GET /api/admin/widget-usage
@@ -5085,11 +4655,6 @@ paths:
         description: days parameter
       operationId: getAdminWidgetUsage
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/admin/business-claims/{id}:
     put:
       summary: PUT /v2/admin/business-claims/{id}
@@ -5169,11 +4734,6 @@ paths:
         description: id identifier
       operationId: getV2AdminBusinessClaimsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/admin/business-claims/release:
     post:
       summary: POST /v2/admin/business-claims/release
@@ -5210,11 +4770,6 @@ paths:
               type: object
       operationId: postV2AdminBusinessClaimsRelease
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/admin/business-claims:
     get:
       summary: GET /v2/admin/business-claims
@@ -5266,11 +4821,6 @@ paths:
         description: Maximum number of results
       operationId: getV2AdminBusinessClaims
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/admin/users/search:
     get:
       summary: GET /v2/admin/users/search
@@ -5312,11 +4862,6 @@ paths:
         description: Maximum number of results
       operationId: getV2AdminUsersSearch
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Error:
@@ -5352,6 +4897,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

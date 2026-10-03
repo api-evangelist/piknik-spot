@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot Profile API
+  title: Piknik.Spot Profile API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged Profile across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -55,11 +55,6 @@ paths:
         description: username identifier
       operationId: getProfileByUsername
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /profile:
     get:
       summary: GET /profile
@@ -125,11 +120,6 @@ paths:
               type: object
       operationId: postProfile
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /profile/skills/{id}:
     delete:
       summary: DELETE /profile/skills/{id}
@@ -167,11 +157,6 @@ paths:
         description: id identifier
       operationId: deleteProfileSkillsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /profile/skills:
     post:
       summary: POST /profile/skills
@@ -208,11 +193,6 @@ paths:
               type: object
       operationId: postProfileSkills
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /profile/suggest-slug:
     get:
       summary: GET /profile/suggest-slug
@@ -243,11 +223,6 @@ paths:
       - cookieAuth: []
       operationId: getProfileSuggestSlug
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /profile/work-experience/{id}:
     put:
       summary: PUT /profile/work-experience/{id}
@@ -327,11 +302,6 @@ paths:
         description: id identifier
       operationId: deleteProfileWorkExperienceById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /profile/work-experience:
     post:
       summary: POST /profile/work-experience
@@ -368,11 +338,6 @@ paths:
               type: object
       operationId: postProfileWorkExperience
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Error:
@@ -408,6 +373,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot Community API
+  title: Piknik.Spot Community API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged Community across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -46,11 +46,6 @@ paths:
       security: []
       operationId: getCommunityInsights
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /community/members:
     get:
       summary: 'Public response shape. STRUCTURAL GUARANTEE: this type does not include'
@@ -121,11 +116,6 @@ paths:
         description: Longitude coordinate
       operationId: getCommunityMembers
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Error:
@@ -161,6 +151,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

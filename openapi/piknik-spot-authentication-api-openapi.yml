@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot Authentication API
+  title: Piknik.Spot Authentication API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged Authentication across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -51,11 +51,6 @@ paths:
               type: object
       operationId: postAuthTelegramLink
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /auth/telegram/register-chat:
     post:
       summary: POST /api/auth/telegram/register-chat
@@ -89,11 +84,6 @@ paths:
               type: object
       operationId: postAuthTelegramRegisterChat
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /auth/telegram/verify:
     post:
       summary: POST /api/auth/telegram/verify
@@ -127,11 +117,6 @@ paths:
               type: object
       operationId: postAuthTelegramVerify
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/auth/verify-email/confirm:
     post:
       summary: POST /v2/auth/verify-email/confirm
@@ -166,11 +151,6 @@ paths:
               type: object
       operationId: postV2AuthVerifyEmailConfirm
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/auth/verify-email:
     post:
       summary: POST /v2/auth/verify-email
@@ -205,11 +185,6 @@ paths:
               type: object
       operationId: postV2AuthVerifyEmail
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Error:
@@ -245,6 +220,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

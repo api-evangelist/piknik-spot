@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot Games API
+  title: Piknik.Spot Games API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged Games across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -68,11 +68,6 @@ paths:
         description: userId parameter
       operationId: getGamesByGameIdLeaderboard
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /games/{gameId}/participating-businesses:
     get:
       summary: GET /games/{gameId}/participating-businesses
@@ -108,11 +103,6 @@ paths:
         description: gameId identifier
       operationId: getGamesByGameIdParticipatingBusinesses
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /games/{gameId}:
     get:
       summary: GET /games/{gameId}
@@ -148,11 +138,6 @@ paths:
         description: gameId identifier
       operationId: getGamesByGameId
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /games/{gameId}/user-stats:
     get:
       summary: GET /games/{gameId}/user-stats
@@ -190,11 +175,6 @@ paths:
         description: gameId identifier
       operationId: getGamesByGameIdUserStats
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /games/{gameId}/user-visits:
     get:
       summary: GET /games/{gameId}/user-visits
@@ -232,11 +212,6 @@ paths:
         description: gameId identifier
       operationId: getGamesByGameIdUserVisits
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /games/active:
     get:
       summary: GET /games/active
@@ -278,11 +253,6 @@ paths:
         description: centerLng parameter
       operationId: getGamesActive
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /games/has-active:
     get:
       summary: GET /games/has-active
@@ -311,11 +281,6 @@ paths:
       security: []
       operationId: getGamesHasActive
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /games/match3/scores:
     post:
       summary: POST - Submit a new Match3 score
@@ -427,11 +392,6 @@ paths:
         description: Maximum number of results
       operationId: getGamesMatch3Scores
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /games/my-challenges:
     get:
       summary: GET /games/my-challenges
@@ -462,11 +422,6 @@ paths:
       - cookieAuth: []
       operationId: getGamesMyChallenges
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /games/random-local-spot:
     get:
       summary: GET /games/random-local-spot
@@ -495,11 +450,6 @@ paths:
       security: []
       operationId: getGamesRandomLocalSpot
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /games:
     get:
       summary: GET /games
@@ -534,11 +484,6 @@ paths:
         description: includeStats parameter
       operationId: getGames
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Error:
@@ -574,6 +519,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

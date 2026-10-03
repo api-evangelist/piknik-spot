@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot Participants API
+  title: Piknik.Spot Participants API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged Participants across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -148,11 +148,6 @@ paths:
         description: filterId identifier
       operationId: deleteParticipantsByIdNotificationFiltersByFilterId
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /participants/{id}/notification-filters:
     get:
       summary: GET /api/participants/[id]/notification-filters
@@ -230,11 +225,6 @@ paths:
               type: object
       operationId: postParticipantsByIdNotificationFilters
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /participants/{id}:
     get:
       summary: GET /participants/{id}
@@ -314,11 +304,6 @@ paths:
               type: object
       operationId: patchParticipantsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /participants/{id}/tasks:
     get:
       summary: GET /participants/{id}/tasks
@@ -354,11 +339,6 @@ paths:
         description: id identifier
       operationId: getParticipantsByIdTasks
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /participants/search:
     get:
       summary: GET /participants/search
@@ -410,11 +390,6 @@ paths:
         description: Longitude coordinate
       operationId: getParticipantsSearch
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/announcements/{announcementId}:
     put:
       summary: PUT /v2/participants/{id}/announcements/{announcementId}
@@ -506,11 +481,6 @@ paths:
         description: announcementId identifier
       operationId: deleteV2ParticipantsByIdAnnouncementsByAnnouncementId
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/announcements:
     get:
       summary: GET /v2/participants/{id}/announcements
@@ -610,11 +580,6 @@ paths:
               type: object
       operationId: postV2ParticipantsByIdAnnouncements
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/associations:
     get:
       summary: GET /v2/participants/{id}/associations
@@ -792,11 +757,6 @@ paths:
         description: membershipId parameter
       operationId: deleteV2ParticipantsByIdAssociations
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/capabilities:
     get:
       summary: GET /v2/participants/{id}/capabilities
@@ -948,11 +908,6 @@ paths:
               type: object
       operationId: putV2ParticipantsByIdCapabilities
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/challenges:
     get:
       summary: GET /v2/participants/{id}/challenges
@@ -988,11 +943,6 @@ paths:
         description: id identifier
       operationId: getV2ParticipantsByIdChallenges
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/chat:
     post:
       summary: POST /v2/participants/{id}/chat
@@ -1036,11 +986,6 @@ paths:
               type: object
       operationId: postV2ParticipantsByIdChat
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/chat-metrics:
     get:
       summary: GET /v2/participants/{id}/chat-metrics
@@ -1081,11 +1026,6 @@ paths:
         description: days parameter
       operationId: getV2ParticipantsByIdChatMetrics
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/claim/generate-link:
     post:
       summary: POST /v2/participants/{id}/claim/generate-link
@@ -1123,11 +1063,6 @@ paths:
         description: id identifier
       operationId: postV2ParticipantsByIdClaimGenerateLink
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/claim:
     post:
       summary: POST /v2/participants/{id}/claim
@@ -1207,11 +1142,6 @@ paths:
         description: id identifier
       operationId: getV2ParticipantsByIdClaim
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/connections/{connectionId}:
     put:
       summary: PUT /v2/participants/{id}/connections/{connectionId}
@@ -1303,11 +1233,6 @@ paths:
         description: connectionId identifier
       operationId: deleteV2ParticipantsByIdConnectionsByConnectionId
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/connections:
     get:
       summary: GET /v2/participants/{id}/connections
@@ -1387,11 +1312,6 @@ paths:
               type: object
       operationId: postV2ParticipantsByIdConnections
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/csa-analytics:
     get:
       summary: GET /v2/participants/{id}/csa-analytics
@@ -1427,11 +1347,6 @@ paths:
         description: id identifier
       operationId: getV2ParticipantsByIdCsaAnalytics
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/csa-availability:
     patch:
       summary: PATCH /v2/participants/{id}/csa-availability
@@ -1473,11 +1388,6 @@ paths:
               type: object
       operationId: patchV2ParticipantsByIdCsaAvailability
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/csa-demand-breakdown:
     get:
       summary: GET /v2/participants/{id}/csa-demand-breakdown
@@ -1513,11 +1423,6 @@ paths:
         description: id identifier
       operationId: getV2ParticipantsByIdCsaDemandBreakdown
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/csa-empty-context:
     get:
       summary: Get contextual information about why a farm has no CSA leads
@@ -1552,11 +1457,6 @@ paths:
         description: id identifier
       operationId: getV2ParticipantsByIdCsaEmptyContext
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/csa-leads:
     get:
       summary: GET /v2/participants/{id}/csa-leads
@@ -1597,11 +1497,6 @@ paths:
         description: status parameter
       operationId: getV2ParticipantsByIdCsaLeads
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/csa-rematch:
     post:
       summary: POST /v2/participants/{id}/csa-rematch
@@ -1637,11 +1532,6 @@ paths:
         description: id identifier
       operationId: postV2ParticipantsByIdCsaRematch
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/featured-in:
     get:
       summary: Get offerings that source from this participant (reverse relationship)
@@ -1678,11 +1568,6 @@ paths:
         description: id identifier
       operationId: getV2ParticipantsByIdFeaturedIn
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/followers:
     get:
       summary: GET /v2/participants/{id}/followers
@@ -1782,11 +1667,6 @@ paths:
               type: object
       operationId: postV2ParticipantsByIdFollowers
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/games:
     get:
       summary: GET /v2/participants/{id}/games
@@ -1824,11 +1704,6 @@ paths:
         description: id identifier
       operationId: getV2ParticipantsByIdGames
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/messages:
     get:
       summary: GET /v2/participants/{id}/messages
@@ -1980,11 +1855,6 @@ paths:
               type: object
       operationId: putV2ParticipantsByIdMessages
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/offerings/{offeringId}:
     delete:
       summary: DELETE /v2/participants/{id}/offerings/{offeringId}
@@ -2118,11 +1988,6 @@ paths:
               type: object
       operationId: putV2ParticipantsByIdOfferingsByOfferingId
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/offerings:
     get:
       summary: GET /v2/participants/{id}/offerings
@@ -2242,11 +2107,6 @@ paths:
               type: object
       operationId: postV2ParticipantsByIdOfferings
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/pack-prices/{quoteId}:
     patch:
       summary: PATCH /v2/participants/{id}/pack-prices/{quoteId}
@@ -2338,11 +2198,6 @@ paths:
         description: quoteId identifier
       operationId: deleteV2ParticipantsByIdPackPricesByQuoteId
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/pack-prices:
     get:
       summary: GET /v2/participants/{id}/pack-prices
@@ -2432,11 +2287,6 @@ paths:
               type: object
       operationId: postV2ParticipantsByIdPackPrices
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/reviews:
     get:
       summary: GET /v2/participants/{id}/reviews
@@ -2634,11 +2484,6 @@ paths:
         description: Maximum number of results
       operationId: deleteV2ParticipantsByIdReviews
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}:
     get:
       summary: GET /v2/participants/{id}
@@ -2796,11 +2641,6 @@ paths:
         description: id identifier
       operationId: deleteV2ParticipantsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/service-locations/{locationId}/geocode:
     post:
       summary: POST /v2/participants/{id}/service-locations/{locationId}/geocode
@@ -2844,11 +2684,6 @@ paths:
         description: locationId identifier
       operationId: postV2ParticipantsByIdServiceLocationsByLocationIdGeocode
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/service-locations/{locationId}:
     get:
       summary: GET /v2/participants/{id}/service-locations/{locationId}
@@ -2982,11 +2817,6 @@ paths:
         description: locationId identifier
       operationId: deleteV2ParticipantsByIdServiceLocationsByLocationId
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/service-locations:
     get:
       summary: GET /v2/participants/{id}/service-locations
@@ -3138,11 +2968,6 @@ paths:
               type: object
       operationId: putV2ParticipantsByIdServiceLocations
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/users/{userId}:
     put:
       summary: PUT /v2/participants/{id}/users/{userId}
@@ -3234,11 +3059,6 @@ paths:
         description: userId identifier
       operationId: deleteV2ParticipantsByIdUsersByUserId
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/{id}/users:
     get:
       summary: GET /v2/participants/{id}/users
@@ -3318,11 +3138,6 @@ paths:
               type: object
       operationId: postV2ParticipantsByIdUsers
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/claim/{token}:
     get:
       summary: GET /v2/participants/claim/{token}
@@ -3402,11 +3217,6 @@ paths:
               type: object
       operationId: postV2ParticipantsClaimByToken
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/connection-suggestions/{id}:
     put:
       summary: PUT /v2/participants/connection-suggestions/{id}
@@ -3450,11 +3260,6 @@ paths:
               type: object
       operationId: putV2ParticipantsConnectionSuggestionsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/connection-suggestions:
     post:
       summary: POST /v2/participants/connection-suggestions
@@ -3562,11 +3367,6 @@ paths:
         description: Pagination offset
       operationId: getV2ParticipantsConnectionSuggestions
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/my-businesses:
     get:
       summary: Get User's Businesses
@@ -3590,11 +3390,6 @@ paths:
       - cookieAuth: []
       operationId: getV2ParticipantsMyBusinesses
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/nearby:
     get:
       summary: Find Nearby Participants
@@ -3651,11 +3446,6 @@ paths:
         description: Maximum number of results
       operationId: getV2ParticipantsNearby
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/offerings/suggestions/{id}:
     put:
       summary: PUT /v2/participants/offerings/suggestions/{id}
@@ -3699,11 +3489,6 @@ paths:
               type: object
       operationId: putV2ParticipantsOfferingsSuggestionsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/personal-profile:
     get:
       summary: GET /api/v2/participants/personal-profile
@@ -3733,11 +3518,6 @@ paths:
       - cookieAuth: []
       operationId: getV2ParticipantsPersonalProfile
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants:
     get:
       summary: Search Participants
@@ -4083,11 +3863,6 @@ paths:
               type: object
       operationId: postV2Participants
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/suggestions/{id}:
     put:
       summary: PUT /v2/participants/suggestions/{id}
@@ -4224,11 +3999,6 @@ paths:
               type: object
       operationId: patchV2ParticipantsSuggestionsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/suggestions:
     post:
       summary: POST /v2/participants/suggestions
@@ -4346,11 +4116,6 @@ paths:
         description: Pagination offset
       operationId: getV2ParticipantsSuggestions
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/verify/{token}/mute:
     patch:
       summary: PATCH /v2/participants/verify/{token}/mute
@@ -4386,11 +4151,6 @@ paths:
         description: token identifier
       operationId: patchV2ParticipantsVerifyByTokenMute
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/participants/verify/{token}:
     get:
       summary: GET /v2/participants/verify/{token}
@@ -4546,11 +4306,6 @@ paths:
               type: object
       operationId: patchV2ParticipantsVerifyByToken
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Participant:
@@ -4607,6 +4362,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

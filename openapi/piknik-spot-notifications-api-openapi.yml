@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot Notifications API
+  title: Piknik.Spot Notifications API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged Notifications across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -48,11 +48,6 @@ paths:
       - cookieAuth: []
       operationId: getNotificationsAnnouncementCount
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /notifications/debug:
     get:
       summary: GET /notifications/debug
@@ -83,11 +78,6 @@ paths:
       - cookieAuth: []
       operationId: getNotificationsDebug
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /notifications/preferences:
     get:
       summary: GET /notifications/preferences
@@ -153,11 +143,6 @@ paths:
               type: object
       operationId: putNotificationsPreferences
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /notifications:
     get:
       summary: GET /notifications
@@ -245,11 +230,6 @@ paths:
               type: object
       operationId: putNotifications
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /notifications/subscribe:
     post:
       summary: POST /notifications/subscribe
@@ -315,11 +295,6 @@ paths:
       - cookieAuth: []
       operationId: deleteNotificationsSubscribe
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /notifications/test:
     post:
       summary: POST /notifications/test
@@ -350,11 +325,6 @@ paths:
       - cookieAuth: []
       operationId: postNotificationsTest
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /notifications/vapid-key:
     get:
       summary: GET /notifications/vapid-key
@@ -383,11 +353,6 @@ paths:
       security: []
       operationId: getNotificationsVapidKey
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/notifications/announcements:
     get:
       summary: GET /v2/notifications/announcements
@@ -475,11 +440,6 @@ paths:
               type: object
       operationId: putV2NotificationsAnnouncements
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Error:
@@ -515,6 +475,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

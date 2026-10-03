@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot Discussions API
+  title: Piknik.Spot Discussions API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged Discussions across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -53,11 +53,6 @@ paths:
         description: slug identifier
       operationId: getDiscussionsCategoriesBySlugJobs
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /discussions/categories:
     get:
       summary: GET /discussions/categories
@@ -86,11 +81,6 @@ paths:
       security: []
       operationId: getDiscussionsCategories
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /discussions/locations:
     get:
       summary: GET /discussions/locations
@@ -119,11 +109,6 @@ paths:
       security: []
       operationId: getDiscussionsLocations
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /discussions/posts/{id}/replies:
     post:
       summary: POST /discussions/posts/{id}/replies
@@ -167,11 +152,6 @@ paths:
               type: object
       operationId: postDiscussionsPostsByIdReplies
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /discussions/posts/{id}:
     get:
       summary: GET /discussions/posts/{id}
@@ -207,11 +187,6 @@ paths:
         description: id identifier
       operationId: getDiscussionsPostsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /discussions/posts:
     get:
       summary: GET /discussions/posts
@@ -339,11 +314,6 @@ paths:
               type: object
       operationId: postDiscussionsPosts
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /discussions/subscriptions:
     get:
       summary: GET /discussions/subscriptions
@@ -456,11 +426,6 @@ paths:
         description: categorySlug parameter
       operationId: deleteDiscussionsSubscriptions
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Error:
@@ -496,6 +461,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

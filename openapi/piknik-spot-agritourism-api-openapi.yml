@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot Agritourism API
+  title: Piknik.Spot Agritourism API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged Agritourism across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -61,11 +61,6 @@ paths:
         description: participantId identifier
       operationId: deleteAgritourismCampaignsByIdLocationsByParticipantId
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/{id}/locations:
     post:
       summary: POST /agritourism/campaigns/{id}/locations
@@ -109,11 +104,6 @@ paths:
               type: object
       operationId: postAgritourismCampaignsByIdLocations
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/{id}/opt-in:
     post:
       summary: POST /agritourism/campaigns/{id}/opt-in
@@ -157,11 +147,6 @@ paths:
               type: object
       operationId: postAgritourismCampaignsByIdOptIn
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/{id}/participant-stats:
     get:
       summary: GET /agritourism/campaigns/{id}/participant-stats
@@ -204,11 +189,6 @@ paths:
         description: Participant identifier
       operationId: getAgritourismCampaignsByIdParticipantStats
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/{id}:
     get:
       summary: GET /agritourism/campaigns/{id}
@@ -324,11 +304,6 @@ paths:
         description: id identifier
       operationId: deleteAgritourismCampaignsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/{id}/scanner/attendees:
     get:
       summary: GET /agritourism/campaigns/{id}/scanner/attendees
@@ -391,11 +366,6 @@ paths:
         description: Search query string
       operationId: getAgritourismCampaignsByIdScannerAttendees
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/{id}/scanner/bulk-reconcile:
     post:
       summary: POST /agritourism/campaigns/{id}/scanner/bulk-reconcile
@@ -439,11 +409,6 @@ paths:
               type: object
       operationId: postAgritourismCampaignsByIdScannerBulkReconcile
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/{id}/scanner/checkin:
     post:
       summary: POST /agritourism/campaigns/{id}/scanner/checkin
@@ -487,11 +452,6 @@ paths:
               type: object
       operationId: postAgritourismCampaignsByIdScannerCheckin
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/{id}/scanner/context:
     get:
       summary: GET /agritourism/campaigns/{id}/scanner/context
@@ -534,11 +494,6 @@ paths:
         description: campaignId parameter
       operationId: getAgritourismCampaignsByIdScannerContext
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/{id}/scanner/guest-list:
     get:
       summary: GET /agritourism/campaigns/{id}/scanner/guest-list
@@ -581,11 +536,6 @@ paths:
         description: campaignId parameter
       operationId: getAgritourismCampaignsByIdScannerGuestList
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/{id}/scanner/lookup:
     post:
       summary: POST /agritourism/campaigns/{id}/scanner/lookup
@@ -629,11 +579,6 @@ paths:
               type: object
       operationId: postAgritourismCampaignsByIdScannerLookup
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/{id}/scanner/stats:
     get:
       summary: GET /agritourism/campaigns/{id}/scanner/stats
@@ -676,11 +621,6 @@ paths:
         description: campaignId parameter
       operationId: getAgritourismCampaignsByIdScannerStats
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/{id}/scanner/undo-checkin:
     post:
       summary: POST /agritourism/campaigns/{id}/scanner/undo-checkin
@@ -724,11 +664,6 @@ paths:
               type: object
       operationId: postAgritourismCampaignsByIdScannerUndoCheckin
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/{id}/status:
     post:
       summary: POST /agritourism/campaigns/{id}/status
@@ -772,11 +707,6 @@ paths:
               type: object
       operationId: postAgritourismCampaignsByIdStatus
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/{id}/stop-busyness:
     get:
       summary: GET /agritourism/campaigns/{id}/stop-busyness
@@ -817,11 +747,6 @@ paths:
         description: Participant identifier
       operationId: getAgritourismCampaignsByIdStopBusyness
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/{id}/ticket-types/{ticketTypeId}:
     patch:
       summary: PATCH /agritourism/campaigns/{id}/ticket-types/{ticketTypeId}
@@ -913,11 +838,6 @@ paths:
         description: ticketTypeId identifier
       operationId: deleteAgritourismCampaignsByIdTicketTypesByTicketTypeId
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/{id}/ticket-types:
     post:
       summary: POST /agritourism/campaigns/{id}/ticket-types
@@ -961,11 +881,6 @@ paths:
               type: object
       operationId: postAgritourismCampaignsByIdTicketTypes
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/all:
     get:
       summary: GET /agritourism/campaigns/all
@@ -996,11 +911,6 @@ paths:
       - cookieAuth: []
       operationId: getAgritourismCampaignsAll
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/create:
     post:
       summary: POST /agritourism/campaigns/create
@@ -1037,11 +947,6 @@ paths:
               type: object
       operationId: postAgritourismCampaignsCreate
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/joinable:
     get:
       summary: GET /agritourism/campaigns/joinable
@@ -1078,11 +983,6 @@ paths:
         description: Participant identifier
       operationId: getAgritourismCampaignsJoinable
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns/mine:
     get:
       summary: GET /agritourism/campaigns/mine
@@ -1119,11 +1019,6 @@ paths:
         description: associationId parameter
       operationId: getAgritourismCampaignsMine
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/campaigns:
     get:
       summary: GET /agritourism/campaigns
@@ -1170,11 +1065,6 @@ paths:
         description: Search radius in kilometers
       operationId: getAgritourismCampaigns
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/checkout:
     post:
       summary: POST /agritourism/checkout
@@ -1211,11 +1101,6 @@ paths:
               type: object
       operationId: postAgritourismCheckout
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/claim-free:
     post:
       summary: POST /agritourism/claim-free
@@ -1252,11 +1137,6 @@ paths:
               type: object
       operationId: postAgritourismClaimFree
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/fee-profiles:
     get:
       summary: GET /agritourism/fee-profiles
@@ -1298,11 +1178,6 @@ paths:
         description: associationId parameter
       operationId: getAgritourismFeeProfiles
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/lookup:
     post:
       summary: POST /agritourism/lookup
@@ -1339,11 +1214,6 @@ paths:
               type: object
       operationId: postAgritourismLookup
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/my-associations:
     get:
       summary: GET /agritourism/my-associations
@@ -1374,11 +1244,6 @@ paths:
       - cookieAuth: []
       operationId: getAgritourismMyAssociations
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/stripe-connect/dashboard:
     get:
       summary: GET /agritourism/stripe-connect/dashboard
@@ -1415,11 +1280,6 @@ paths:
         description: accountId parameter
       operationId: getAgritourismStripeConnectDashboard
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/stripe-connect:
     post:
       summary: POST /agritourism/stripe-connect
@@ -1456,11 +1316,6 @@ paths:
               type: object
       operationId: postAgritourismStripeConnect
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/stripe-connect/status:
     get:
       summary: GET /agritourism/stripe-connect/status
@@ -1502,11 +1357,6 @@ paths:
         description: organizerId parameter
       operationId: getAgritourismStripeConnectStatus
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/ticket-types/{id}:
     put:
       summary: PUT /agritourism/ticket-types/{id}
@@ -1550,11 +1400,6 @@ paths:
               type: object
       operationId: putAgritourismTicketTypesById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/tickets/{id}/cancel:
     post:
       summary: POST /agritourism/tickets/{id}/cancel
@@ -1592,11 +1437,6 @@ paths:
         description: id identifier
       operationId: postAgritourismTicketsByIdCancel
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/tickets/{id}/download:
     get:
       summary: GET /agritourism/tickets/{id}/download
@@ -1634,11 +1474,6 @@ paths:
         description: id identifier
       operationId: getAgritourismTicketsByIdDownload
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/tickets/{id}/pass:
     get:
       summary: GET /agritourism/tickets/{id}/pass
@@ -1676,11 +1511,6 @@ paths:
         description: id identifier
       operationId: getAgritourismTicketsByIdPass
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/tickets/{id}:
     get:
       summary: GET /agritourism/tickets/{id}
@@ -1718,11 +1548,6 @@ paths:
         description: id identifier
       operationId: getAgritourismTicketsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/tickets:
     get:
       summary: GET /agritourism/tickets
@@ -1753,11 +1578,6 @@ paths:
       - cookieAuth: []
       operationId: getAgritourismTickets
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agritourism/validate:
     post:
       summary: POST /agritourism/validate
@@ -1794,11 +1614,6 @@ paths:
               type: object
       operationId: postAgritourismValidate
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Error:
@@ -1834,6 +1649,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot A2A Agents API
+  title: Piknik.Spot A2A Agents API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged A2A Agents across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -54,11 +54,6 @@ paths:
               type: object
       operationId: postAgentsAdminBanAgent
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/association/{id}/card:
     get:
       summary: GET /agents/association/{id}/card
@@ -94,11 +89,6 @@ paths:
         description: id identifier
       operationId: getAgentsAssociationByIdCard
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/association/{id}/get_benefits:
     post:
       summary: POST /agents/association/{id}/get_benefits
@@ -168,11 +158,6 @@ paths:
         description: id identifier
       operationId: getAgentsAssociationByIdGetBenefits
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/association/{id}/get_info:
     post:
       summary: POST /agents/association/{id}/get_info
@@ -242,11 +227,6 @@ paths:
         description: id identifier
       operationId: getAgentsAssociationByIdGetInfo
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/association/{id}/list_members:
     post:
       summary: POST /agents/association/{id}/list_members
@@ -316,11 +296,6 @@ paths:
         description: id identifier
       operationId: getAgentsAssociationByIdListMembers
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/association/{id}/membership_info:
     post:
       summary: POST /agents/association/{id}/membership_info
@@ -390,11 +365,6 @@ paths:
         description: id identifier
       operationId: getAgentsAssociationByIdMembershipInfo
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/add_offering:
     post:
       summary: POST /agents/participant/{id}/add_offering
@@ -438,11 +408,6 @@ paths:
               type: object
       operationId: postAgentsParticipantByIdAddOffering
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/card:
     get:
       summary: GET /agents/participant/{id}/card
@@ -478,11 +443,6 @@ paths:
         description: id identifier
       operationId: getAgentsParticipantByIdCard
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/challenge_status:
     post:
       summary: POST /agents/participant/{id}/challenge_status
@@ -518,11 +478,6 @@ paths:
         description: id identifier
       operationId: postAgentsParticipantByIdChallengeStatus
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/get_analytics:
     post:
       summary: POST /agents/participant/{id}/get_analytics
@@ -560,11 +515,6 @@ paths:
         description: id identifier
       operationId: postAgentsParticipantByIdGetAnalytics
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/get_associations:
     post:
       summary: POST /agents/participant/{id}/get_associations
@@ -600,11 +550,6 @@ paths:
         description: id identifier
       operationId: postAgentsParticipantByIdGetAssociations
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/get_capabilities:
     post:
       summary: POST /agents/participant/{id}/get_capabilities
@@ -640,11 +585,6 @@ paths:
         description: id identifier
       operationId: postAgentsParticipantByIdGetCapabilities
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/get_events:
     post:
       summary: POST /agents/participant/{id}/get_events
@@ -686,11 +626,6 @@ paths:
               type: object
       operationId: postAgentsParticipantByIdGetEvents
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/get_hours:
     post:
       summary: POST /agents/participant/{id}/get_hours
@@ -732,11 +667,6 @@ paths:
               type: object
       operationId: postAgentsParticipantByIdGetHours
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/get_messages:
     post:
       summary: POST /agents/participant/{id}/get_messages
@@ -780,11 +710,6 @@ paths:
               type: object
       operationId: postAgentsParticipantByIdGetMessages
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/get_profile:
     post:
       summary: POST /agents/participant/{id}/get_profile
@@ -820,11 +745,6 @@ paths:
         description: id identifier
       operationId: postAgentsParticipantByIdGetProfile
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/get_resellers:
     post:
       summary: POST /agents/participant/{id}/get_resellers
@@ -860,11 +780,6 @@ paths:
         description: id identifier
       operationId: postAgentsParticipantByIdGetResellers
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/get_reviews:
     post:
       summary: POST /agents/participant/{id}/get_reviews
@@ -906,11 +821,6 @@ paths:
               type: object
       operationId: postAgentsParticipantByIdGetReviews
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/get_suppliers:
     post:
       summary: POST /agents/participant/{id}/get_suppliers
@@ -946,11 +856,6 @@ paths:
         description: id identifier
       operationId: postAgentsParticipantByIdGetSuppliers
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/list_offerings:
     post:
       summary: POST /agents/participant/{id}/list_offerings
@@ -992,11 +897,6 @@ paths:
               type: object
       operationId: postAgentsParticipantByIdListOfferings
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/send_inquiry:
     post:
       summary: POST /agents/participant/{id}/send_inquiry
@@ -1040,11 +940,6 @@ paths:
               type: object
       operationId: postAgentsParticipantByIdSendInquiry
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/update_hours:
     post:
       summary: POST /agents/participant/{id}/update_hours
@@ -1088,11 +983,6 @@ paths:
               type: object
       operationId: postAgentsParticipantByIdUpdateHours
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/update_offering:
     post:
       summary: POST /agents/participant/{id}/update_offering
@@ -1136,11 +1026,6 @@ paths:
               type: object
       operationId: postAgentsParticipantByIdUpdateOffering
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/participant/{id}/update_place:
     post:
       summary: POST /agents/participant/{id}/update_place
@@ -1184,11 +1069,6 @@ paths:
               type: object
       operationId: postAgentsParticipantByIdUpdatePlace
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/platform/approve_task:
     post:
       summary: POST /agents/platform/approve_task
@@ -1225,11 +1105,6 @@ paths:
               type: object
       operationId: postAgentsPlatformApproveTask
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/platform/card:
     get:
       summary: GET /agents/platform/card
@@ -1258,11 +1133,6 @@ paths:
       security: []
       operationId: getAgentsPlatformCard
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/platform/claim_task:
     post:
       summary: POST /agents/platform/claim_task
@@ -1299,11 +1169,6 @@ paths:
               type: object
       operationId: postAgentsPlatformClaimTask
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/platform/create_place:
     post:
       summary: POST /agents/platform/create_place
@@ -1340,11 +1205,6 @@ paths:
               type: object
       operationId: postAgentsPlatformCreatePlace
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/platform/discover_businesses:
     post:
       summary: POST /agents/platform/discover_businesses
@@ -1379,11 +1239,6 @@ paths:
               type: object
       operationId: postAgentsPlatformDiscoverBusinesses
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/platform/get_platform_info:
     post:
       summary: POST /agents/platform/get_platform_info
@@ -1418,11 +1273,6 @@ paths:
               type: object
       operationId: postAgentsPlatformGetPlatformInfo
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/platform/get_task:
     post:
       summary: POST /agents/platform/get_task
@@ -1457,11 +1307,6 @@ paths:
               type: object
       operationId: postAgentsPlatformGetTask
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/platform/list_tasks:
     post:
       summary: POST /agents/platform/list_tasks
@@ -1496,11 +1341,6 @@ paths:
               type: object
       operationId: postAgentsPlatformListTasks
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/platform/rate_limit_status:
     get:
       summary: GET /agents/platform/rate_limit_status
@@ -1531,11 +1371,6 @@ paths:
       - cookieAuth: []
       operationId: getAgentsPlatformRateLimitStatus
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/platform/search_products:
     post:
       summary: POST /agents/platform/search_products
@@ -1570,11 +1405,6 @@ paths:
               type: object
       operationId: postAgentsPlatformSearchProducts
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/platform/submit_task_response:
     post:
       summary: POST /agents/platform/submit_task_response
@@ -1611,11 +1441,6 @@ paths:
               type: object
       operationId: postAgentsPlatformSubmitTaskResponse
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/platform/suggest_connection:
     post:
       summary: POST /agents/platform/suggest_connection
@@ -1652,11 +1477,6 @@ paths:
               type: object
       operationId: postAgentsPlatformSuggestConnection
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/platform/suggest_place:
     post:
       summary: POST /agents/platform/suggest_place
@@ -1693,11 +1513,6 @@ paths:
               type: object
       operationId: postAgentsPlatformSuggestPlace
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/platform/suggest_product:
     post:
       summary: POST /agents/platform/suggest_product
@@ -1734,11 +1549,6 @@ paths:
               type: object
       operationId: postAgentsPlatformSuggestProduct
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/public/place-summary:
     get:
       summary: Thin public place summaries for AI agents
@@ -1767,11 +1577,6 @@ paths:
       security: []
       operationId: getAgentsPublicPlaceSummary
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/registry:
     get:
       summary: GET /agents/registry
@@ -1818,11 +1623,6 @@ paths:
         description: Search radius in kilometers
       operationId: getAgentsRegistry
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/task-processor/process:
     post:
       summary: POST /agents/task-processor/process
@@ -1857,11 +1657,6 @@ paths:
               type: object
       operationId: postAgentsTaskProcessorProcess
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/tasks/create:
     post:
       summary: POST /agents/tasks/create
@@ -1898,11 +1693,6 @@ paths:
               type: object
       operationId: postAgentsTasksCreate
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /agents/tasks/status/{taskId}:
     get:
       summary: GET /agents/tasks/status/{taskId}
@@ -1938,11 +1728,6 @@ paths:
         description: taskId identifier
       operationId: getAgentsTasksStatusByTaskId
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Error:
@@ -1978,6 +1763,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

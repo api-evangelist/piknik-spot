@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot Marketplace API
+  title: Piknik.Spot Marketplace API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged Marketplace across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -60,11 +60,6 @@ paths:
               type: object
       operationId: postListingsByIdAccept
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /listings/{id}/confirm-acceptance:
     post:
       summary: POST /api/listings/[id]/confirm-acceptance
@@ -101,11 +96,6 @@ paths:
         description: id identifier
       operationId: postListingsByIdConfirmAcceptance
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /listings/{id}/confirm-direct-pickup:
     post:
       summary: POST /api/listings/[id]/confirm-direct-pickup
@@ -148,11 +138,6 @@ paths:
               type: object
       operationId: postListingsByIdConfirmDirectPickup
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /listings/{id}/decline:
     post:
       summary: POST /api/listings/[id]/decline
@@ -195,11 +180,6 @@ paths:
               type: object
       operationId: postListingsByIdDecline
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /listings/{id}/decline-acceptance:
     post:
       summary: POST /api/listings/[id]/decline-acceptance
@@ -242,11 +222,6 @@ paths:
               type: object
       operationId: postListingsByIdDeclineAcceptance
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /listings/{id}/fulfill:
     post:
       summary: Mark listing as fulfilled
@@ -283,11 +258,6 @@ paths:
         description: id identifier
       operationId: postListingsByIdFulfill
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /listings/{id}/reactivate:
     post:
       summary: POST /api/listings/[id]/reactivate
@@ -324,11 +294,6 @@ paths:
         description: id identifier
       operationId: postListingsByIdReactivate
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /listings/{id}:
     get:
       summary: Get single listing
@@ -441,11 +406,6 @@ paths:
         description: id identifier
       operationId: deleteListingsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /listings/{id}/view:
     post:
       summary: POST /listings/{id}/view
@@ -483,11 +443,6 @@ paths:
         description: id identifier
       operationId: postListingsByIdView
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /listings/my:
     get:
       summary: Get current user's listings
@@ -523,11 +478,6 @@ paths:
         description: status parameter
       operationId: getListingsMy
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /listings:
     get:
       summary: Browse Marketplace Listings
@@ -681,11 +631,6 @@ paths:
               $ref: '#/components/schemas/CreateListingRequest'
       operationId: postListings
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /marketplace/contact:
     post:
       summary: POST /marketplace/contact
@@ -722,11 +667,6 @@ paths:
               type: object
       operationId: postMarketplaceContact
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /widget/listings/{id}/email-pdfs:
     post:
       summary: POST /widget/listings/{id}/email-pdfs
@@ -768,11 +708,6 @@ paths:
               type: object
       operationId: postWidgetListingsByIdEmailPdfs
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /widget/listings/{id}:
     patch:
       summary: PATCH /widget/listings/{id}
@@ -848,11 +783,6 @@ paths:
         description: id identifier
       operationId: deleteWidgetListingsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /widget/listings:
     get:
       summary: GET /widget/listings
@@ -914,13 +844,17 @@ paths:
               type: object
       operationId: postWidgetListings
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        error_description:
+          type: string
+          description: Detailed error description
     CreateListingRequest:
       type: object
       required:
@@ -970,15 +904,6 @@ components:
           type: array
           items:
             type: string
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        error_description:
-          type: string
-          description: Detailed error description
   securitySchemes:
     cookieAuth:
       type: apiKey
@@ -1003,6 +928,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

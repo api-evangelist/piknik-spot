@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot Events API
+  title: Piknik.Spot Events API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged Events across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -54,11 +54,6 @@ paths:
         description: id identifier
       operationId: getEventsByIdAnalytics
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/{id}/calendar:
     get:
       summary: GET /events/{id}/calendar
@@ -99,11 +94,6 @@ paths:
         description: format parameter
       operationId: getEventsByIdCalendar
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/{id}/instances:
     get:
       summary: GET /events/{id}/instances
@@ -193,11 +183,6 @@ paths:
               type: object
       operationId: postEventsByIdInstances
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/{id}:
     get:
       summary: GET /events/{id}
@@ -313,11 +298,6 @@ paths:
         description: id identifier
       operationId: deleteEventsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/{id}/rsvp:
     post:
       summary: POST /events/{id}/rsvp
@@ -397,11 +377,6 @@ paths:
         description: id identifier
       operationId: deleteEventsByIdRsvp
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/analytics:
     get:
       summary: GET /events/analytics
@@ -438,11 +413,6 @@ paths:
         description: days parameter
       operationId: getEventsAnalytics
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/digest:
     post:
       summary: POST /api/events/digest
@@ -472,11 +442,6 @@ paths:
       - cookieAuth: []
       operationId: postEventsDigest
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/import/fetch:
     get:
       summary: GET /events/import/fetch
@@ -518,11 +483,6 @@ paths:
         description: Maximum number of results
       operationId: getEventsImportFetch
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/import:
     post:
       summary: POST /events/import
@@ -559,11 +519,6 @@ paths:
               type: object
       operationId: postEventsImport
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/import/sources:
     get:
       summary: GET /events/import/sources
@@ -600,11 +555,6 @@ paths:
         description: activeOnly parameter
       operationId: getEventsImportSources
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/map:
     get:
       summary: GET /events/map
@@ -651,11 +601,6 @@ paths:
         description: Search radius in kilometers
       operationId: getEventsMap
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/my-rsvps:
     get:
       summary: GET /events/my-rsvps
@@ -686,11 +631,6 @@ paths:
       - cookieAuth: []
       operationId: getEventsMyRsvps
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events:
     get:
       summary: GET /events
@@ -738,11 +678,6 @@ paths:
               $ref: '#/components/schemas/CreateEventRequest'
       operationId: postEvents
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/rsvp/{id}/download:
     get:
       summary: GET /events/rsvp/{id}/download
@@ -780,11 +715,6 @@ paths:
         description: id identifier
       operationId: getEventsRsvpByIdDownload
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/tickets/attendees:
     get:
       summary: GET /events/tickets/attendees
@@ -841,11 +771,6 @@ paths:
         description: Search query string
       operationId: getEventsTicketsAttendees
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/tickets/audit-csv:
     get:
       summary: GET /events/tickets/audit-csv
@@ -882,11 +807,6 @@ paths:
         description: eventId parameter
       operationId: getEventsTicketsAuditCsv
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/tickets/bulk-checkin:
     post:
       summary: POST /events/tickets/bulk-checkin
@@ -923,11 +843,6 @@ paths:
               type: object
       operationId: postEventsTicketsBulkCheckin
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/tickets/bulk-reconcile:
     post:
       summary: POST /events/tickets/bulk-reconcile
@@ -964,11 +879,6 @@ paths:
               type: object
       operationId: postEventsTicketsBulkReconcile
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/tickets/checkin:
     post:
       summary: POST /events/tickets/checkin
@@ -1005,11 +915,6 @@ paths:
               type: object
       operationId: postEventsTicketsCheckin
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/tickets/guest-list:
     get:
       summary: GET /events/tickets/guest-list
@@ -1051,11 +956,6 @@ paths:
         description: format parameter
       operationId: getEventsTicketsGuestList
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/tickets/lookup:
     post:
       summary: POST /events/tickets/lookup
@@ -1092,11 +992,6 @@ paths:
               type: object
       operationId: postEventsTicketsLookup
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/tickets/scannable:
     get:
       summary: GET /events/tickets/scannable
@@ -1138,11 +1033,6 @@ paths:
         description: eventId parameter
       operationId: getEventsTicketsScannable
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/tickets/stats:
     get:
       summary: GET /events/tickets/stats
@@ -1179,11 +1069,6 @@ paths:
         description: eventId parameter
       operationId: getEventsTicketsStats
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /events/tickets/verify:
     post:
       summary: POST /events/tickets/verify
@@ -1220,11 +1105,6 @@ paths:
               type: object
       operationId: postEventsTicketsVerify
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /participants/{id}/events:
     get:
       summary: GET /participants/{id}/events
@@ -1344,11 +1224,6 @@ paths:
               type: object
       operationId: postParticipantsByIdEvents
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     CreateEventRequest:
@@ -1437,6 +1312,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

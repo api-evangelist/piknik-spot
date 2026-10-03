@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot OAuth API
+  title: Piknik.Spot OAuth API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged OAuth across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -64,11 +64,6 @@ paths:
         description: approved parameter
       operationId: getOauthAuthorize
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /oauth/clients/{id}/reset-secret:
     post:
       summary: POST /oauth/clients/{id}/reset-secret
@@ -106,11 +101,6 @@ paths:
         description: id identifier
       operationId: postOauthClientsByIdResetSecret
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /oauth/clients/{id}:
     patch:
       summary: PATCH /oauth/clients/{id}
@@ -232,11 +222,6 @@ paths:
         description: id identifier
       operationId: deleteOauthClientsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /oauth/clients/info:
     get:
       summary: GET /oauth/clients/info
@@ -271,11 +256,6 @@ paths:
         description: client_id parameter
       operationId: getOauthClientsInfo
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /oauth/clients:
     post:
       summary: POST /oauth/clients
@@ -341,11 +321,6 @@ paths:
       - cookieAuth: []
       operationId: getOauthClients
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /oauth/register:
     post:
       summary: Dynamic Client Registration (DCR) endpoint per RFC 7591
@@ -379,11 +354,6 @@ paths:
               type: object
       operationId: postOauthRegister
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /oauth/revoke:
     post:
       summary: POST /oauth/revoke
@@ -412,11 +382,6 @@ paths:
       security: []
       operationId: postOauthRevoke
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /oauth/token:
     post:
       summary: POST /oauth/token
@@ -445,11 +410,6 @@ paths:
       security: []
       operationId: postOauthToken
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /oauth/userinfo:
     get:
       summary: GET /oauth/userinfo
@@ -478,11 +438,6 @@ paths:
       security: []
       operationId: getOauthUserinfo
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Error:
@@ -518,6 +473,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

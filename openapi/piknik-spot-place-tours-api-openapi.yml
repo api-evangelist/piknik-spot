@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot Place Tours API
+  title: Piknik.Spot Place Tours API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged Place Tours across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -53,11 +53,6 @@ paths:
         description: tourSlug identifier
       operationId: getPlaceToursBySlugByTourSlug
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /place-tours/for-place/{participantId}:
     get:
       summary: GET /place-tours/for-place/{participantId}
@@ -93,11 +88,6 @@ paths:
         description: participantId identifier
       operationId: getPlaceToursForPlaceByParticipantId
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /place-tours/road-path:
     post:
       summary: POST /place-tours/road-path
@@ -132,11 +122,6 @@ paths:
               type: object
       operationId: postPlaceToursRoadPath
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /place-tours:
     get:
       summary: GET /place-tours
@@ -183,11 +168,6 @@ paths:
         description: Search radius in kilometers
       operationId: getPlaceTours
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Error:
@@ -223,6 +203,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

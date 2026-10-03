@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot CSA API
+  title: Piknik.Spot CSA API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged CSA across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -57,11 +57,6 @@ paths:
         description: region parameter
       operationId: getV2CsaBudgetContext
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/csa/demand-map:
     get:
       summary: GET /v2/csa/demand-map
@@ -108,11 +103,6 @@ paths:
         description: Search radius in kilometers
       operationId: getV2CsaDemandMap
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/csa/interests/{id}/activity:
     get:
       summary: GET /v2/csa/interests/{id}/activity
@@ -148,11 +138,6 @@ paths:
         description: id identifier
       operationId: getV2CsaInterestsByIdActivity
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/csa/interests/{id}/selections:
     post:
       summary: POST /v2/csa/interests/{id}/selections
@@ -194,11 +179,6 @@ paths:
               type: object
       operationId: postV2CsaInterestsByIdSelections
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/csa/interests/my-inquiries:
     get:
       summary: GET - Fetch all CSA inquiries for the authenticated user
@@ -264,11 +244,6 @@ paths:
         description: id parameter
       operationId: deleteV2CsaInterestsMyInquiries
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/csa/interests:
     post:
       summary: POST /v2/csa/interests
@@ -303,11 +278,6 @@ paths:
               type: object
       operationId: postV2CsaInterests
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/csa/unclaimed-notifications/opt-out:
     post:
       summary: POST /v2/csa/unclaimed-notifications/opt-out
@@ -381,11 +351,6 @@ paths:
         description: Participant identifier
       operationId: getV2CsaUnclaimedNotificationsOptOut
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/csa-leads/{id}/quick-reply:
     post:
       summary: POST /v2/csa-leads/{id}/quick-reply
@@ -427,11 +392,6 @@ paths:
               type: object
       operationId: postV2CsaLeadsByIdQuickReply
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/csa-leads/{id}:
     patch:
       summary: PATCH /v2/csa-leads/{id}
@@ -473,11 +433,6 @@ paths:
               type: object
       operationId: patchV2CsaLeadsById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Error:
@@ -513,6 +468,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot Place API
+  title: Piknik.Spot Place API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged Place across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -53,11 +53,6 @@ paths:
         description: id identifier
       operationId: getPlaceByIdOgImage
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /place/{id}/users/{userId}:
     put:
       summary: PUT /place/{id}/users/{userId}
@@ -149,11 +144,6 @@ paths:
         description: userId identifier
       operationId: deletePlaceByIdUsersByUserId
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /place/{id}/users:
     get:
       summary: GET /place/{id}/users
@@ -233,11 +223,6 @@ paths:
               type: object
       operationId: postPlaceByIdUsers
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /place/challenge-interest:
     post:
       summary: POST /place/challenge-interest
@@ -315,11 +300,6 @@ paths:
         description: businessId parameter
       operationId: getPlaceChallengeInterest
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /place/challenge-opportunities:
     get:
       summary: GET /place/challenge-opportunities
@@ -356,11 +336,6 @@ paths:
         description: businessId parameter
       operationId: getPlaceChallengeOpportunities
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /place/games/{gameId}/participation:
     patch:
       summary: PATCH /place/games/{gameId}/participation
@@ -404,11 +379,6 @@ paths:
               type: object
       operationId: patchPlaceGamesByGameIdParticipation
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /place/games/{gameId}/qr-code/pdf:
     get:
       summary: GET /place/games/{gameId}/qr-code/pdf
@@ -456,11 +426,6 @@ paths:
         description: type parameter
       operationId: getPlaceGamesByGameIdQrCodePdf
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /place/games/{gameId}/qr-code:
     get:
       summary: GET /place/games/{gameId}/qr-code
@@ -508,11 +473,6 @@ paths:
         description: type parameter
       operationId: getPlaceGamesByGameIdQrCode
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /place/games:
     get:
       summary: GET /place/games
@@ -554,11 +514,6 @@ paths:
         description: businessId parameter
       operationId: getPlaceGames
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /place/store-qr/{participantId}/qr-code/pdf:
     get:
       summary: GET /place/store-qr/{participantId}/qr-code/pdf
@@ -601,11 +556,6 @@ paths:
         description: size parameter
       operationId: getPlaceStoreQrByParticipantIdQrCodePdf
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /place/store-qr/{participantId}/qr-code:
     get:
       summary: GET /place/store-qr/{participantId}/qr-code
@@ -643,11 +593,6 @@ paths:
         description: participantId identifier
       operationId: getPlaceStoreQrByParticipantIdQrCode
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Error:
@@ -683,6 +628,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot Users API
+  title: Piknik.Spot Users API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged Users across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -52,11 +52,6 @@ paths:
         description: userId identifier
       operationId: getUsersByUserIdFollows
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /users/me/social-links/phone/code:
     post:
       summary: POST /api/users/me/social-links/phone/code
@@ -84,11 +79,6 @@ paths:
       security: []
       operationId: postUsersMeSocialLinksPhoneCode
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /users/me/social-links/phone:
     delete:
       summary: DELETE /api/users/me/social-links/phone
@@ -116,11 +106,6 @@ paths:
       security: []
       operationId: deleteUsersMeSocialLinksPhone
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /users/me/social-links:
     get:
       summary: GET /api/users/me/social-links
@@ -150,11 +135,6 @@ paths:
       - cookieAuth: []
       operationId: getUsersMeSocialLinks
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /users/me/social-links/telegram/code:
     post:
       summary: POST /api/users/me/social-links/telegram/code
@@ -182,11 +162,6 @@ paths:
       security: []
       operationId: postUsersMeSocialLinksTelegramCode
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /users/me/social-links/telegram:
     delete:
       summary: DELETE /api/users/me/social-links/telegram
@@ -214,11 +189,6 @@ paths:
       security: []
       operationId: deleteUsersMeSocialLinksTelegram
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /users/search:
     get:
       summary: GET /users/search
@@ -255,11 +225,6 @@ paths:
         description: Search query string
       operationId: getUsersSearch
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /v2/users/{userId}/suggestions:
     get:
       summary: GET /v2/users/{userId}/suggestions
@@ -297,11 +262,6 @@ paths:
         description: userId identifier
       operationId: getV2UsersByUserIdSuggestions
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Error:
@@ -337,6 +297,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

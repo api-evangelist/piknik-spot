@@ -1,6 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Piknik Spot Tasks API
+  title: Piknik.Spot Tasks API
+  description: Piknik.Spot API with OAuth2 authentication, Model Context Protocol (MCP) support, and Agent-to-Agent (A2A) capabilities for AI-powered local food system interactions.
   version: 1.0.0
   contact:
     name: Piknik.Spot API Support
@@ -9,7 +10,6 @@ info:
   license:
     name: Proprietary
     url: https://piknik.spot/terms
-  description: 'Operations tagged Tasks across 2 of this provider''s published API definitions: piknik-spot-openapi.json, piknik-spot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://piknik.spot/api
   description: Production Server
@@ -55,11 +55,6 @@ paths:
         description: id identifier
       operationId: postTasksByIdAbandon
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /tasks/{id}/claim:
     post:
       summary: POST /tasks/{id}/claim
@@ -97,11 +92,6 @@ paths:
         description: id identifier
       operationId: postTasksByIdClaim
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /tasks/{id}/confirm-dropoff:
     post:
       summary: POST /api/tasks/[id]/confirm-dropoff
@@ -144,11 +134,6 @@ paths:
               type: object
       operationId: postTasksByIdConfirmDropoff
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /tasks/{id}/confirm-pickup:
     post:
       summary: POST /api/tasks/[id]/confirm-pickup
@@ -191,11 +176,6 @@ paths:
               type: object
       operationId: postTasksByIdConfirmPickup
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /tasks/{id}/messages:
     get:
       summary: GET /tasks/{id}/messages
@@ -275,11 +255,6 @@ paths:
               type: object
       operationId: postTasksByIdMessages
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /tasks/{id}/reject:
     post:
       summary: POST /tasks/{id}/reject
@@ -323,11 +298,6 @@ paths:
               type: object
       operationId: postTasksByIdReject
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /tasks/{id}:
     get:
       summary: GET /tasks/{id}
@@ -363,11 +333,6 @@ paths:
         description: id identifier
       operationId: getTasksById
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /tasks/{id}/submit-response:
     post:
       summary: POST /tasks/{id}/submit-response
@@ -411,11 +376,6 @@ paths:
               type: object
       operationId: postTasksByIdSubmitResponse
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /tasks/{id}/unclaim:
     post:
       summary: POST /api/tasks/[id]/unclaim
@@ -458,11 +418,6 @@ paths:
               type: object
       operationId: postTasksByIdUnclaim
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /tasks/{id}/update:
     put:
       summary: PUT /tasks/{id}/update
@@ -542,11 +497,6 @@ paths:
         description: id identifier
       operationId: deleteTasksByIdUpdate
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /tasks/{id}/update-response:
     patch:
       summary: PATCH /api/tasks/[id]/update-response
@@ -587,11 +537,6 @@ paths:
               type: object
       operationId: patchTasksByIdUpdateResponse
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /tasks/{id}/verify:
     post:
       summary: POST /tasks/{id}/verify
@@ -629,11 +574,6 @@ paths:
         description: id identifier
       operationId: postTasksByIdVerify
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /tasks/create:
     post:
       summary: POST /tasks/create
@@ -670,11 +610,6 @@ paths:
               type: object
       operationId: postTasksCreate
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /tasks/nearby:
     get:
       summary: GET /tasks/nearby
@@ -822,11 +757,6 @@ paths:
               type: object
       operationId: postTasksNearby
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /tasks/public:
     get:
       summary: GET /tasks/public
@@ -903,11 +833,6 @@ paths:
         description: Search radius in kilometers
       operationId: getTasksPublic
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
   /tasks/trigger-proximity-check:
     post:
       summary: POST /tasks/trigger-proximity-check
@@ -944,11 +869,6 @@ paths:
               type: object
       operationId: postTasksTriggerProximityCheck
       x-operation-id-source: derived
-    servers:
-    - url: https://piknik.spot/api
-      description: Production Server
-    - url: http://localhost:3000/api
-      description: Development Server
 components:
   schemas:
     Error:
@@ -984,6 +904,3 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
-x-refined-from:
-- piknik-spot-openapi.json
-- piknik-spot-openapi.yml

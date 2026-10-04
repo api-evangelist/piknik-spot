@@ -2921,8 +2921,6 @@ apis:
   humanURL: https://piknik.spot/skills/piknik-mcp/SKILL.md
   baseURL: https://piknik.spot/api/mcp
   tags:
-  - OpenAPI
-  tags_raw:
   - Open API
   properties:
   - type: OpenAPI

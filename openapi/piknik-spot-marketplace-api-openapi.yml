@@ -846,15 +846,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        error_description:
-          type: string
-          description: Detailed error description
     CreateListingRequest:
       type: object
       required:
@@ -904,6 +895,15 @@ components:
           type: array
           items:
             type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        error_description:
+          type: string
+          description: Detailed error description
   securitySchemes:
     cookieAuth:
       type: apiKey

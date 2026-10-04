@@ -166,6 +166,8 @@ apis:
   humanURL: https://piknik.spot/api/docs
   baseURL: https://piknik.spot/api
   tags:
+  - A2A
+  tags_raw:
   - A2a
   properties:
   - type: OpenAPI
@@ -935,6 +937,8 @@ apis:
   humanURL: https://piknik.spot/api/docs
   baseURL: https://piknik.spot/api
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -1320,6 +1324,8 @@ apis:
   humanURL: https://piknik.spot/api/docs
   baseURL: https://piknik.spot/api
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -1610,6 +1616,8 @@ apis:
   humanURL: https://piknik.spot/api/docs
   baseURL: https://piknik.spot/api
   tags:
+  - Notification
+  tags_raw:
   - Notifications
   properties:
   - type: OpenAPI
@@ -1642,6 +1650,8 @@ apis:
   humanURL: https://piknik.spot/api/docs
   baseURL: https://piknik.spot/api
   tags:
+  - Authentication
+  tags_raw:
   - OAuth
   properties:
   - type: OpenAPI
@@ -1966,6 +1976,8 @@ apis:
   humanURL: https://piknik.spot/api/docs
   baseURL: https://piknik.spot/api
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
@@ -1998,6 +2010,8 @@ apis:
   humanURL: https://piknik.spot/api/docs
   baseURL: https://piknik.spot/api
   tags:
+  - Profiles
+  tags_raw:
   - Profile
   properties:
   - type: OpenAPI
@@ -2158,6 +2172,8 @@ apis:
   humanURL: https://piknik.spot/api/docs
   baseURL: https://piknik.spot/api
   tags:
+  - Scans
+  tags_raw:
   - Scan
   properties:
   - type: OpenAPI
@@ -2318,6 +2334,8 @@ apis:
   humanURL: https://piknik.spot/api/docs
   baseURL: https://piknik.spot/api
   tags:
+  - SMS
+  tags_raw:
   - Sms
   properties:
   - type: OpenAPI
@@ -2478,6 +2496,8 @@ apis:
   humanURL: https://piknik.spot/api/docs
   baseURL: https://piknik.spot/api
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
@@ -2541,7 +2561,8 @@ apis:
   description: The Test API from Piknik.Spot — 1 operation(s) for test.
   humanURL: https://piknik.spot/api/docs
   baseURL: https://piknik.spot/api
-  tags:
+  tags: []
+  tags_raw:
   - Test
   properties:
   - type: OpenAPI
@@ -2702,6 +2723,8 @@ apis:
   humanURL: https://piknik.spot/api/docs
   baseURL: https://piknik.spot/api
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -2830,6 +2853,8 @@ apis:
   humanURL: https://piknik.spot/api/docs
   baseURL: https://piknik.spot/api
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
@@ -2862,6 +2887,8 @@ apis:
   humanURL: https://piknik.spot/api/docs
   baseURL: https://piknik.spot/api
   tags:
+  - Widgets
+  tags_raw:
   - Widget
   properties:
   - type: OpenAPI
@@ -2894,6 +2921,8 @@ apis:
   humanURL: https://piknik.spot/skills/piknik-mcp/SKILL.md
   baseURL: https://piknik.spot/api/mcp
   tags:
+  - OpenAPI
+  tags_raw:
   - Open API
   properties:
   - type: OpenAPI
@@ -2926,6 +2955,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/piknik-spot-capability-edges.yml
+  name: Piknik.Spot Business Capability Map
 - type: Website
   url: https://piknik.spot/
 - type: DomainSecurity

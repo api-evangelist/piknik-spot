@@ -1,0 +1,12 @@
+{
+ "url": "https://piknik.spot/openapi.json",
+ "requested_url": "https://piknik.spot/openapi.json",
+ "status": 200,
+ "content_type": "application/json; charset=UTF-8",
+ "bytes": 1061528,
+ "sha256": "c1ad036037ddc0d85c30eba661ace303981315576397c4258fc798bafe791d53",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.988), but the bytes differ, so the archive is an earlier or reformatted copy."
+}

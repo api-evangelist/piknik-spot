@@ -1,0 +1,46 @@
+slug: piknik-spot
+provider: Piknik.Spot
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Feature Flags
+  spec_file: piknik-spot-feature-flags-api-openapi.yml
+  capability_id: BC-4210.50
+  capability_id_l1: BC-4210
+  capability_name: Feature Flag Management
+  confidence: 0.85
+  evidence: GET /feature-flags  'Get feature flags for the current user'
+  reason: Operations explicitly read feature flags scoped to the current user, i.e. runtime control and
+    targeting of feature flags, which is Feature Flag Management under Software Release & Deployment.
+- tag: Webhooks
+  spec_file: piknik-spot-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.8
+  evidence: GET /webhooks, POST /webhooks, PUT /webhooks/{id}, DELETE /webhooks/{id}, POST /webhooks/test
+  reason: Full CRUD plus test-delivery over outbound webhook subscriptions registered by API consumers
+    — this is the lifecycle of event subscriptions on a developer platform. The /webhooks/stripe and /webhooks/process
+    endpoints are inbound receivers, but the dominant surface is subscription management.
+- tag: OAuth
+  spec_file: piknik-spot-oauth-api-openapi.yml
+  capability_id: BC-4270.40
+  capability_id_l1: BC-4270
+  capability_name: Developer Identity & Credential Management
+  confidence: 0.7
+  evidence: Dynamic Client Registration (DCR) endpoint per RFC 7591; POST /oauth/clients/{id}/reset-secret;
+    GET /oauth/clients
+  reason: 'The surface is not just a login flow: it provides full CRUD over OAuth client registrations,
+    dynamic client registration, secret rotation and revocation — issuance and stewardship of developer
+    credentials and OAuth clients for external API consumers. Authorization/token/userinfo endpoints alone
+    would be plumbing, but client-registration management is the named sub-capability.'

@@ -1,4 +1,4 @@
-generated: '2026-09-19'
+generated: '2026-09-23'
 method: generated
 source: openapi/piknik-spot-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
@@ -7,11 +7,11 @@ description: Recommended x-agentic-access execution contracts, classified heuris
 summary:
   operations: 683
   by_action_class:
-    connected: 321
-    acting: 362
+    connected: 326
+    acting: 357
   by_consequence:
-    read: 321
-    write: 344
+    read: 326
+    write: 339
     physical: 14
     safety-critical: 4
   human_in_the_loop_required: 4
@@ -689,18 +689,12 @@ operations:
 - path: /admin/global-features
   method: post
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /admin/global-features/seed
   method: post
   x-agentic-access:
@@ -1568,18 +1562,12 @@ operations:
 - path: /admin/widget-access
   method: post
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /admin/widget-access
   method: delete
   x-agentic-access:
@@ -3991,18 +3979,12 @@ operations:
 - path: /feature-flags
   method: post
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /feedback
   method: post
   x-agentic-access:
@@ -5085,18 +5067,12 @@ operations:
 - path: /participants/{id}/notification-filters
   method: post
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /participants/{id}
   method: get
   x-agentic-access:
@@ -8282,18 +8258,12 @@ operations:
 - path: /widget/keys
   method: post
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /widget/listings/{id}/email-pdfs
   method: post
   x-agentic-access:

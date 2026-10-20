@@ -1,8 +1,8 @@
 generated: '2026-09-19'
 method: probed
 status: published
-source: 'https://piknik.spot/api/mcp (live JSON-RPC probes: initialize, tools/list, prompts/list, resources/list, tools/call)
-  + https://piknik.spot/llms.txt + https://piknik.spot/skills/piknik-mcp/SKILL.md'
+source: 'https://piknik.spot/api/mcp (live JSON-RPC probes: initialize, tools/list, prompts/list, resources/list,
+  tools/call) + https://piknik.spot/llms.txt + https://piknik.spot/skills/piknik-mcp/SKILL.md'
 deployment:
   mode: remote
   endpoint: https://piknik.spot/api/mcp
@@ -11,8 +11,9 @@ deployment:
   package: null
   auth: oauth
   auth_note: OAuth 2.0 authorization code + PKCE (S256) with RFC 7591 dynamic client registration at https://piknik.spot/api/oauth/register,
-    OR a pik_pat_ personal access token minted at https://piknik.spot/settings/developer and sent as a Bearer header. Public
-    discovery tools need neither. The field enum has one value; both mechanisms are real.
+    OR a pik_pat_ personal access token minted at https://piknik.spot/settings/developer and sent as a
+    Bearer header. Public discovery tools need neither. The field enum has one value; both mechanisms
+    are real.
   verified: probed
 server:
   name: piknik
@@ -25,8 +26,9 @@ server:
   - prompts
   - resources
   - logging
-  instructions: Piknik local food system platform. Public discovery tools are available; sign in via OAuth or a Personal Access
-    Token (Settings -> Developer) for write tools like create_listing, create_recipe, and get_my_places.
+  instructions: Piknik local food system platform. Public discovery tools are available; sign in via OAuth
+    or a Personal Access Token (Settings -> Developer) for write tools like create_listing, create_recipe,
+    and get_my_places.
   listings: []
 probes:
 - method: initialize
@@ -46,12 +48,12 @@ probes:
 - method: tools/call get_my_places (anonymous)
   http_status: 401
   result: 'JSON-RPC error -32001 "Authentication required. Please authorize this application." with data.authorizationUrl,
-    tokenUrl, scopes [marketplace:write, events:write], quickstart https://piknik.spot/api/mcp/auth/start; header WWW-Authenticate:
-    Bearer realm="mcp", resource_metadata="https://piknik.spot/.well-known/oauth-protected-resource"'
+    tokenUrl, scopes [marketplace:write, events:write], quickstart https://piknik.spot/api/mcp/auth/start;
+    header WWW-Authenticate: Bearer realm="mcp", resource_metadata="https://piknik.spot/.well-known/oauth-protected-resource"'
 - method: GET /api/mcp
   http_status: 200
-  result: 'JSON status document: "HarvestConnect Agent Directory MCP Server", authentication.status anonymous, available_tools
-    split public/authenticated, oauth_info'
+  result: 'JSON status document: "HarvestConnect Agent Directory MCP Server", authentication.status anonymous,
+    available_tools split public/authenticated, oauth_info'
 auth:
   methods:
   - oauth2
@@ -90,8 +92,8 @@ tools:
 - name: geocode_address
   category: geo
   access: public
-  description: Convert an address string to latitude and longitude coordinates. Uses hybrid geocoding (Google Maps API with
-    Nominatim fallback) for accurate results.
+  description: Convert an address string to latitude and longitude coordinates. Uses hybrid geocoding
+    (Google Maps API with Nominatim fallback) for accurate results.
   input_properties:
   - address
   required:
@@ -99,9 +101,9 @@ tools:
 - name: calculate_local_food_score
   category: score
   access: public
-  description: 'Calculate the Local Food Score for a given address or coordinates. Returns a score from 0-100 with three factors:
-    how local, easy to get, and covers a diet. Only counts food grown within 100 km that is reachable through channels in
-    the search radius.'
+  description: 'Calculate the Local Food Score for a given address or coordinates. Returns a score from
+    0-100 with three factors: how local, easy to get, and covers a diet. Only counts food grown within
+    100 km that is reachable through channels in the search radius.'
   input_properties:
   - address
   - latitude
@@ -111,8 +113,8 @@ tools:
 - name: geocode_place
   category: admin-places
   access: admin
-  description: '🔐 ADMIN ONLY: Detect and set GPS coordinates for a place by geocoding its existing address. Useful for fixing
-    places missing coordinates or correcting inaccurate ones.'
+  description: '🔐 ADMIN ONLY: Detect and set GPS coordinates for a place by geocoding its existing address.
+    Useful for fixing places missing coordinates or correcting inaccurate ones.'
   input_properties:
   - participant_id
   - force_redetect
@@ -121,9 +123,10 @@ tools:
 - name: link_google_place
   category: admin-places
   access: admin
-  description: '🔐 ADMIN ONLY: Search Google Places for a Piknik place and optionally store its googlePlaceId after human review.
-    Returns ranked candidates with 0-100 match scores and score breakdowns (name, address, status, type, proximity). Default
-    action is search. Linking requires an explicit google_place_id unless auto_select is true.'
+  description: '🔐 ADMIN ONLY: Search Google Places for a Piknik place and optionally store its googlePlaceId
+    after human review. Returns ranked candidates with 0-100 match scores and score breakdowns (name,
+    address, status, type, proximity). Default action is search. Linking requires an explicit google_place_id
+    unless auto_select is true.'
   input_properties:
   - participant_id
   - business_name
@@ -138,8 +141,8 @@ tools:
 - name: search_events
   category: events
   access: public
-  description: Search for local food events, farmers markets, workshops, and community gatherings. Respects EVENT_SYSTEM feature
-    flag. Can search by address string or coordinates.
+  description: Search for local food events, farmers markets, workshops, and community gatherings. Respects
+    EVENT_SYSTEM feature flag. Can search by address string or coordinates.
   input_properties:
   - query
   - address
@@ -160,7 +163,8 @@ tools:
 - name: search_games
   category: games
   access: public
-  description: Search for active gamification challenges and geographic games. Respects GAMIFICATION_SYSTEM feature flag.
+  description: Search for active gamification challenges and geographic games. Respects GAMIFICATION_SYSTEM
+    feature flag.
   input_properties:
   - location
   - status
@@ -169,8 +173,8 @@ tools:
 - name: find_places
   category: discovery
   access: public
-  description: Find existing places based on location, preferences, and context. Combines multiple recommendation engines
-    for comprehensive results.
+  description: Find existing places based on location, preferences, and context. Combines multiple recommendation
+    engines for comprehensive results.
   input_properties:
   - address
   - radius
@@ -184,9 +188,10 @@ tools:
 - name: suggest_place
   category: contribute
   access: public
-  description: Analyze location coverage gaps and create a new place suggestion. ONLY use this when there is verifiable evidence
-    (such as a website, business registry, or direct confirmation) of the physical business existence. Do NOT make assumptions
-    or suggest unverified places. Returns participant_id in the response when authenticated with business_name
+  description: Analyze location coverage gaps and create a new place suggestion. ONLY use this when there
+    is verifiable evidence (such as a website, business registry, or direct confirmation) of the physical
+    business existence. Do NOT make assumptions or suggest unverified places. Returns participant_id in
+    the response when authenticated with business_name
   input_properties:
   - address
   - radius
@@ -204,7 +209,8 @@ tools:
 - name: get_professional_profile
   category: people
   access: public
-  description: Get professional networking profile information. Respects PROFESSIONAL_NETWORKING feature flag.
+  description: Get professional networking profile information. Respects PROFESSIONAL_NETWORKING feature
+    flag.
   input_properties:
   - username
   required:
@@ -212,8 +218,8 @@ tools:
 - name: search_listings
   category: marketplace
   access: public
-  description: Search marketplace listings for items to buy, sell, or services offered. Find products and services available
-    in the local food system.
+  description: Search marketplace listings for items to buy, sell, or services offered. Find products
+    and services available in the local food system.
   input_properties:
   - query
   - listing_type
@@ -225,8 +231,8 @@ tools:
 - name: create_listing
   category: marketplace
   access: authenticated
-  description: '🔐 AUTHENTICATED: Create a new marketplace listing (wanted to buy, wanted to sell, or service offering). Requires
-    OAuth authentication with marketplace:write scope.'
+  description: '🔐 AUTHENTICATED: Create a new marketplace listing (wanted to buy, wanted to sell, or service
+    offering). Requires OAuth authentication with marketplace:write scope.'
   input_properties:
   - participant_id
   - listing_type
@@ -249,9 +255,9 @@ tools:
 - name: create_event
   category: events
   access: authenticated
-  description: '🔐 AUTHENTICATED: Create a new event (farmers market, workshop, community gathering, etc.). Requires OAuth
-    authentication with events:write scope. Respects EVENT_SYSTEM feature flag. Events can be created with or without a participant
-    (place) association.'
+  description: '🔐 AUTHENTICATED: Create a new event (farmers market, workshop, community gathering, etc.).
+    Requires OAuth authentication with events:write scope. Respects EVENT_SYSTEM feature flag. Events
+    can be created with or without a participant (place) association.'
   input_properties:
   - participant_id
   - title
@@ -275,8 +281,8 @@ tools:
 - name: update_event
   category: events
   access: authenticated
-  description: '🔐 AUTHENTICATED: Update an existing event. Requires OAuth authentication with events:write scope. Can update
-    event details, times, location, or status.'
+  description: '🔐 AUTHENTICATED: Update an existing event. Requires OAuth authentication with events:write
+    scope. Can update event details, times, location, or status.'
   input_properties:
   - event_id
   - title
@@ -291,15 +297,17 @@ tools:
 - name: get_my_places
   category: places
   access: authenticated
-  description: '🔐 AUTHENTICATED: Get list of places (farms, restaurants, markets) that the authenticated user owns or has
-    access to manage. Useful for finding participant_id to use with update_place, create_listing, or create_event.'
+  description: '🔐 AUTHENTICATED: Get list of places (farms, restaurants, markets) that the authenticated
+    user owns or has access to manage. Useful for finding participant_id to use with update_place, create_listing,
+    or create_event.'
   input_properties: []
   required: []
 - name: update_place
   category: places
   access: authenticated
-  description: '🔐 AUTHENTICATED: Update a place (farm, restaurant, market) that you own or manage. Allows updating profile
-    information like name, description, address, contact details, operating hours, and more. Admin users can also update status.'
+  description: '🔐 AUTHENTICATED: Update a place (farm, restaurant, market) that you own or manage. Allows
+    updating profile information like name, description, address, contact details, operating hours, and
+    more. Admin users can also update status.'
   input_properties:
   - participant_id
   - name
@@ -332,7 +340,8 @@ tools:
 - name: claim_delivery_task
   category: delivery
   access: authenticated
-  description: '🔐 AUTHENTICATED: Claim a delivery coordination task. Caller must have a participant with canDeliver: true.'
+  description: '🔐 AUTHENTICATED: Claim a delivery coordination task. Caller must have a participant with
+    canDeliver: true.'
   input_properties:
   - task_id
   required:
@@ -340,7 +349,8 @@ tools:
 - name: update_delivery_status
   category: delivery
   access: authenticated
-  description: '🔐 AUTHENTICATED: Update delivery task status with optional GPS. Caller must be the user who claimed the task.'
+  description: '🔐 AUTHENTICATED: Update delivery task status with optional GPS. Caller must be the user
+    who claimed the task.'
   input_properties:
   - task_id
   - status
@@ -352,8 +362,8 @@ tools:
 - name: search_offerings
   category: products
   access: public
-  description: Search for products and offerings across all places (farms, restaurants, processors). Find what products are
-    available, where, and at what price.
+  description: Search for products and offerings across all places (farms, restaurants, processors). Find
+    what products are available, where, and at what price.
   input_properties:
   - latitude
   - longitude
@@ -375,8 +385,8 @@ tools:
 - name: list_all_places
   category: places
   access: public
-  description: List all places (farms, markets, restaurants, community gardens) within a radius of coordinates. Get full inventory
-    of participants in an area.
+  description: List all places (farms, markets, restaurants, community gardens) within a radius of coordinates.
+    Get full inventory of participants in an area.
   input_properties:
   - latitude
   - longitude
@@ -393,8 +403,8 @@ tools:
 - name: list_service_locations
   category: service-locations
   access: public
-  description: List all service locations (pickup points, delivery hubs) for a specific place. Service locations can be used
-    for CSA pickups, farmers market stalls, delivery points, etc.
+  description: List all service locations (pickup points, delivery hubs) for a specific place. Service
+    locations can be used for CSA pickups, farmers market stalls, delivery points, etc.
   input_properties:
   - participant_id
   - include_inactive
@@ -404,8 +414,8 @@ tools:
 - name: create_service_location
   category: service-locations
   access: authenticated
-  description: '🔐 AUTHENTICATED: Create a new service location (CSA pickup point, farmers market stall, delivery hub) for
-    your place. Address will be auto-geocoded.'
+  description: '🔐 AUTHENTICATED: Create a new service location (CSA pickup point, farmers market stall,
+    delivery hub) for your place. Address will be auto-geocoded.'
   input_properties:
   - participant_id
   - name
@@ -447,8 +457,8 @@ tools:
 - name: list_products
   category: products
   access: public
-  description: 'List products/offerings for a place, including kind, paused state, and pack sell prices (ways they sell: kg,
-    eighth, etc.). Use create_pack_price to add sell packs on STAPLE offerings.'
+  description: 'List products/offerings for a place, including kind, paused state, and pack sell prices
+    (ways they sell: kg, eighth, etc.). Use create_pack_price to add sell packs on STAPLE offerings.'
   input_properties:
   - participant_id
   - include_inactive
@@ -459,8 +469,8 @@ tools:
 - name: search_products
   category: products
   access: public
-  description: Search the shared product catalog by name or alias. Returns product_id values to pass to create_product. No
-    authentication required.
+  description: Search the shared product catalog by name or alias. Returns product_id values to pass to
+    create_product. No authentication required.
   input_properties:
   - query
   - category
@@ -470,11 +480,11 @@ tools:
 - name: create_product
   category: products
   access: authenticated
-  description: '🔐 AUTHENTICATED: Create a place offering. kind=STAPLE (default): catalog food via product_id. kind=COMPOSED:
-    named package/dish with optional ingredients[{source_id,product_id}]. Do NOT use price/price_unit for how the farm sells
-    packs — after creating a STAPLE, call create_pack_price (e.g. 10 kg or 1 eighth). Use source_url for the shop/product
-    page link — never put URLs in description. Use is_available=false to pause. Only with verifiable evidence. Use list_products
-    / search_products first.'
+  description: '🔐 AUTHENTICATED: Create a place offering. kind=STAPLE (default): catalog food via product_id.
+    kind=COMPOSED: named package/dish with optional ingredients[{source_id,product_id}]. Do NOT use price/price_unit
+    for how the farm sells packs — after creating a STAPLE, call create_pack_price (e.g. 10 kg or 1 eighth).
+    Use source_url for the shop/product page link — never put URLs in description. Use is_available=false
+    to pause. Only with verifiable evidence. Use list_products / search_products first.'
   input_properties:
   - participant_id
   - kind
@@ -500,9 +510,9 @@ tools:
 - name: update_product
   category: products
   access: authenticated
-  description: '🔐 AUTHENTICATED: Update an offering. Use is_available to pause/resume. Use source_url for the shop/product
-    page link — never put URLs in description. For STAPLE sell prices (10 kg, ⅛ animal, etc.) use create_pack_price / update_pack_price
-    / delete_pack_price — not price/price_unit.'
+  description: '🔐 AUTHENTICATED: Update an offering. Use is_available to pause/resume. Use source_url
+    for the shop/product page link — never put URLs in description. For STAPLE sell prices (10 kg, ⅛ animal,
+    etc.) use create_pack_price / update_pack_price / delete_pack_price — not price/price_unit.'
   input_properties:
   - participant_id
   - offering_id
@@ -530,25 +540,26 @@ tools:
 - name: fetch_ontario_farms
   category: open-data
   access: public
-  description: Fetch Ontario farm/agri-business records from government open data for populating Piknik. Returns OMAFRA-licensed
-    meat and dairy plants (individual business records with addresses) plus census mid-tier farm counts by county ($100k–$999k
-    receipts, 2021). Does NOT read from existing Piknik data.
+  description: Fetch Ontario farm/agri-business records from government open data for populating Piknik.
+    Returns OMAFRA-licensed meat and dairy plants (individual business records with addresses) plus census
+    mid-tier farm counts by county ($100k–$999k receipts, 2021). Does NOT read from existing Piknik data.
   input_properties:
   - format
   required: []
 - name: fetch_ontario_grocery_retailers
   category: open-data
   access: public
-  description: Fetch active Ontario grocery and convenience retailers from AGCO open data. Classifies each by consumer capacity
-    tier (minimal gas/convenience vs community grocer vs regional chain) using licence type and premises type.
+  description: Fetch active Ontario grocery and convenience retailers from AGCO open data. Classifies
+    each by consumer capacity tier (minimal gas/convenience vs community grocer vs regional chain) using
+    licence type and premises type.
   input_properties:
   - format
   required: []
 - name: get_regional_food_improvements
   category: score
   access: public
-  description: Analyze a region for food score gaps and ranked improvement opportunities (connect farms to shops, document
-    inventory, onboard producers, infrastructure). Returns the same JSON as GET /api/regional-score/analyze.
+  description: Analyze a region for food score gaps and ranked improvement opportunities (connect farms
+    to shops, document inventory, onboard producers, infrastructure). Returns the same JSON as GET /api/regional-score/analyze.
   input_properties:
   - region_id
   - region_slug
@@ -559,11 +570,12 @@ tools:
 - name: suggest_connection
   category: contribute
   access: authenticated
-  description: '🔐 AUTHENTICATED: Propose a supplier→buyer sourcing link for admin review (does NOT change scores until approved).
-    ONLY use this when there is verifiable evidence (such as a website link, official registry, or direct confirmation) of
-    the commercial relationship. Do NOT make assumptions or suggest unverified connections. Supplier: FARM, PROCESSOR, COMMUNITY_GARDEN,
-    MERCHANT (shop hop, discovery only), or MARKET with marketKind exchange. Buyer: RESTAURANT, MERCHANT, MARKET, FARM, or
-    FOOD_BANK. Non-admins use this; admins use apply_connection for immediate links.'
+  description: '🔐 AUTHENTICATED: Propose a supplier→buyer sourcing link for admin review (does NOT change
+    scores until approved). ONLY use this when there is verifiable evidence (such as a website link, official
+    registry, or direct confirmation) of the commercial relationship. Do NOT make assumptions or suggest
+    unverified connections. Supplier: FARM, PROCESSOR, COMMUNITY_GARDEN, MERCHANT (shop hop, discovery
+    only), or MARKET with marketKind exchange. Buyer: RESTAURANT, MERCHANT, MARKET, FARM, or FOOD_BANK.
+    Non-admins use this; admins use apply_connection for immediate links.'
   input_properties:
   - supplier_id
   - buyer_id
@@ -577,12 +589,13 @@ tools:
 - name: apply_connection
   category: admin-connections
   access: admin
-  description: '🔐 ADMIN ONLY: Create or update a live supplier→buyer sourcing link. ONLY use this when there is verifiable
-    evidence (such as a website link, official registry, or direct confirmation) of the commercial relationship. Do NOT make
-    assumptions or create unverified connections. Supplier: FARM, PROCESSOR, COMMUNITY_GARDEN, MERCHANT (shop hop, discovery
-    only), or MARKET with marketKind exchange. Buyer: RESTAURANT, MERCHANT, MARKET, FARM, FOOD_BANK, or PROCESSOR. Farm and
-    processor supplier links affect Local Food Score (processor chains include upstream farms and exchange hubs). Shop hops
-    do not.'
+  description: '🔐 ADMIN ONLY: Create or update a live supplier→buyer sourcing link. ONLY use this when
+    there is verifiable evidence (such as a website link, official registry, or direct confirmation) of
+    the commercial relationship. Do NOT make assumptions or create unverified connections. Supplier: FARM,
+    PROCESSOR, COMMUNITY_GARDEN, MERCHANT (shop hop, discovery only), or MARKET with marketKind exchange.
+    Buyer: RESTAURANT, MERCHANT, MARKET, FARM, FOOD_BANK, or PROCESSOR. Farm and processor supplier links
+    affect Local Food Score (processor chains include upstream farms and exchange hubs). Shop hops do
+    not.'
   input_properties:
   - supplier_id
   - buyer_id
@@ -603,10 +616,10 @@ tools:
 - name: suggest_product
   category: contribute
   access: authenticated
-  description: '🔐 AUTHENTICATED: Suggest a new product/offering for an existing place. ONLY use this when there is verifiable
-    evidence (such as a website menu, farm guide, or direct confirmation) that the place actually offers this product. Do
-    NOT make assumptions or suggest unverified products. Creates a pending suggestion for admin review — does not require
-    place ownership.'
+  description: '🔐 AUTHENTICATED: Suggest a new product/offering for an existing place. ONLY use this when
+    there is verifiable evidence (such as a website menu, farm guide, or direct confirmation) that the
+    place actually offers this product. Do NOT make assumptions or suggest unverified products. Creates
+    a pending suggestion for admin review — does not require place ownership.'
   input_properties:
   - participant_id
   - product_id
@@ -621,8 +634,8 @@ tools:
 - name: notify_participants
   category: admin-participants
   access: admin
-  description: '🔐 ADMIN ONLY: Send welcome/onboarding emails to newly added participants (farms, gardens, etc.). Use this
-    to notify businesses that they''re now on Piknik and can claim their spot.'
+  description: '🔐 ADMIN ONLY: Send welcome/onboarding emails to newly added participants (farms, gardens,
+    etc.). Use this to notify businesses that they''re now on Piknik and can claim their spot.'
   input_properties:
   - participant_ids
   - include_claim_link
@@ -631,17 +644,17 @@ tools:
 - name: list_neighborhoods
   category: admin-neighborhoods
   access: admin
-  description: '🔐 ADMIN ONLY: List Waterloo Region neighborhoods (optional municipality filter). Each row includes id, label,
-    kind, municipality, GPS, benchmark price (CAD), DOM, and previousPrice when set. Missing housing fields show as n/a. Structured
-    result.neighborhoods has the full objects.'
+  description: '🔐 ADMIN ONLY: List Waterloo Region neighborhoods (optional municipality filter). Each
+    row includes id, label, kind, municipality, GPS, benchmark price (CAD), DOM, and previousPrice when
+    set. Missing housing fields show as n/a. Structured result.neighborhoods has the full objects.'
   input_properties:
   - municipality
   required: []
 - name: add_neighborhood
   category: admin-neighborhoods
   access: admin
-  description: '🔐 ADMIN ONLY: Add a neighborhood to the catalog. Response includes benchmark price, DOM, and previousPrice
-    when provided.'
+  description: '🔐 ADMIN ONLY: Add a neighborhood to the catalog. Response includes benchmark price, DOM,
+    and previousPrice when provided.'
   input_properties:
   - label
   - municipality
@@ -660,8 +673,8 @@ tools:
 - name: update_neighborhood
   category: admin-neighborhoods
   access: admin
-  description: '🔐 ADMIN ONLY: Update a neighborhood by ID. Response always includes benchmark price, DOM, and previousPrice
-    (n/a if unset).'
+  description: '🔐 ADMIN ONLY: Update a neighborhood by ID. Response always includes benchmark price, DOM,
+    and previousPrice (n/a if unset).'
   input_properties:
   - id
   - label
@@ -685,16 +698,17 @@ tools:
 - name: rebuild_neighborhood_score_samples
   category: admin-neighborhoods
   access: admin
-  description: '🔐 ADMIN ONLY: Rebuild the score samples for specified radii (e.g. 1, 3, 5, 8, or 10 km) in the Waterloo Region
-    to update the Local Food Score map coloring.'
+  description: '🔐 ADMIN ONLY: Rebuild the score samples for specified radii (e.g. 1, 3, 5, 8, or 10 km)
+    in the Waterloo Region to update the Local Food Score map coloring.'
   input_properties:
   - radii
   required: []
 - name: discover_neighborhood_candidates
   category: admin-neighborhoods
   access: admin
-  description: '🔐 ADMIN ONLY: Discover food-related OSM locations (restaurants, cafes, specialty food shops) in a neighborhood,
-    filtering out ignored franchise names and already imported places. Returns clean candidates for sourcing verification.'
+  description: '🔐 ADMIN ONLY: Discover food-related OSM locations (restaurants, cafes, specialty food
+    shops) in a neighborhood, filtering out ignored franchise names and already imported places. Returns
+    clean candidates for sourcing verification.'
   input_properties:
   - neighborhood_id
   - radius_km
@@ -704,7 +718,8 @@ tools:
 - name: apply_association
   category: admin-associations
   access: admin
-  description: '🔐 ADMIN ONLY: Link a participant (farm, restaurant, market) to an association (like EFAO or WRCGN).'
+  description: '🔐 ADMIN ONLY: Link a participant (farm, restaurant, market) to an association (like EFAO
+    or WRCGN).'
   input_properties:
   - participant_id
   - association_id
@@ -728,10 +743,10 @@ tools:
 - name: create_pack_price
   category: pack-prices
   access: authenticated
-  description: '🔐 AUTHENTICATED (place owner or admin): Add how a STAPLE offering is sold — total price for a pack size. Examples:
-    offering_id + pack_qty=10 + pack_unit=kg; or pack_qty=1 + pack_unit=eighth (beef share). Optional source_url = online
-    shop page for that pack. Prefer offering_id. Use list_pack_prices to inspect; update_pack_price / delete_pack_price to
-    fix mistakes.'
+  description: '🔐 AUTHENTICATED (place owner or admin): Add how a STAPLE offering is sold — total price
+    for a pack size. Examples: offering_id + pack_qty=10 + pack_unit=kg; or pack_qty=1 + pack_unit=eighth
+    (beef share). Optional source_url = online shop page for that pack. Prefer offering_id. Use list_pack_prices
+    to inspect; update_pack_price / delete_pack_price to fix mistakes.'
   input_properties:
   - participant_id
   - offering_id
@@ -751,8 +766,9 @@ tools:
 - name: list_pack_prices
   category: pack-prices
   access: authenticated
-  description: '🔐 AUTHENTICATED: List pack/sell-price quotes (includes source_url shop link when set). Filter by place, offering_id,
-    category, quote_id, or fresh_only. Pass include_paused=true to see paused packs (farmer view).'
+  description: '🔐 AUTHENTICATED: List pack/sell-price quotes (includes source_url shop link when set).
+    Filter by place, offering_id, category, quote_id, or fresh_only. Pass include_paused=true to see paused
+    packs (farmer view).'
   input_properties:
   - participant_id
   - offering_id
@@ -765,9 +781,9 @@ tools:
 - name: update_pack_price
   category: pack-prices
   access: authenticated
-  description: '🔐 AUTHENTICATED (place owner or admin): Update a pack price quote. Use is_active=false to pause; true to resume.
-    Optional source_url = online shop page for that pack (pass empty string to clear). Use list_pack_prices for quote_id;
-    delete_pack_price to remove permanently.'
+  description: '🔐 AUTHENTICATED (place owner or admin): Update a pack price quote. Use is_active=false
+    to pause; true to resume. Optional source_url = online shop page for that pack (pass empty string
+    to clear). Use list_pack_prices for quote_id; delete_pack_price to remove permanently.'
   input_properties:
   - quote_id
   - category
@@ -786,8 +802,8 @@ tools:
 - name: delete_pack_price
   category: pack-prices
   access: authenticated
-  description: '🔐 AUTHENTICATED (place owner or admin): Permanently delete a pack price when you no longer sell that pack
-    (or it was added by mistake). Prefer is_active=false (pause) if you may resume later.'
+  description: '🔐 AUTHENTICATED (place owner or admin): Permanently delete a pack price when you no longer
+    sell that pack (or it was added by mistake). Prefer is_active=false (pause) if you may resume later.'
   input_properties:
   - quote_id
   required:
@@ -795,8 +811,8 @@ tools:
 - name: search_recipes
   category: recipes
   access: public
-  description: Search public published recipes (or your own with mine=true). Filter by cuisine slug, region, diet, meal, or
-    free-text query.
+  description: Search public published recipes (or your own with mine=true). Filter by cuisine slug, region,
+    diet, meal, or free-text query.
   input_properties:
   - query
   - cuisine
@@ -825,8 +841,8 @@ tools:
 - name: create_recipe
   category: recipes
   access: authenticated
-  description: '🔐 AUTHENTICATED: Create a crowdsourced recipe. Defaults to DRAFT. Link ingredients to catalog via product_id
-    when known.'
+  description: '🔐 AUTHENTICATED: Create a crowdsourced recipe. Defaults to DRAFT. Link ingredients to
+    catalog via product_id when known.'
   input_properties:
   - title
   - description
@@ -848,8 +864,8 @@ tools:
 - name: update_recipe
   category: recipes
   access: authenticated
-  description: '🔐 AUTHENTICATED: Update a recipe you own (or any recipe if admin). Providing ingredients or cuisine_ids replaces
-    those lists entirely.'
+  description: '🔐 AUTHENTICATED: Update a recipe you own (or any recipe if admin). Providing ingredients
+    or cuisine_ids replaces those lists entirely.'
   input_properties:
   - recipe_id
   - title
@@ -880,8 +896,8 @@ tools:
 - name: search_jobs
   category: jobs
   access: public
-  description: Search job and volunteer postings. Public. Filter by place, text, employment type, or location. Use before
-    create_job to avoid duplicates.
+  description: Search job and volunteer postings. Public. Filter by place, text, employment type, or location.
+    Use before create_job to avoid duplicates.
   input_properties:
   - query
   - participant_id
@@ -897,9 +913,9 @@ tools:
 - name: create_job
   category: jobs
   access: authenticated
-  description: '🔐 AUTHENTICATED: Create a job or volunteer posting for a place. Admins may post for any place; owners/admins
-    of a place may post for that place. ONLY when a website or official posting names this opening — copy published words.
-    Do not invent jobs.'
+  description: '🔐 AUTHENTICATED: Create a job or volunteer posting for a place. Admins may post for any
+    place; owners/admins of a place may post for that place. ONLY when a website or official posting names
+    this opening — copy published words. Do not invent jobs.'
   input_properties:
   - participant_id
   - title
@@ -921,8 +937,8 @@ tools:
 - name: update_job
   category: jobs
   access: authenticated
-  description: '🔐 AUTHENTICATED: Update or expire a job posting. Admins may edit any job; place owners/admins may edit their
-    own. Set status CANCELLED or FILLED when the opening closes.'
+  description: '🔐 AUTHENTICATED: Update or expire a job posting. Admins may edit any job; place owners/admins
+    may edit their own. Set status CANCELLED or FILLED when the opening closes.'
   input_properties:
   - job_id
   - title
@@ -951,7 +967,8 @@ tools:
 - name: create_association
   category: admin-associations
   access: admin
-  description: '🔐 ADMIN ONLY: Create an association. Use when the org does not already exist. Do not invent names.'
+  description: '🔐 ADMIN ONLY: Create an association. Use when the org does not already exist. Do not invent
+    names.'
   input_properties:
   - name
   - description
@@ -964,8 +981,8 @@ tools:
 - name: list_place_tours
   category: tours
   access: public
-  description: List drafts and published walking tours for an association you can manage. Returns tours and member places
-    for stops.
+  description: List drafts and published walking tours for an association you can manage. Returns tours
+    and member places for stops.
   input_properties:
   - association_id
   - slug
@@ -973,8 +990,8 @@ tools:
 - name: create_place_tour
   category: tours
   access: public
-  description: Create a draft walking tour for an association you can manage. Title must not copy the association name. Stops
-    via set_place_tour_stops. Narration is on each place (update_place tourNarration).
+  description: Create a draft walking tour for an association you can manage. Title must not copy the
+    association name. Stops via set_place_tour_stops. Narration is on each place (update_place tourNarration).
   input_properties:
   - association_id
   - slug
@@ -985,8 +1002,8 @@ tools:
 - name: update_place_tour
   category: tours
   access: public
-  description: Update a tour you can manage. Set status PUBLISHED when stops are ready. Public pages still need the Place
-    Tours feature flag.
+  description: Update a tour you can manage. Set status PUBLISHED when stops are ready. Public pages still
+    need the Place Tours feature flag.
   input_properties:
   - association_id
   - slug
@@ -1000,8 +1017,8 @@ tools:
 - name: set_place_tour_stops
   category: tours
   access: public
-  description: Replace tour stops in order. participant_ids are Piknik place ids. Does not require membership, but dashboard
-    stop picker lists members.
+  description: Replace tour stops in order. participant_ids are Piknik place ids. Does not require membership,
+    but dashboard stop picker lists members.
   input_properties:
   - association_id
   - slug
@@ -1041,15 +1058,73 @@ resources:
   mimeType: application/json
 prompts: []
 discrepancies:
-- The GET /api/mcp status document lists four "public" tools — search_agents, get_agent_card, execute_agent_capability, get_agent_search_history
-  — that do NOT appear in the live tools/list (62 tools). Either they are served by a separate agent-directory server or the
-  status document is stale; recorded, not resolved.
-- The provider-published MCP SKILL.md table names a subset of tools; the live tools/list is the authoritative inventory and
-  is what this manifest records.
-- The 683-operation OpenAPI declares the MCP endpoint (POST /mcp, GET /mcp/sse, token endpoints) under the "MCP" / "AI Agents"
-  tags but carries no operationIds anywhere, so the crosswalk binds tools to METHOD /path pairs instead.
+- The GET /api/mcp status document lists four "public" tools — search_agents, get_agent_card, execute_agent_capability,
+  get_agent_search_history — that do NOT appear in the live tools/list (62 tools). Either they are served
+  by a separate agent-directory server or the status document is stale; recorded, not resolved.
+- The provider-published MCP SKILL.md table names a subset of tools; the live tools/list is the authoritative
+  inventory and is what this manifest records.
+- The 683-operation OpenAPI declares the MCP endpoint (POST /mcp, GET /mcp/sse, token endpoints) under
+  the "MCP" / "AI Agents" tags but carries no operationIds anywhere, so the crosswalk binds tools to METHOD
+  /path pairs instead.
 usage_policy:
   file: well-known/piknik-spot-agent-ethics.md
-  summary: Immediate-use only; no retention, aggregation, republication or model training; attribution string is appended
-    to every response; rate tiers 1000/100/10 requests per hour for discovery/interactions/bulk.
+  summary: Immediate-use only; no retention, aggregation, republication or model training; attribution
+    string is appended to every response; rate tiers 1000/100/10 requests per hour for discovery/interactions/bulk.
 crosswalk: mcp/piknik-spot-tool-crosswalk.yml
+tool_quality:
+  tool_count: 66
+  tokens_total: 18028
+  tokens_per_tool_median: 211
+  heavy_tools:
+  - name: update_place
+    tokens: 1321
+  heavy_tool_count: 1
+  params_total: 436
+  params_undescribed: 89
+  params_described_pct: 79.6
+  tools_with_undescribed_params: 22
+  tools_annotated: 0
+  annotated_pct: 0.0
+  state_changing_unhinted:
+  - create_listing
+  - update_listing
+  - create_event
+  - update_event
+  - update_place
+  - claim_delivery_task
+  - update_delivery_status
+  - create_service_location
+  - update_service_location
+  - create_product
+  - update_product
+  - apply_connection
+  - remove_connection
+  - add_neighborhood
+  - update_neighborhood
+  - delete_neighborhood
+  - apply_association
+  - remove_association
+  - create_pack_price
+  - update_pack_price
+  - delete_pack_price
+  - create_recipe
+  - update_recipe
+  - delete_recipe
+  - create_job
+  - update_job
+  - create_association
+  - create_place_tour
+  - update_place_tour
+  - set_place_tour_stops
+  tools_missing_schema: 0
+  short_descriptions: 0
+  duplicate_descriptions: 0
+  duplicate_names: 0
+  nonportable_names: []
+  output_schema_count: 0
+  token_estimate: chars/3.6 of each compact tool definition
+  source: mcp/piknik-spot-mcp-tools-list.json
+  measured: '2026-10-20'
+  scored: false
+  note: Facts from the saved tools/list capture (mcp_tool_quality.py); recorded, not scored. Checks learned
+    from Glimind's agent-readiness audit.

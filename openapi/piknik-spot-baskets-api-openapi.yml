@@ -240,3 +240,9 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'OAuth2 access token (JWT). Include in Authorization header as: Bearer {token}'
+x-provenance:
+  method: harvested
+  publisher: Piknik.Spot
+  source: https://piknik.spot/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
